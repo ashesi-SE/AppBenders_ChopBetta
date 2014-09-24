@@ -1,0 +1,354 @@
+@import "fonts.css";
+@import "scrollbar.css";
+
+*, *:before, *:after {
+    -moz-box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+.column, .columns {
+    position: relative;
+    padding-left : 0;
+    padding-right: 0;
+}
+body{
+    width: 100%;
+    background-image: url("../img/back1.png");
+    background-size: cover;
+}
+
+    margin-top: 35px;
+}
+
+#theChef #picArea{
+    margin: 30px 0;
+}
+
+#theChef #picArea>div{
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    border: 6px solid white;
+    box-shadow: 0 0 0 8px rgb(207,164,120);
+    overflow: hidden;
+    margin: 0 auto;
+}
+#theChef #picArea img{
+    height: 150px;
+}
+#theChef #name{
+    position: relative;
+    text-align: center;
+    border-bottom: 1px solid #805B36;
+    font-family: Ahellya, serif;
+    margin: 0 15%;;
+}
+#theChef #name p{
+    font-size: 30px;
+    margin: 0;
+}
+#theChef #name::before{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 76%;
+    margin: 0 12%;
+    top: 0;
+    background-color: #805B36;
+    height: 1px;
+}
+
+#theChef #slogan2{
+    position: relative;
+    text-align: center;
+    font-family: Jasmine, cursive;
+    margin: 13px 5%;
+}
+#theChef #slogan2 p{
+    font-size: 35px;
+    color: #644226;
+}
+#theChef #slogan2:before{
+    position: absolute;
+    left: 0;
+    top:0;
+    content: "\201C";
+    font-family: Ahellya, serif;
+    font-size: 70px;
+    color:rgb(80,80,80);
+}
+#theChef #slogan2:after{
+    position: absolute;
+    right: 0;
+    top:0;
+    content: "\201D";
+    font-family: Ahellya, serif;
+    font-size: 70px;
+    color:rgb(80,80,80);
+}
+
+/*PIC SQUARE*/
+#pizzaSquare{
+    height: 400px;
+}
+#mainSq{
+    position: relative;
+    height: 300px;
+    width: 300px;
+    border: 30px solid #ffffff;
+    box-shadow: 0 0 5px #444;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#mainSq div,
+#mainSq figure{
+    position: absolute;
+    overflow: hidden;
+    width: 50%;
+    height: 50%;
+}
+#mainSq div img{
+    position: absolute;
+    height: 100%;
+    max-width: inherit;
+    width: auto;
+}
+#mainSq .q1{
+    top: 0;
+    left: 0;
+}
+#mainSq .q1 img{
+    bottom: 0;
+    right: 0;
+}
+#mainSq .q2{
+    top: 0;
+    right: 0;
+}
+#mainSq .q2 img{
+    bottom: 0;
+    left: 0;
+}
+#mainSq .q3{
+    bottom: 0;
+    left: 0;
+}
+#mainSq .q3 img{
+    top: 0;
+    right: 0;
+}
+#mainSq .q4{
+    bottom: 0;
+    right: 0;
+}
+#mainSq .q4 img{
+    top: 0;
+    left: 0;
+}
+#mainSq figure{
+    top: 50%;
+    transform: translate(50%,-50%);
+    margin: 0;
+}
+
+#mainSq figure.captionContainer div {
+    height: 100%;
+    width: 100%;
+}
+#mainSq figure.captionContainer .imgBack {
+    background-image: url("../img/purty_wood_3.png");
+    width: -webkit-calc(100% + 50px);
+    width: calc(100% + 50px);
+    opacity: 0.9;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(-40px,0, 0);
+    transform: translate3d(-40px,0,0);
+}
+
+#mainSq figure.captionContainer figcaption {
+    top: auto;
+    bottom: 0;
+    height: 50%;
+    text-align: left;
+    padding: 10px 15px;
+}
+
+#mainSq figure.captionContainer h2,
+#mainSq figure.captionContainer p {
+    -webkit-transform: translate3d(0,40px,0);
+    transform: translate3d(0,40px,0);
+    text-align: center;
+    color: #a62;
+}
+
+#mainSq figure.captionContainer h2 {
+    -webkit-transition: -webkit-transform 0.35s;
+    transition: transform 0.35s;
+    font-family: Trajan, serif;
+    font-size: 20px;
+    line-height: 100%;
+}
+
+#mainSq figure.captionContainer p {
+    color: rgba(255,255,255,0.6);
+    opacity: 0;
+    font-family: Trajan, serif;
+    -webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
+    transition: opacity 0.2s, transform 0.35s;
+    line-height: 100%;
+    font-size: 14px;
+}
+
+#mainSq figure.captionContainer:hover .imgBack,
+#mainSq figure.captionContainer:hover p {
+    opacity: 1;
+}
+
+#mainSq figure.captionContainer:hover .imgBack,
+#mainSq figure.captionContainer:hover h2,
+#mainSq figure.captionContainer:hover p {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+#mainSq figure.captionContainer:hover h2{
+    margin: 15px 0;
+}
+
+#mainSq figure.captionContainer:hover p {
+    -webkit-transition-delay: 0.05s;
+    transition-delay: 0.05s;
+    -webkit-transition-duration: 0.35s;
+    transition-duration: 0.35s;
+}
+
+/*ABOUT US*/
+#aboutUs{
+    background-image: url("../img/purty_wood_3.png");
+    padding: 10px;
+}
+
+#aboutUs header{
+    width: 100%;
+    min-height: 50px;
+    background-color: rgba(0,0,0,0.56);
+    box-shadow: 0 0 12px #000 inset;
+    border-radius: 3px;
+}
+#aboutUs header .logo{
+    position: relative;
+}
+#aboutUs header .logo .saams{
+    color: #DBBB9B;
+}
+#aboutUs header .logo .pizzashack{
+    color: #ffffff;
+}
+#aboutUs header #text{
+    text-align: center;
+}
+#aboutUs header #text span{
+    font-family: Pistara, sans-serif;
+    font-size: 31px;
+    padding: 0 6px;
+    color: #DBBB9B;
+}
+#aboutUs .info{
+    margin: 50px auto;
+}
+#aboutUs .info .small-2{
+    width: 20%;
+}
+#aboutUs .info .memberImage,
+#aboutUs .info .memberSummary{
+    margin: 0 auto;
+    text-align: center;
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    box-shadow: 0 0 0 7px #fff, 0 0 60px #000;
+    border: 1px dashed #5B2715;
+}
+
+#aboutUs .info .memberImage{
+    background-color: #fff;
+    overflow: hidden;
+}
+/*#aboutUs .info .memberImage img:hover{*/
+    /*filter: saturate(50%);*/
+    /*-webkit-filter: saturate(50%);*/
+    /*-ms-filter: saturate(50%);*/
+    /*-o-filter: saturate(50%);*/
+    /*-moz-filter: saturate(50%);*/
+/*}*/
+#aboutUs .info .memberSummary{
+    background-image: url("../img/agsquare.png");
+}
+#aboutUs .info .memberSummary p{
+    width: 75%;
+    margin: 0 auto;
+    font-family: serif;
+    font-size: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+}
+#aboutUs .info .memberName{
+    text-align: center;
+    width: 100%;
+    font-family: Capsuula, sans-serif;
+    font-size: 22px;
+    text-shadow: -2px -1px 1px #000;
+    color: #ffffff;
+    padding: 15px 0;
+}
+
+/*CONTACT US*/
+#contactUs{
+    background-image: url("../img/3.jpg");
+    min-height: 460px;
+}
+#contactUs #tellUs{
+    padding: 82px 0;
+    height: 100%;
+}
+#contactUs #tellUs div{
+    text-align: center;
+    font-family: Halo, cursive;
+    font-size: 113px;
+    color: white;
+    width: 385px;
+    height: 385px;
+    border: 4px solid white;
+    border-radius: 9px;
+    background-color: rgba(0,0,0,0.5);
+    margin: 0 auto;
+}
+#visitUs{
+    padding: 10px;
+    background-image: url("../img/dark_dotted.png");
+}
+#visitUs #map{
+    width: 100%;
+    height: 500px;
+}
+#visitUs #map img{
+    max-width: inherit;
+}
+/* GENERAL */
+.centerPage{
+    margin: 0 auto;
+    max-width: 1024px;
+}
+
+#tweet-n-slide>div{
+    padding: 0;
+}
+
+
+main{
+    padding-top: 100px !important;
+
+}
