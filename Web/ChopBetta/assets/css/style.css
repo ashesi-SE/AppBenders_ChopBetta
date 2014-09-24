@@ -1,0 +1,22 @@
+@import "fonts.css";
+@import "scrollbar.css";
+
+*, *:before, *:after {
+    -moz-box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+.column, .columns {
+    position: relative;
+    padding-left : 0;
+    padding-right: 0;
+}
+body {
+    margin: 0;
+}
+.centerPage{
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+
