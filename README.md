@@ -33,5 +33,5 @@ The front end of the various canteens which will enable them update the menu so 
 
 -descriptions on clone : From the repository online, copy the url of the repository and use the git clone command which is "git clone <url of repository>"
 
--Tools
+-Tools: 
 jQuery
