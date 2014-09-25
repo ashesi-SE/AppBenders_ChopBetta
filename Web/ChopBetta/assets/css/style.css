@@ -14,9 +14,13 @@
 body {
     margin: 0;
 }
+label{
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+}
 .addBtn button{
     padding: 9px;
 }
+
 .centerPage{
     margin: 0 auto;
     max-width: 500px;
