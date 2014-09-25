@@ -3,15 +3,15 @@
  */
 
 var mealRows = 1;
-var foods = "";
+var meals = "";
 var mealInputRow = "";
 $(document).ready(function(){
     //gets food available
-    $.get('sample.php',{statusSet: 2},function(data){
+    $.get('canteen_json.php',{display_foodList: 2},function(data,status){
+        console.log(data);
         $.each(data,function( key, elem  ){
-             foods+='<option value="'+elem.itemname+'">'+elem.itemname+'</option>'
+            meals+='<option value="'+elem.item_name+'">'+elem.item_name+'</option>'
         });
-
     },"json");
 
 
@@ -32,11 +32,14 @@ function setupRow(foods){
 
     return mealInputRow;
 }
+//TODO: Consider using one add to menu button, like Shamir suggested.
 function addMealRow(elem){
+
+    //do the below on successful add to db
     elem.className += " alert";
     elem.innerHTML = 'Remove';
     var parent = elem.parentNode.parentNode;
-   $('#dataRows').append(setupRow(foods));
+   $('#dataRows').append(setupRow(meals));
 
 
 }
