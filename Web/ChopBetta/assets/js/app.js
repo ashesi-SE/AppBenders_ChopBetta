@@ -8,7 +8,7 @@ $(document).ready(function(){
     //gets food available
     $.get('sample.php',{statusSet: 2},function(data){
         $.each(function(){
-            // foods+='<option value="husker">'+data[itemname]+'</option>'
+             foods+='<option value="husker">'+data[itemname]+'</option>'
         });
         console.log(data);
     },"json");

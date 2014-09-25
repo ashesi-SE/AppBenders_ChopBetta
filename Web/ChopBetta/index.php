@@ -10,7 +10,9 @@
 
         <ul class="left">
             <li><a href="#/view1">Home</a></li>
-            <li><a href="#/view2">view2</a></li>
+            <li><a href="#/view2">Today's Menu</a></li>
+            <li><a href="#/view2">Create meal item</a></li>
+            <li><a href="#/view2">Add food item</a></li>
         </ul>
         <ul class="right">
             <li class="has-dropdown">
