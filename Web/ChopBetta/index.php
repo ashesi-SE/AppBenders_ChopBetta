@@ -13,7 +13,7 @@
             <li><a href="#/view2">view2</a></li>
         </ul>
         <ul class="right">
-            <li class="has-dropdown" ng-controller="fbLoginController">
+            <li class="has-dropdown">
                 <a href="\">{{Loginstate}}</a>
                 <ul class="dropdown">
                     <li class="active" ><button ng-click="loginfb()" >{{LogAction}}</button></li>
@@ -24,13 +24,13 @@
 </nav>
 
 <main class="centerPage">
-    <form>
+    <section>
 
-        <div class="row">
-            <label>Select Box</label>
-            <div class="large-9 columns">
+        <div class="row" id="addMealRow1">
+            <label for="meals">Create menu</label>
+            <div class="large-9 columns" style="padding-left: 0">
 
-                    <select>
+                    <select class="meals">
                         <option value="husker">Husker</option>
                         <option value="starbuck">Starbuck</option>
                         <option value="hotdog">Hot Dog</option>
@@ -38,12 +38,13 @@
                     </select>
 
             </div>
-            <div class="large-3 columns">
-                <span class="postfix"><button>Add to menu</button></span>
+            <div class="large-3 columns addBtn" style="padding-left: 0">
+                 <button class="menuControl" >Add to menu</button>
             </div>
         </div>
+        <div id="adder"></div>
 
-    </form>
+    </section>
 </main>
 </body>
 <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>

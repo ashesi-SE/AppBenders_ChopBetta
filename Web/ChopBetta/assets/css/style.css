@@ -8,11 +8,14 @@
 }
 .column, .columns {
     position: relative;
-    padding-left : 0;
-    padding-right: 0;
+    /*padding-left : 0;*/
+    /*padding-right: 0;*/
 }
 body {
     margin: 0;
+}
+.addBtn button{
+    padding: 9px;
 }
 .centerPage{
     margin: 0 auto;
