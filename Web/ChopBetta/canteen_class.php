@@ -24,7 +24,7 @@ class canteen_class extends db{
         if(!$this->sql_query($strQuery)){
             return false;
         }
-        return $this->fetch();
+        return true;
     }
     
     function update_foodList($item_name){ //this function allows the food vendors to make changes to the food items
@@ -42,6 +42,7 @@ class canteen_class extends db{
         if(!$this->sql_query($strQuery)){
             return false;
         }
+        return true;
     }
 
 
@@ -56,13 +57,13 @@ class canteen_class extends db{
         return true;
     }
 
-    function display_mealList($meal_name){ //this functions displays the combinations of food items 
+    function display_mealList(){ //this functions displays the combinations of food items 
         $strQuery="SELECT `meal_name` FROM mealList"; 
 
         if(!$this->sql_query($strQuery)){
             return false;
         }
-        return $this->fetch();
+        return true;
     }
     
     function update_mealList($meal_name){ //changes can be made to meal
@@ -80,6 +81,7 @@ class canteen_class extends db{
         if(!$this->sql_query($strQuery)){
             return false;
         }
+        return true;
     }
 
 
@@ -96,7 +98,7 @@ class canteen_class extends db{
         return true;
     }
 
-    function display_currentMeal($current_meal_name,$customer_rating){ //displays the available meals and their 
+    function display_currentMeal(){ //displays the available meals and their 
     //ratings to customers
 
         $strQuery="SELECT `current_meal_name`,`customer_rating` FROM currentMeal"; 
@@ -104,7 +106,7 @@ class canteen_class extends db{
         if(!$this->sql_query($strQuery)){
             return false;
         }
-        return $this->fetch();
+        return true;
     }
     
     function update_currentMeal($current_meal_name){ //allows food vendors to make changes to the available meals
@@ -124,6 +126,7 @@ class canteen_class extends db{
         if(!$this->sql_query($strQuery)){
             return false;
         }
+        return true;
     }
 }
 
