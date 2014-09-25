@@ -12,7 +12,9 @@ $(document).ready(function(){
         $.each(data,function( key, elem  ){
             meals+='<option value="'+elem.item_name+'">'+elem.item_name+'</option>'
         });
+        $('#addMealRow1').find('.meals').html(meals);
     },"json");
+
 
 
 });
@@ -34,17 +36,33 @@ function setupRow(foods){
 }
 //TODO: Consider using one add to menu button, like Shamir suggested.
 function addMealRow(elem){
-
-    //do the below on successful add to db
-    elem.className += " alert";
-    elem.innerHTML = 'Remove';
     var parent = elem.parentNode.parentNode;
-   $('#dataRows').append(setupRow(meals));
+
+    $.get('canteen_json.php',{add_foodList:1,item_name: $('#'+parent.id).find('.meals').val()},function(data,status){
+        //do the below on successful add to db
+        elem.className += " alert";
+        elem.innerHTML = 'Remove';
 
 
+        $('#dataRows').append(setupRow(meals));
+        elem.setAttribute('onclick', 'remMealRow(this)');
+    });
+}
+function remMealRow(elem){
+
+    var parent = elem.parentNode.parentNode;
+    console.log(parent.id);
+    $('#'+parent.id).remove();
+}
+function addMealdiff(elem){
+    $.get('canteen_json.php',{add_foodList:1,item_name: $('#foodItem_input').val()},function(data,status){
+        $('#add_foodItem_modal').foundation('reveal', 'close');
+    });
 }
 function showMsg(type,msg,options){
     var options = $.extend({type : "info", speed : 40, mousestop : true }, options);
 
 }
+
+
 
