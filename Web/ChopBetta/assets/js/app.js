@@ -7,7 +7,7 @@ var meals = "";
 var mealInputRow = "";
 $(document).ready(function(){
     //gets food available
-    $.get('http://10.10.30.90/Web/ChopBetta/canteen_json.php',{display_foodList: 2},function(data,status){
+    $.get('canteen_json.php',{display_foodList: 2},function(data,status){
         console.log(data);
         $.each(data,function( key, elem  ){
             meals+='<option value="'+elem.item_name+'">'+elem.item_name+'</option>'
@@ -38,7 +38,7 @@ function setupRow(foods){
 function addMealRow(elem){
     var parent = elem.parentNode.parentNode;
 
-    $.get('http://10.10.30.90/Web/ChopBetta/canteen_json.php',{add_foodList:1,item_name: $('#'+parent.id).find('.meals').val()},function(data,status){
+    $.get('canteen_json.php',{add_foodList:1,item_name: $('#'+parent.id).find('.meals').val()},function(data,status){
         //do the below on successful add to db
         elem.className += " alert";
         elem.innerHTML = 'Remove';
@@ -55,7 +55,7 @@ function remMealRow(elem){
     $('#'+parent.id).remove();
 }
 function addMealdiff(elem){
-    $.get('http://10.10.30.90/Web/ChopBetta/canteen_json.php',{add_foodList:1,item_name: $('#foodItem_input').val()},function(data,status){
+    $.get('canteen_json.php',{add_foodList:1,item_name: $('#foodItem_input').val()},function(data,status){
         $('#add_foodItem_modal').foundation('reveal', 'close');
     });
 }

@@ -18,7 +18,7 @@
             <li class="has-dropdown">
                 <a href="/">Kingston Coker</a>
                 <ul class="dropdown">
-                    <li class="active" ><button ng-click="loginfb()" >Logout</button></li>
+                    <li class="active" ><a ng-click="loginfb()" >Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -30,14 +30,12 @@
         <div class="row" id="addMealRow1">
             <label for="meals">Create menu</label>
             <div class="large-9 columns" style="padding-left: 0">
-
                     <select class="meals">
-
+                        <option value="load">Loading...</option>
                     </select>
-
             </div>
             <div class="large-3 columns addBtn" style="padding-left: 0">
-                 <button class="menuControl" onclick="addMealRow(this)" >Add to menu</button>
+                 <button class="menuControl" onclick="addMealRow(this)">Add to menu</button>
             </div>
         </div>
         <div id="adder"></div>
@@ -64,22 +62,23 @@
     </div>
 
     <div id="add_foodItem_modal" class="reveal-modal small" data-reveal>
-
         <div class="row">
             <div class="large-12 columns">
-                <div class="row collapse">
-                    <div class="small-10 columns">
-                        <input id="foodItem_input" type="text" placeholder="Jollof, veg and chicken...">
+                <div class="row collapse prefix-round">
+
+                    <div class="small-9 columns">
+                        <input type="text" placeholder="Value">
                     </div>
-                    <div class="small-2 columns">
-                        <a href="#" class="button postfix" onclick="addMealdiff(this)">Save</a>
+                    <div class="small-3 columns">
+                        <a href="#" class="button postfix">Go</a>
                     </div>
                 </div>
             </div>
+            <a class="close-reveal-modal">&#215;</a>
         </div>
-        <a class="close-reveal-modal">&times;</a>
-    </div>
 </main>
+
+
 </body>
 <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
 <script src="assets/js/app.js" type="text/javascript"></script>
