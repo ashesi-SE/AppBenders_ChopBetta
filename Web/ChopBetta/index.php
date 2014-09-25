@@ -26,19 +26,10 @@
 </nav>
 
 <main class="centerPage">
-    <section>
-<a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
-
-<div id="myModal" class="reveal-modal" data-reveal>
-  <h2>Awesome. I have it.</h2>
-  <p class="lead">Your couch.  It is mine.</p>
-  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
+    <section id="dataRows">
         <div class="row" id="addMealRow1">
             <label for="meals">Create menu</label>
             <div class="large-9 columns" style="padding-left: 0">
-
                     <select class="meals">
                         <option value="husker">Husker</option>
                         <option value="starbuck">Starbuck</option>
@@ -48,7 +39,7 @@
 
             </div>
             <div class="large-3 columns addBtn" style="padding-left: 0">
-                 <button class="menuControl" >Add to menu</button>
+                 <button class="menuControl" onclick="addMealRow(this)">Add to menu</button>
             </div>
         </div>
         <div id="adder"></div>

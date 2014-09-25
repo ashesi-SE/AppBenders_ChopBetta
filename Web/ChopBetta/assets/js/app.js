@@ -4,22 +4,21 @@
 
 var mealRows = 1;
 var foods = "";
-var addMealRow = "";
+var mealInputRow = "";
 $(document).ready(function(){
     //gets food available
     $.get('sample.php',{statusSet: 2},function(data){
-<<<<<<< HEAD
-        $.each(function(){
-             foods+='<option value="husker">'+data[itemname]+'</option>'
-=======
         $.each(data,function( key, elem  ){
-             foods+='<option value="husker">'+elem.itemname+'</option>'
->>>>>>> 77f9c9f55f6dba8cb253acdf064a3621ef123aca
+             foods+='<option value="'+elem.itemname+'">'+elem.itemname+'</option>'
         });
-        console.log(foods);
+
     },"json");
 
-addMealRow = ' <div class="row" id="addMealRow'+mealRows+'">'+
+
+});
+function setupRow(foods){
+    mealRows++;
+    mealInputRow = ' <div class="row" id="addMealRow'+mealRows+'">'+
 
     '<div class="large-9 columns" style="padding-left: 0">'+
     '<select id="meals">'+
@@ -27,19 +26,17 @@ addMealRow = ' <div class="row" id="addMealRow'+mealRows+'">'+
     '</select>'+
     '</div>'+
     '<div class="large-3 columns addBtn" style="padding-left: 0">'+
-    '<button onclick="addtoMenu(this)">Add to menu</button>'+
+    '<button onclick="addMealRow(this)">Add to menu</button>'+
     '</div>'+
     '</div>';
-});
 
-function addtoMenu(elem){
-
+    return mealInputRow;
+}
+function addMealRow(elem){
+    elem.className += " alert";
+    elem.innerHTML = 'Remove';
     var parent = elem.parentNode.parentNode;
-    alert(parent);
-    console.log(e);
-
-    parent.css({"color":'green'});
-   $('#adder').prepend(addMealRow);
+   $('#dataRows').append(setupRow(foods));
 
 
 }
