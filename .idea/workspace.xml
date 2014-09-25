@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b82f531-7eb0-4b29-8b2f-e569ae433a31" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Web/ChopBetta/sample.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js" afterPath="$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Web/ChopBetta/index.php" afterPath="$PROJECT_DIR$/Web/ChopBetta/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Web/ChopBetta/assets/css/style.css" afterPath="$PROJECT_DIR$/Web/ChopBetta/assets/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ChopBetta.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,25 +101,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Web/ChopBetta/assets/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21755028" vertical-offset="0" max-vertical-offset="595">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
               <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
-              <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.15539305" vertical-offset="0" max-vertical-offset="1224">
+              <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding>
                 <element signature="e#0#38#0" expanded="false" />
-                <marker date="1411618335791" expanded="true" signature="623:638" placeholder="..." />
-                <marker date="1411618335791" expanded="true" signature="761:776" placeholder="..." />
+                <marker date="1411634235668" expanded="true" signature="656:671" placeholder="..." />
+                <marker date="1411634235668" expanded="true" signature="794:809" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -192,9 +186,9 @@
         <option value="$PROJECT_DIR$/sample.php" />
         <option value="$PROJECT_DIR$/Web/ChopBetta/sample.php" />
         <option value="db-console:/fe62109e/619a6a4c-bec4-4af7-8cbe-e6adcbd58b00/" />
-        <option value="$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js" />
         <option value="$PROJECT_DIR$/Web/ChopBetta/index.php" />
         <option value="$PROJECT_DIR$/Web/ChopBetta/assets/css/style.css" />
+        <option value="$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js" />
       </list>
     </option>
   </component>
@@ -371,7 +365,13 @@
       <option name="project" value="LOCAL" />
       <updated>1411613570840</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="stable iter1">
+      <created>1411633997664</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1411633997664</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -442,7 +442,8 @@
     <MESSAGE value="menu items and modals edit 2" />
     <MESSAGE value="got the new add to menu ui working-might change in a later release" />
     <MESSAGE value="reading from db" />
-    <option name="LAST_COMMIT_MESSAGE" value="reading from db" />
+    <MESSAGE value="stable iter1" />
+    <option name="LAST_COMMIT_MESSAGE" value="stable iter1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -506,18 +507,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1224">
-          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-            <marker date="1411618335791" expanded="true" signature="623:638" placeholder="..." />
-            <marker date="1411618335791" expanded="true" signature="761:776" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Web/ChopBetta/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-19.615385" vertical-offset="0" max-vertical-offset="1224">
@@ -534,9 +523,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Web/ChopBetta/assets/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21755028" vertical-offset="0" max-vertical-offset="595">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Web/ChopBetta/assets/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15539305" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+            <marker date="1411634235668" expanded="true" signature="656:671" placeholder="..." />
+            <marker date="1411634235668" expanded="true" signature="794:809" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
