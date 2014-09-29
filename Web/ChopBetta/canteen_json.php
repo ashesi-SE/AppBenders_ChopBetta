@@ -85,7 +85,7 @@
 
 		$array = array();	
 
-		while($row = $fl->fetch()){
+		while($row = $cm->fetch()){
     	$array[] = array_map('utf8_encode',	$row);
 		} 
 		echo json_encode($array);	
@@ -121,7 +121,7 @@
 
 		$array = array();	
 
-		while($row = $fl->fetch()){
+		while($row = $cm->fetch()){
     	$array[] = array_map('utf8_encode',	$row);
 		} 
 		echo json_encode($array);		
@@ -166,7 +166,7 @@
 
         $array = array();
 
-        while($row = $fl->fetch()){
+        while($row = $cm->fetch()){
             $array[] = array_map('utf8_encode',	$row);
         }
         echo json_encode($array);
@@ -184,7 +184,7 @@
 
         $array = array();
 
-        while($row = $fl->fetch()){
+        while($row = $cm->fetch()){
             $array[] = array_map('utf8_encode',	$row);
         }
         echo json_encode($array);
