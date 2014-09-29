@@ -48,7 +48,7 @@
         <div class="small-9 columns">
             <input type="text" id="right-label" placeholder="Inline Text Input">
         </div>
-        <a class="close-reveal-modal">&#215;</a>
+        <a class="close-reveal-modal">&times;</a>
     </div>
 
     <div id="create_meal_modal" class="reveal-modal small" data-reveal>
@@ -58,7 +58,7 @@
         <div class="small-9 columns">
             <input type="text" id="right-label" placeholder="Inline Text Input">
         </div>
-        <a class="close-reveal-modal">&#215;</a>
+        <a class="close-reveal-modal">&times;</a>
     </div>
 
     <div id="add_foodItem_modal" class="reveal-modal small" data-reveal>
@@ -66,15 +66,15 @@
             <div class="large-12 columns">
                 <div class="row collapse prefix-round">
 
-                    <div class="small-9 columns">
+                    <div class="small-10 columns">
                         <input type="text" placeholder="Value">
                     </div>
-                    <div class="small-3 columns">
+                    <div class="small-2 columns">
                         <a href="#" class="button postfix">Go</a>
                     </div>
                 </div>
             </div>
-            <a class="close-reveal-modal">&#215;</a>
+            <a class="close-reveal-modal">&times;</a>
         </div>
 </main>
 

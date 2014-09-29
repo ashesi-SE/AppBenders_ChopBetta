@@ -7,10 +7,18 @@ var meals = "";
 var mealInputRow = "";
 $(document).ready(function(){
     //gets food available
-    $.get('canteen_json.php',{display_foodList: 2},function(data,status){
+    $.get('canteen_json.php',{display_MealList: 2},function(data,status){
         console.log(data);
-        $.each(data,function( key, elem  ){
-            meals+='<option value="'+elem.item_name+'">'+elem.item_name+'</option>'
+        $.each(data,function(key, elem  ){
+            var meal = $.parseJSON(elem.meal_name); var mealStr = "";
+            for (var i=0;i<meal.length;i++){
+                if(i < meal.length-1){
+                    mealStr += meal[i]+", ";
+                }else{
+                    mealStr += " and "+ meal[i];
+                }
+            }
+            meals+='<option value="'+elem.meal_name+'">'+mealStr+'</option>'
         });
         $('#addMealRow1').find('.meals').html(meals);
     },"json");
@@ -18,6 +26,7 @@ $(document).ready(function(){
 
 
 });
+
 function setupRow(foods){
     mealRows++;
     mealInputRow = ' <div class="row" id="addMealRow'+mealRows+'">'+
@@ -38,7 +47,7 @@ function setupRow(foods){
 function addMealRow(elem){
     var parent = elem.parentNode.parentNode;
 
-    $.get('canteen_json.php',{add_foodList:1,item_name: $('#'+parent.id).find('.meals').val()},function(data,status){
+    $.get('canteen_json.php',{add_currentMeal:1,item_name: $('#'+parent.id).find('.meals').val()},function(data,status){
         //do the below on successful add to db
         elem.className += " alert";
         elem.innerHTML = 'Remove';

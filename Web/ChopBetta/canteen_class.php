@@ -75,7 +75,7 @@ class canteen_class extends db{
         return true;
     }
 
-    function delete_mealList($item_name){ //a meal can be deleted from the database
+    function delete_mealList($meal_name){ //a meal can be deleted from the database
         $strQuery="DELETE FROM mealList WHERE `meal_name`='$meal_name'"; 
 
         if(!$this->sql_query($strQuery)){
