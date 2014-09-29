@@ -1,6 +1,6 @@
 <?php
 /**
- * FoodList CRUD
+ * Food list CRUD
  */
 	if (isset($_REQUEST['add_foodList'])){
 		include_once("canteen_class.php");
@@ -126,65 +126,65 @@
 		} 
 		echo json_encode($array);		
 	}
-    /**
-     * Meal list CRUD
-     */
-    else if (isset($_REQUEST['add_MealList'])){
-        include_once("canteen_class.php");
-
-        $meal_name="";
-        if (isset($_REQUEST["mealName"])) {
-            $meal_name=$_REQUEST["mealName"];
-        }
-        $cm=new canteen_class();
-        $cm->add_mealList($meal_name);
-    }
-
-    else if (isset($_REQUEST['display_MealList'])){
-        include_once("canteen_class.php");
-
-        $cm=new canteen_class();
-        $cm->display_mealList();
-
-        $array = array();
-
-        while($row = $cm->fetch()){
-            $array[] = array_map('utf8_encode',	$row);
-        }
-        echo json_encode($array);
-    }
-
-    else if (isset($_REQUEST['update_currentMeal'])){
-        include_once("canteen_class.php");
-
-        $meal_name="";
-        if (isset($_REQUEST["meal_name"])) {
-            $current_meal_name=$_REQUEST["meal_name"];
-        }
-        $cm=new canteen_class();
-        $cm->update_currentMeal($meal_name);
-
-        $array = array();
-
-        while($row = $cm->fetch()){
-            $array[] = array_map('utf8_encode',	$row);
-        }
-        echo json_encode($array);
-    }
-
-    else if (isset($_REQUEST['delete_Meal'])){
+/**
+ * Meal list CRUD
+ */
+    else if (isset($_REQUEST['add_mealList'])){
         include_once("canteen_class.php");
 
         $meal_name="";
         if (isset($_REQUEST["meal_name"])) {
             $meal_name=$_REQUEST["meal_name"];
         }
-        $cm=new canteen_class();
-        $cm->delete_currentMeal($meal_name);
+        $ml=new canteen_class();
+        $ml->add_mealList($meal_name);
+    }
+
+    else if (isset($_REQUEST['display_mealList'])){
+        include_once("canteen_class.php");
+
+        $ml=new canteen_class();
+        $ml->display_mealList();
 
         $array = array();
 
-        while($row = $cm->fetch()){
+        while($row = $ml->fetch()){
+            $array[] = array_map('utf8_encode',	$row);
+        }
+        echo json_encode($array);
+    }
+
+    else if (isset($_REQUEST['update_mealList'])){
+        include_once("canteen_class.php");
+
+        $meal_name="";
+        if (isset($_REQUEST["meal_name"])) {
+            $meal_name=$_REQUEST["meal_name"];
+        }
+        $ml=new canteen_class();
+        $ml->update_mealList($meal_name);
+
+        $array = array();
+
+        while($row = $ml->fetch()){
+            $array[] = array_map('utf8_encode',	$row);
+        }
+        echo json_encode($array);
+    }
+
+    else if (isset($_REQUEST['delete_mealList'])){
+        include_once("canteen_class.php");
+
+        $meal_name="";
+        if (isset($_REQUEST["meal_name"])) {
+            $meal_name=$_REQUEST["meal_name"];
+        }
+        $ml=new canteen_class();
+        $ml->delete_currentMeal($meal_name);
+
+        $array = array();
+
+        while($row = $ml->fetch()){
             $array[] = array_map('utf8_encode',	$row);
         }
         echo json_encode($array);
