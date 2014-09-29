@@ -18,7 +18,7 @@ $(document).ready(function(){
                     mealStr += " and "+ meal[i];
                 }
             }
-            meals+='<option value="'+elem.meal_name+'">'+mealStr+'</option>'
+            meals+='<option value="'+mealStr+'">'+mealStr+'</option>'
         });
         $('#addMealRow1').find('.meals').html(meals);
     },"json");
@@ -46,7 +46,7 @@ function setupRow(foods){
 //TODO: Consider using one add to menu button, like Shamir suggested.
 function addMealRow(elem){
     var parent = elem.parentNode.parentNode;
-
+console.log($('#'+parent.id).find('.meals').val());
     $.get('canteen_json.php',{add_currentMeal:1,current_meal_name: $('#'+parent.id).find('.meals').val()},function(data,status){
         //do the below on successful add to db
         elem.className += " alert";
