@@ -47,9 +47,9 @@ class canteen_class extends db{
     }
 
 //functions for the vendors table
-    function add_vendor($vendor_name,$vendor_password){ //adds vendors to a specific canteen
-        $strQuery="INSERT INTO vendors(`vendor_name`,`vendor_password`) 
-            VALUES ('$vendor_name','$vendor_password')"; 
+    function add_vendor($vendor_name,$vendor_password,$cid){ //adds vendors to a specific canteen
+        $strQuery="INSERT INTO vendors(`vendor_name`,`vendor_password`,`cid`) 
+            VALUES ('$vendor_name','$vendor_password',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
             return false;
@@ -86,9 +86,9 @@ class canteen_class extends db{
     }
 
 //functions for the foodList table
-    function add_foodList($item_name){ //this function allows those at the canteen to add food items to the database
-        $strQuery="INSERT INTO foodList(`item_name`) 
-            VALUES ('$item_name')"; 
+    function add_foodList($item_name,$cid){ //this function allows those at the canteen to add food items to the database
+        $strQuery="INSERT INTO foodList(`item_name`,`cid`) 
+            VALUES ('$item_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
             return false;
@@ -125,9 +125,9 @@ class canteen_class extends db{
 
 
 //functions for the mealList table
-   function add_mealList($meal_name){ //this function allows food vendors to create meals out of food items
-        $strQuery="INSERT INTO mealList(`meal_name`) 
-            VALUES ('$meal_name')"; 
+   function add_mealList($meal_name,$cid){ //this function allows food vendors to create meals out of food items
+        $strQuery="INSERT INTO mealList(`meal_name`,`cid`) 
+            VALUES ('$meal_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
             return false;
@@ -164,11 +164,11 @@ class canteen_class extends db{
 
 
 //functions for the currentMeal table
-    function add_currentMeal($current_meal_name){ //allows food vendors add meals to the current list of 
+    function add_currentMeal($current_meal_name,$cid){ //allows food vendors add meals to the current list of 
     //food available at the canteens
 
-        $strQuery="INSERT INTO currentMeal(`current_meal_name`) 
-            VALUES ('$current_meal_name')"; 
+        $strQuery="INSERT INTO currentMeal(`current_meal_name`,`cid`) 
+            VALUES ('$current_meal_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
             return false;

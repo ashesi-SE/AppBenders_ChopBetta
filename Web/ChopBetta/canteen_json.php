@@ -80,7 +80,7 @@
 			$vendor_password=md5($vendor_password);
 		}
 		$v=new canteen_class();
-		$v->add_vendor($vendor_name,$vendor_password);
+		$v->add_vendor($vendor_name,$vendor_password,$cid);
 	}
 
 	else if (isset($_REQUEST['display_vendor'])){
@@ -160,7 +160,7 @@
 			$item_name=$_REQUEST["item_name"];
 		}
 		$fl=new canteen_class();
-		$fl->add_foodList($item_name);
+		$fl->add_foodList($item_name,$cid);
 	}
 	
 	else if(isset($_REQUEST['display_foodList'])){
@@ -235,7 +235,7 @@
             $meal_name=$_REQUEST["meal_name"];
         }
         $ml=new canteen_class();
-        $ml->add_mealList($meal_name);
+        $ml->add_mealList($meal_name,$cid);
     }
 
     else if (isset($_REQUEST['display_mealList'])){
@@ -311,7 +311,7 @@
 			$current_meal_name=$_REQUEST["current_meal_name"];
 		}
 		$cm=new canteen_class();
-		$cm->add_currentMeal($current_meal_name);
+		$cm->add_currentMeal($current_meal_name,$cid);
 	}
 
 	else if (isset($_REQUEST['display_currentMeal'])){
