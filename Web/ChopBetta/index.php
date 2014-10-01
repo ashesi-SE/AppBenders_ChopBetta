@@ -4,7 +4,6 @@
     <title>ChopBetta</title>
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/foundation.min.css"/>
-
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
     <script src="assets/js/foundation.min.js" type="text/javascript"></script>
@@ -12,8 +11,10 @@
 
 <body class="login">
 
-<form id="login" class="centerPage">
-    <header>AshStudent Inc.</header>
+<!--TODO: php redir if session is set even before login loads-->
+
+<form id="login" class="centerPage" action="canteen_loginHandler.php">
+    <header>Login</header>
     <div>
         <label for="username">Username</label>
         <input id="username" name="username" type="text" required="true" placeholder="Username">

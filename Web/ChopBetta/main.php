@@ -16,7 +16,7 @@
         </ul>
         <ul class="right">
             <li class="has-dropdown">
-                <a href="/">Kingston Coker</a>
+                <a href="/"><?php echo $_SESSION['username']!= null? $_SESSION['username'] : "Who r u?"; ?></a>
                 <ul class="dropdown">
                     <li class="active" ><a ng-click="loginfb()" >Logout</a></li>
                 </ul>

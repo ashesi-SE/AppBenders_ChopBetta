@@ -163,7 +163,9 @@ class canteen_class extends db{
     }
 
 
-//functions for the currentMeal table
+/**
+ * functions for the currentMeal table
+ * */
     function add_currentMeal($current_meal_name,$cid){ //allows food vendors add meals to the current list of 
     //food available at the canteens
 
@@ -207,6 +209,25 @@ class canteen_class extends db{
         return true;
     }
 
+    function authenticate($username, $password){
+        $strQuery="SELECT * FROM vendors WHERE `vendor_name`='$username'";
+        $this->sql_query($strQuery);
+        $row = $this->fetch();
+        if(!$row){
+            echo json_encode(array('status' => 'NoU'));
+            return false;
+        }else{
+            $password = md5($password);
+            if($password == md5($row['vendor_password'])){
+                echo json_encode(array('status' => 'VALID','data' => $row));
+                return $row;
+            }else{
+                echo json_encode(array('status' => 'BADPASS'));
+                return false;
+            }
+        }
+
+    }
 
 
 }

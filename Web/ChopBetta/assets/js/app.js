@@ -25,6 +25,12 @@ $(document).ready(function(){
 
 
     $('#login').submit(function(e){
+
+        $.get('canteen_loginHandler.php',{username: $('#username').val(),
+                password: $('#password').val()},function(data,status){
+            alert(data);
+
+        });
         alert('submiitted');
       //  e.preventDefault();
 
