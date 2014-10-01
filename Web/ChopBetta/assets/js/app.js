@@ -4,21 +4,29 @@
 
 var mealRows = 1;
 var mealsAvailable = "";
-
+var userData = "";//Values are set by login handlers
 $(document).ready(function(){
-    mealsAvailable = generateMealList(1);
-    $('#addMealRow1').find('.meals').html(mealsAvailable);
-
     /**
      * Login n logout handlers
      */
+    $.get('canteen_loginHandler.php',{isAuthenticated:2},function(data){
+
+        if(data){
+            userData = data.dat;
+            mealsAvailable = generateMealList();
+            $('#addMealRow1').find('.meals').html(mealsAvailable);
+            console.log(userData);
+        }
+
+    },"json");
+
     $('#login').submit(function(e){
         e.preventDefault();
         $.get('canteen_loginHandler.php',{username: $('#username').val(),
-                password: $('#password').val()},function(data,status) {
-            console.log(data);
-            console.log(data.stat);
+                password: $('#password').val()},function(data) {
             if (data.stat == "VALID") {
+                userData = data.dat;
+                console.log(userData);
                 window.location.href = "main.php";
             }
         },"json");
@@ -29,17 +37,16 @@ $(document).ready(function(){
             window.location.href = "index.php";
         });
     });
-
 });
-
 
 /**
  * Creates meal list for a specified canteen
  * <option>{meal here}</option> part
  */
-function generateMealList(canteenId){
+function generateMealList(){
+    console.log("CID: "+userData.cid);
     var meals = "";
-    $.get('canteen_json.php',{display_MealList: 2},function(data,status){
+    $.get('canteen_json.php',{display_MealList: 2,cid:userData.cid},function(data){
         console.log(data);
         $.each(data,function(key, elem  ){
             var meal = $.parseJSON(elem.meal_name); var mealStr = "";

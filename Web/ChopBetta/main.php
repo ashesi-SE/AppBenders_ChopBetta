@@ -73,10 +73,10 @@ if ($_SESSION['username'] == null){
                 <div class="row collapse prefix-round">
 
                     <div class="small-10 columns">
-                        <input type="text" placeholder="Value">
+                        <input type="text" placeholder="Type food item here...eg: Rice or Plantain">
                     </div>
                     <div class="small-2 columns">
-                        <a href="#" class="button postfix">Go</a>
+                        <a href="#" class="button postfix">Add food</a>
                     </div>
                 </div>
             </div>
@@ -91,13 +91,7 @@ if ($_SESSION['username'] == null){
 <script src="assets/js/foundation.min.js" type="text/javascript"></script>
 <script>
     $(document).foundation();
-    /**
-     * TODO: Provide a login_handler.php such that a username and password can be sent to it and it will return
-     * a string with the valid user details or "Invalid user" or "Wrong password". the page should also check
-     * for the presence
-     *
-     * TODO: Look up handling login with jquery
-     */
+
 </script>
 </html>
 

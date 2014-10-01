@@ -17,7 +17,6 @@ if (@$_SESSION['username'] != null){
 
 <body class="login">
 
-<!--TODO: php redir if session is set even before login loads-->
 
 <form id="login" class="centerPage" >
     <header>Login</header>
