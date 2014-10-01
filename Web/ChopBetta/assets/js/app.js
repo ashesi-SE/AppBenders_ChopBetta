@@ -21,9 +21,11 @@ $(document).ready(function(){
     },"json");
 
     $('#login').submit(function(e){
+
         e.preventDefault();
         $.get('canteen_loginHandler.php',{username: $('#username').val(),
-                password: $('#password').val()},function(data) {
+                password: $('#password').val()},function(data,status) {
+            console.log(data)
             if (data.stat == "VALID") {
                 userData = data.dat;
                 console.log(userData);

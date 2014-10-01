@@ -218,7 +218,7 @@ class canteen_class extends db{
             return false;
         }else{
             $password = md5($password);
-            if($password == md5($row['vendor_password'])){
+            if($password == $row['vendor_password']){
                 echo json_encode(array('stat' => 'VALID','dat' => $row));//valid user and password
                 return $row;
             }else{
