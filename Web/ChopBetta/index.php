@@ -85,6 +85,13 @@
 <script src="assets/js/foundation.min.js" type="text/javascript"></script>
 <script>
     $(document).foundation();
+    /**
+     * TODO: Provide a login_handler.php such that a username and password can be sent to it and it will return
+     * a string with the valid user details or "Invalid user" or "Wrong password". the page should also check
+     * for the presence
+     *
+     * TODO: Look up handling login with jquery
+     */
 </script>
 </html>
 
