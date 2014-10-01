@@ -23,7 +23,14 @@ $(document).ready(function(){
         $('#addMealRow1').find('.meals').html(meals);
     },"json");
 
+
+    $('#login').submit(function(e){
+        alert('submiitted');
+      //  e.preventDefault();
+
+    });
 });
+
 
 
 function setupRow(foods){
