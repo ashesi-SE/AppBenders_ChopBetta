@@ -3,10 +3,42 @@
  */
 
 var mealRows = 1;
-var meals = "";
-var mealInputRow = "";
+var mealsAvailable = "";
+
 $(document).ready(function(){
-    //gets food available
+    mealsAvailable = generateMealList(1);
+    $('#addMealRow1').find('.meals').html(mealsAvailable);
+
+    /**
+     * Login n logout handlers
+     */
+    $('#login').submit(function(e){
+        e.preventDefault();
+        $.get('canteen_loginHandler.php',{username: $('#username').val(),
+                password: $('#password').val()},function(data,status) {
+            console.log(data);
+            console.log(data.stat);
+            if (data.stat == "VALID") {
+                window.location.href = "main.php";
+            }
+        },"json");
+    });
+
+    $('#logout').click(function(){
+        $.get('canteen_loginHandler.php',{logout: "x"}).done(function(){
+            window.location.href = "index.php";
+        });
+    });
+
+});
+
+
+/**
+ * Creates meal list for a specified canteen
+ * <option>{meal here}</option> part
+ */
+function generateMealList(canteenId){
+    var meals = "";
     $.get('canteen_json.php',{display_MealList: 2},function(data,status){
         console.log(data);
         $.each(data,function(key, elem  ){
@@ -20,56 +52,34 @@ $(document).ready(function(){
             }
             meals+='<option value="'+mealStr+'">'+mealStr+'</option>'
         });
-        $('#addMealRow1').find('.meals').html(meals);
     },"json");
 
-
-    $('#login').submit(function(e){
-
-        $.get('canteen_loginHandler.php',{username: $('#username').val(),
-                password: $('#password').val()},function(data,status){
-            alert(data);
-
-        });
-        alert('submiitted');
-      //  e.preventDefault();
-
-    });
-});
-
-
-
-function setupRow(foods){
-    mealRows++;
-    mealInputRow = ' <div class="row" id="addMealRow'+mealRows+'">'+
-
-    '<div class="large-9 columns" style="padding-left: 0">'+
-    '<select id="meals">'+
-    foods +
-    '</select>'+
-    '</div>'+
-    '<div class="large-3 columns addBtn" style="padding-left: 0">'+
-    '<button onclick="addMealRow(this)">Add to menu</button>'+
-    '</div>'+
-    '</div>';
-
-    return mealInputRow;
+    return meals;
 }
 
-//TODO: Consider using one add to menu button, like Shamir suggested.
-function addMealRow(elem){
+
+function addMeal(elem){
+   var newMealDOM = ' <div class="row" id="addMealRow'+mealRows+'">'+
+    '<div class="large-9 columns" style="padding-left: 0">'+
+    '<select id="meals">'+ mealsAvailable + '</select>'+
+    '</div>'+
+    '<div class="large-3 columns addBtn" style="padding-left: 0">'+
+    '<button onclick="addMeal(this)">Add to menu</button>'+
+    '</div>'+
+    '</div>';
     var parent = elem.parentNode.parentNode;
-console.log($('#'+parent.id).find('.meals').val());
+    console.log($('#'+parent.id).find('.meals').val());
     $.get('canteen_json.php',{add_currentMeal:1,current_meal_name: $('#'+parent.id).find('.meals').val()},function(data,status){
         //do the below on successful add to db
         elem.className += " alert";
         elem.innerHTML = 'Remove';
-
-        $('#dataRows').append(setupRow(meals));
-        elem.setAttribute('onclick', 'remMealRow(this)');
+        $('#dataRows').append(newMealDOM);
+        elem.setAttribute('onclick', 'remMeal(this)');
+    }).done(function(){
+        mealRows++;
     });
 }
-function remMealRow(elem){
+function remMeal(elem){
 
     var parent = elem.parentNode.parentNode;
     console.log(parent.id);

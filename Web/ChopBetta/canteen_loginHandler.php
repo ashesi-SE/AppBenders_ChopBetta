@@ -19,11 +19,14 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
     $res = $controllerObj->authenticate($_REQUEST['username'],$_REQUEST['password']);//this is echoing to ajax
 
     if($res){
-      //  $_SESSION['username'] = $_REQUEST['username'];
-      //  $_SESSION['cid'] = $res['username'];
-      //  $_SESSION['vid'] = $_REQUEST['username'];
+        $_SESSION['username'] = $_REQUEST['username'];
+        $_SESSION['cid'] = $res['cid'];
+        $_SESSION['vid'] = $res['vendor_id'];
     }
   //  print_r($_SERVER['username']);
+}
+if(isset($_REQUEST['logout'])){
+    session_destroy();
 }
 
 session_write_close();

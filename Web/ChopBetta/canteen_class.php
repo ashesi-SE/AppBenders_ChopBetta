@@ -214,15 +214,15 @@ class canteen_class extends db{
         $this->sql_query($strQuery);
         $row = $this->fetch();
         if(!$row){
-            echo json_encode(array('status' => 'NoU'));
+            echo json_encode(array('stat' => 'NOU'));//No user found
             return false;
         }else{
             $password = md5($password);
             if($password == md5($row['vendor_password'])){
-                echo json_encode(array('status' => 'VALID','data' => $row));
+                echo json_encode(array('stat' => 'VALID','dat' => $row));//valid user and password
                 return $row;
             }else{
-                echo json_encode(array('status' => 'BADPASS'));
+                echo json_encode(array('stat' => 'BADPASS'));//valid user invalid password
                 return false;
             }
         }

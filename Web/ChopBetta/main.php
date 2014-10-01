@@ -1,3 +1,9 @@
+<?php
+session_start();
+if ($_SESSION['username'] == null){
+    header('Location: index.php');
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -18,7 +24,7 @@
             <li class="has-dropdown">
                 <a href="/"><?php echo $_SESSION['username']!= null? $_SESSION['username'] : "Who r u?"; ?></a>
                 <ul class="dropdown">
-                    <li class="active" ><a ng-click="loginfb()" >Logout</a></li>
+                    <li class="active" ><a id="logout" >Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -35,7 +41,7 @@
                     </select>
             </div>
             <div class="large-3 columns addBtn" style="padding-left: 0">
-                 <button class="menuControl" onclick="addMealRow(this)">Add to menu</button>
+                 <button class="menuControl" onclick="addMeal(this)">Add to menu</button>
             </div>
         </div>
         <div id="adder"></div>

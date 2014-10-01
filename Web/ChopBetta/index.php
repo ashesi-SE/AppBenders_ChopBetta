@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (@$_SESSION['username'] != null){
+    header('Location: main.php');
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -13,7 +19,7 @@
 
 <!--TODO: php redir if session is set even before login loads-->
 
-<form id="login" class="centerPage" action="canteen_loginHandler.php">
+<form id="login" class="centerPage" >
     <header>Login</header>
     <div>
         <label for="username">Username</label>
