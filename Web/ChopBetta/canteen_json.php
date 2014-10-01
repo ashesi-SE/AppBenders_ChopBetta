@@ -77,7 +77,6 @@
 		$vendor_password="";
 		if (isset($_REQUEST["vendor_password"])) {
 			$vendor_password=$_REQUEST["vendor_password"];
-			$vendor_password=md5($vendor_password);
 		}
 		$v=new canteen_class();
 		$v->add_vendor($vendor_name,$vendor_password,$cid);

@@ -49,7 +49,7 @@ class canteen_class extends db{
 //functions for the vendors table
     function add_vendor($vendor_name,$vendor_password,$cid){ //adds vendors to a specific canteen
         $strQuery="INSERT INTO vendors(`vendor_name`,`vendor_password`,`cid`) 
-            VALUES ('$vendor_name','$vendor_password',$cid)"; 
+            VALUES ('$vendor_name',md5('$vendor_password'),$cid)"; 
 
         if(!$this->sql_query($strQuery)){
             return false;

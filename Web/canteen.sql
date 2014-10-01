@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `cafeteria` (
 CREATE TABLE IF NOT EXISTS `vendors` (
   `vendor_id` int PRIMARY KEY AUTO_INCREMENT,
   `vendor_name` varchar(100),
-  `vendor_password`	varchar(15),
+  `vendor_password`	varchar(255),
   `cid` int NOT NULL,	
   FOREIGN KEY (`cid`) references `cafeteria` (`cafeteria_id`),
   UNIQUE (`vendor_name`,`cid`)
