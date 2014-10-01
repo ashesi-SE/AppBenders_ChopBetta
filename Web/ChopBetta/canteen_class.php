@@ -179,7 +179,7 @@ class canteen_class extends db{
     function display_currentMeal($cid){ //displays the available meals and their 
     //ratings to customers
 
-        $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating` FROM currentMeal WHERE `cid`=$cid"; 
+        $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`cid` FROM currentMeal WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
             return false;
