@@ -10,12 +10,10 @@ require_once("canteen_class.php");
 $controllerObj = new canteen_class();
 $res=false;
 
-$_SESSION['username']= null;
-$_SESSION['cid']= null;
-$_SESSION['vid']= null;
-
 if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
-
+    $_SESSION['username']= null;
+    $_SESSION['cid']= null;
+    $_SESSION['vid']= null;
     $res = $controllerObj->authenticate($_REQUEST['username'],$_REQUEST['password']);//this is echoing to ajax
 
     if($res){
@@ -27,6 +25,14 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 }
 if(isset($_REQUEST['logout'])){
     session_destroy();
+}
+if(isset($_REQUEST['isAuthenticated'])){
+
+    if($_SESSION['username']==null){
+       echo false;
+    }else{
+       echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['vid'], 'vendor_name' => $_SESSION['username'],'cid' => $_SESSION['cid'] )));
+    }
 }
 
 session_write_close();
