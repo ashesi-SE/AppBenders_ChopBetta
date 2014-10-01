@@ -1,0 +1,32 @@
+.card {
+padding: 1.5rem;
+box-shadow: 0 1px 2px #aaa;
+background: #ebebeb;
+margin-left: 21vw;
+margin-right: 2vw;
+margin-top: 1rem;
+border-radius: 3px;
+user-select: none;
+transform-origin: top left;
+}
+
+body{
+
+	background-color:white ;
+}
+
+#tabs{
+	height: 100%;
+	background-color: #333329;
+}
+
+@media (max-width: 640px) {
+#tabs{
+	height: auto;
+	padding-bottom: 2%
+	background-color: #333329;
+}
+.card{
+	margin-left: 2vw;
+}
+}

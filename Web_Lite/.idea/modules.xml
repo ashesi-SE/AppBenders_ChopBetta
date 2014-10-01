@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/web_lite.iml" filepath="$PROJECT_DIR$/web_lite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Web_Lite.iml" filepath="$PROJECT_DIR$/Web_Lite.iml" />
     </modules>
   </component>
 </project>
