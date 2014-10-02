@@ -39,7 +39,55 @@ $(document).ready(function(){
             window.location.href = "index.php";
         });
     });
+
+    /**
+     * Event handler for modal
+     */
+    $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
+        var modal = $(this);
+        var modalId = modal['context'].id;
+        if(modalId == 'add_foodItem_modal'){
+            $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
+                if(data.length > 0){
+                    $('#foodList ul').html("");
+                }
+                $.each(data,function(key, elem  ){
+                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
+                });
+            },"json");
+
+        }else if(modalId == 'create_meal_modal'){
+            $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
+                if(data.length > 0){
+                    $('#selectableFoodList ul').html("");
+                }
+                $.each(data,function(key, elem  ){
+                    $('#selectableFoodList ul').append(
+                        '<li class="'+elem.item_id +'">' +
+                        '<input type="checkbox" name="'+elem.item_name +'" value="'+elem.item_id +'" id="'+elem.item_id +'">' +
+                        '<label for="'+elem.item_id +'">'+elem.item_name +'</label>' +
+                        '</li>');
+                });
+            },"json").done(function(){
+                $('#selectableFoodList input[type=checkbox]').click(function(){
+                    var elemId = $(this)['context'].id;
+
+                    console.log($('#'+ elemId + ':checked'));
+                    $('#'+ elemId + ':checked')
+                })
+            });
+
+
+        }else if(modalId == 'today_menu_modal'){
+
+        }
+        //TODO: Depending on modal ID load the needed data
+
+        console.log(modal);
+    });
+
 });
+
 
 /**
  * Creates meal list for a specified canteen
@@ -89,20 +137,32 @@ function addMeal(elem){
     });
 }
 function remMeal(elem){
-
     var parent = elem.parentNode.parentNode;
     console.log(parent.id);
     $('#'+parent.id).remove();
 }
-function addMealdiff(elem){
-    $.get('canteen_json.php',{add_foodList:1,item_name: $('#foodItem_input').val()},function(data,status){
-        $('#add_foodItem_modal').foundation('reveal', 'close');
+
+
+function addFood(){
+    $.get('canteen_json.php',{add_foodList: 2,item_name:$('#foodItem').val(),cid:userData.cid}).done(function(){
+
+        $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
+            if(data.length > 0){
+                $('#foodList ul').html("");
+            }
+            $.each(data,function(key, elem  ){
+                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
+            });
+            $('#foodItem').val("");
+        },"json");
     });
 }
+
 function showMsg(type,msg,options){
     var options = $.extend({type : "info", speed : 40, mousestop : true }, options);
-
 }
+
+
 
 
 

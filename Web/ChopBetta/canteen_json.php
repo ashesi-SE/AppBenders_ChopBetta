@@ -155,8 +155,9 @@
 		include_once("canteen_class.php");
 		
 		$item_name="";
-		if (isset($_REQUEST["item_name"])) {
+		if (isset($_REQUEST["item_name"]) && isset($_REQUEST["cid"])) {
 			$item_name=$_REQUEST["item_name"];
+            $cid=$_REQUEST["cid"];
 		}
 		$fl=new canteen_class();
 		$fl->add_foodList($item_name,$cid);
@@ -164,7 +165,6 @@
 	
 	else if(isset($_REQUEST['display_foodList'])){
 		include_once("canteen_class.php");
-		
 		$cid=0;
 		if (isset($_REQUEST["cid"])) {
 			$cid=$_REQUEST["cid"];
