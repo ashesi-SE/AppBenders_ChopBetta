@@ -1,0 +1,10 @@
+
+## Directory-based project format:
+.idea/
+
+## Directory in Web
+Web/ChopBetta/.idea/
+
+## Directory in Android (uncomment the line below if you prefer)
+## remember to run "git rm --cached -r Android/ChopBetta/.idea/" first
+Android/ChopBetta/.idea/
