@@ -24,7 +24,7 @@ $(document).ready(function(){
 
         e.preventDefault();
         $.get('canteen_loginHandler.php',{username: $('#username').val(),
-                password: $('#password').val()},function(data,status) {
+            password: $('#password').val()},function(data,status) {
             console.log(data)
             if (data.stat == "VALID") {
                 userData = data.dat;
@@ -69,23 +69,34 @@ $(document).ready(function(){
                         '</li>');
                 });
             },"json").done(function(){
-                $('#selectableFoodList input[type=checkbox]').click(function(){
+                //Click function
+                var mealArray = [];
+                $('#selectableFoodList').find('input[type=checkbox]').click(function(){
                     var elemId = $(this)['context'].id;
+                    var clickedFoodItem = $('#'+ elemId + ':checked');
+                    var uncheckedFoodItem = $('#'+ elemId);
+                    console.log(clickedFoodItem);
 
-                    console.log($('#'+ elemId + ':checked'));
-                    $('#'+ elemId + ':checked')
+                    if(clickedFoodItem.length == 1) {
+                        mapDS.add(clickedFoodItem.val(),clickedFoodItem.attr('name'));
+
+                        mealArray["'"+clickedFoodItem.val()+"'"] = clickedFoodItem.attr('name');
+                    }else{
+                        mapDS.remove(uncheckedFoodItem.val());
+                        mealArray["'"+uncheckedFoodItem.val()+"'"] = null;
+                    }
+                    $('#create_meal_modal').find('.displayArea').html(mealArray.join(", "));
+                    console.log(mealArray);
+                    console.log(mapDS.toArray());
+                    console.log(mapDS.toArray(true));
+                    console.log(mealArray.length);
+                    console.log(mapDS.length);
                 })
             });
-
-
-        }else if(modalId == 'today_menu_modal'){
-
         }
-        //TODO: Depending on modal ID load the needed data
 
         console.log(modal);
     });
-
 });
 
 
@@ -116,14 +127,14 @@ function generateMealList(){
 
 
 function addMeal(elem){
-   var newMealDOM = ' <div class="row" id="addMealRow'+mealRows+'">'+
-    '<div class="large-9 columns" style="padding-left: 0">'+
-    '<select id="meals">'+ mealsAvailable + '</select>'+
-    '</div>'+
-    '<div class="large-3 columns addBtn" style="padding-left: 0">'+
-    '<button onclick="addMeal(this)">Add to menu</button>'+
-    '</div>'+
-    '</div>';
+    var newMealDOM = ' <div class="row" id="addMealRow'+mealRows+'">'+
+        '<div class="large-9 columns" style="padding-left: 0">'+
+        '<select id="meals">'+ mealsAvailable + '</select>'+
+        '</div>'+
+        '<div class="large-3 columns addBtn" style="padding-left: 0">'+
+        '<button onclick="addMeal(this)">Add to menu</button>'+
+        '</div>'+
+        '</div>';
     var parent = elem.parentNode.parentNode;
     console.log($('#'+parent.id).find('.meals').val());
     $.get('canteen_json.php',{add_currentMeal:1,current_meal_name: $('#'+parent.id).find('.meals').val()},function(data,status){
@@ -161,8 +172,5 @@ function addFood(){
 function showMsg(type,msg,options){
     var options = $.extend({type : "info", speed : 40, mousestop : true }, options);
 }
-
-
-
 
 

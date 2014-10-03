@@ -17,7 +17,6 @@ if ($_SESSION['username'] == null){
 
             <ul class="left">
                 <li><a href="#">Home</a></li>
-<!--                <li><a href="#" data-reveal-id="today_menu_modal">Today's Menu</a></li>-->
                 <li><a href="#" data-reveal-id="create_meal_modal">Create meal item</a></li>
                 <li><a href="#" data-reveal-id="add_foodItem_modal">Add food item</a></li>
             </ul>
@@ -48,15 +47,7 @@ if ($_SESSION['username'] == null){
             <div id="adder"></div>
 
         </section>
-        <div id="today_menu_modal" class="reveal-modal small" data-reveal>
-            <div class="small-3 columns">
-                <label for="right-label" class="right">Today's meal</label>
-            </div>
-            <div class="small-9 columns">
-                <input type="text" id="right-label" placeholder="Inline Text Input">
-            </div>
-            <a class="close-reveal-modal">&times;</a>
-        </div>
+
 
         <div id="create_meal_modal" class="reveal-modal medium" data-reveal>
             <div class="row">
@@ -68,8 +59,8 @@ if ($_SESSION['username'] == null){
                     </section>
                 </div>
                 <div class="small-8 columns">
-                    <div class="displayArea small-9 columns">
-                        <div class="disPlayArea">No food items selected</div>
+                    <div class="small-9 columns">
+                        <div class="displayArea">No food items selected</div>
                     </div>
                     <div class="small-3 columns">
                         <a href="#" onclick="addFood()" class="button postfix">Add meal</a>
@@ -109,6 +100,7 @@ if ($_SESSION['username'] == null){
 
     </body>
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
+    <script src="assets/js/mapDS.js" type="text/javascript"></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
     <script src="assets/js/foundation.min.js" type="text/javascript"></script>
     <script>
