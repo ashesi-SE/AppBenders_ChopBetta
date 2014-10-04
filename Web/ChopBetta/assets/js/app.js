@@ -16,6 +16,7 @@ $(document).ready(function(){
             mealsAvailable = generateMealList();
             $('#addMealRow1').find('.meals').html(mealsAvailable);
             console.log(userData);
+           console.log(mealsAvailable);
         }
 
     },"json");
@@ -25,7 +26,7 @@ $(document).ready(function(){
         e.preventDefault();
         $.get('canteen_loginHandler.php',{username: $('#username').val(),
             password: $('#password').val()},function(data,status) {
-            console.log(data)
+            console.log(data);
             if (data.stat == "VALID") {
                 userData = data.dat;
                 console.log(userData);
@@ -41,7 +42,7 @@ $(document).ready(function(){
     });
 
     /**
-     * Event handler for modal
+     * Event handler for modal open
      */
     $(document).on('opened.fndtn.reveal', '[data-reveal]', function () {
         var modal = $(this);
@@ -70,7 +71,7 @@ $(document).ready(function(){
                 });
             },"json").done(function(){
                 //Click function
-                var mealArray = [];
+
                 $('#selectableFoodList').find('input[type=checkbox]').click(function(){
                     var elemId = $(this)['context'].id;
                     var clickedFoodItem = $('#'+ elemId + ':checked');
@@ -79,19 +80,17 @@ $(document).ready(function(){
 
                     if(clickedFoodItem.length == 1) {
                         mapDS.add(clickedFoodItem.val(),clickedFoodItem.attr('name'));
-
-                        mealArray["'"+clickedFoodItem.val()+"'"] = clickedFoodItem.attr('name');
                     }else{
                         mapDS.remove(uncheckedFoodItem.val());
-                        mealArray["'"+uncheckedFoodItem.val()+"'"] = null;
                     }
-                    $('#create_meal_modal').find('.displayArea').html(mealArray.join(", "));
-                    console.log(mealArray);
+                  //  $('#create_meal_modal').find('.displayArea').html(mealArray.join(", "));
+                    $('#create_meal_modal').find('.displayArea').html(makeHRString(mapDS.valArray()));
                     console.log(mapDS.toArray());
-                    console.log(mapDS.toArray(true));
-                    console.log(mealArray.length);
-                    console.log(mapDS.length);
-                })
+                   // console.log(mapDS.toArray(true));//TODO:this goes to db
+                   // console.log(mapDS.length);
+                });
+
+
             });
         }
 
@@ -107,32 +106,39 @@ $(document).ready(function(){
 function generateMealList(){
     console.log("CID: "+userData.cid);
     var meals = "";
-    $.get('canteen_json.php',{display_MealList: 2,cid:userData.cid},function(data){
+    $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
         console.log(data);
         $.each(data,function(key, elem  ){
             var meal = $.parseJSON(elem.meal_name); var mealStr = "";
             for (var i=0;i<meal.length;i++){
                 if(i < meal.length-1){
-                    mealStr += meal[i]+", ";
+                    mealStr += meal[i].value+", ";
                 }else{
-                    mealStr += " and "+ meal[i];
+                    mealStr += " and "+ meal[i].value;
                 }
             }
-            meals+='<option value="'+mealStr+'">'+mealStr+'</option>'
-        });
-    },"json");
 
-    return meals;
+            meals+='<option value="'+mealStr+'">'+mealStr+'</option>';
+        });
+    },"json").done(function(){
+       // console.log(meals);
+        return meals;
+    });
+
+}
+function add_toMealList(){
+    $.get('canteen_json.php',{add_mealList: 2,cid:userData.cid,meal_name:mapDS.toArray(true)},function(data){
+
+    });
 }
 
-
-function addMeal(elem){
+function addCurMeal(elem){
     var newMealDOM = ' <div class="row" id="addMealRow'+mealRows+'">'+
         '<div class="large-9 columns" style="padding-left: 0">'+
         '<select id="meals">'+ mealsAvailable + '</select>'+
         '</div>'+
         '<div class="large-3 columns addBtn" style="padding-left: 0">'+
-        '<button onclick="addMeal(this)">Add to menu</button>'+
+        '<button onclick="addCurMeal(this)">Add to menu</button>'+
         '</div>'+
         '</div>';
     var parent = elem.parentNode.parentNode;
@@ -142,12 +148,12 @@ function addMeal(elem){
         elem.className += " alert";
         elem.innerHTML = 'Remove';
         $('#dataRows').append(newMealDOM);
-        elem.setAttribute('onclick', 'remMeal(this)');
+        elem.setAttribute('onclick', 'remCurMeal(this)');
     }).done(function(){
         mealRows++;
     });
 }
-function remMeal(elem){
+function remCurMeal(elem){
     var parent = elem.parentNode.parentNode;
     console.log(parent.id);
     $('#'+parent.id).remove();
@@ -169,6 +175,16 @@ function addFood(){
     });
 }
 
+function makeHRString(kvMap){
+    //TODO: nothing selected
+    if(kvMap.length == 1){
+        return kvMap[0];
+    }else{
+        var str =  kvMap.join(", ");
+        var ind = str.lastIndexOf(",");
+        return str.slice(0,ind) +" and"+ str.slice(ind+1,str.length);
+    }
+}
 function showMsg(type,msg,options){
     var options = $.extend({type : "info", speed : 40, mousestop : true }, options);
 }

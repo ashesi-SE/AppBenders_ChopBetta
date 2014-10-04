@@ -13,10 +13,7 @@ var mapDS = new function() {
         this.length++;
     };
     this.remove = function (index) {
-        console.log(key);
-        console.log(index);
         var valIndex = $.inArray(index,key);
-        console.log(valIndex);
         key = $.grep(key, function (n,i) {
             return i !== valIndex;
         });
@@ -36,7 +33,14 @@ var mapDS = new function() {
             final.push(item);
         });
 
-        return (serialize)? final.toString(): final;
+        return (serialize)? JSON.stringify(final): final;
+
+    };
+    this.valArray = function (serialize) {
+        serialize = serialize || false;
+
+
+        return (serialize)? JSON.stringify(value): value;
 
     };
 
