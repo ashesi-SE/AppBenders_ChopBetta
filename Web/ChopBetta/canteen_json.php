@@ -230,8 +230,9 @@
         include_once("canteen_class.php");
 
         $meal_name="";
-        if (isset($_REQUEST["meal_name"])) {
+        if (isset($_REQUEST["meal_name"]) && isset($_REQUEST["cid"])) {
             $meal_name=$_REQUEST["meal_name"];
+            $cid=$_REQUEST["cid"];
         }
         $ml=new canteen_class();
         $ml->add_mealList($meal_name,$cid);

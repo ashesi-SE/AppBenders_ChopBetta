@@ -41,7 +41,7 @@ if ($_SESSION['username'] == null){
                     </select>
                 </div>
                 <div class="large-3 columns addBtn" style="padding-left: 0">
-                    <button class="menuControl" onclick="addMeal(this)">Add to menu</button>
+                    <button class="menuControl" onclick="addCurMeal(this)">Add to menu</button>
                 </div>
             </div>
             <div id="adder"></div>
@@ -63,7 +63,7 @@ if ($_SESSION['username'] == null){
                         <div class="displayArea">No food items selected</div>
                     </div>
                     <div class="small-3 columns">
-                        <a href="#" onclick="addFood()" class="button postfix">Add meal</a>
+                        <a href="#" onclick="add_toMealList()" class="button postfix">Add meal</a>
                     </div>
                     <section id="mealList" class="large-12 columns"  >
                         <ul>
