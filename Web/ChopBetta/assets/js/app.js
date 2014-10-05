@@ -5,6 +5,7 @@
 var mealRows = 1;
 var mealsAvailable = "";
 var userData = "";//Values are set by login handlers
+var newMealDOM = "";
 $(document).ready(function(){
     /**
      * Login n logout handlers
@@ -13,15 +14,13 @@ $(document).ready(function(){
 
         if(data){
             userData = data.dat;
-            mealsAvailable = generateMealList();
+            generateMealList();
             console.log(userData);
-            console.log(mealsAvailable);
         }
 
     },"json");
 
     $('#login').submit(function(e){
-
         e.preventDefault();
         $.get('canteen_loginHandler.php',{username: $('#username').val(),
             password: $('#password').val()},function(data,status) {
@@ -39,6 +38,7 @@ $(document).ready(function(){
             window.location.href = "index.php";
         });
     });
+
 
     /**
      * Event handler for modal open
@@ -81,11 +81,9 @@ $(document).ready(function(){
                     }else{
                         mapDS.remove(uncheckedFoodItem.val());
                     }
-                  //  $('#create_meal_modal').find('.displayArea').html(mealArray.join(", "));
+                    //  $('#create_meal_modal').find('.displayArea').html(mealArray.join(", "));
                     $('#create_meal_modal').find('.displayArea').html(makeHRString(mapDS.valArray()));
                     console.log(mapDS.toArray());
-                   // console.log(mapDS.toArray(true));//TODO:this goes to db
-                   // console.log(mapDS.length);
                 });
 
             });
@@ -103,7 +101,7 @@ $(document).ready(function(){
 function generateMealList(){
     console.log("CID: "+userData.cid);
     return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
-        var meals = "";
+
         console.log(data);
         $.each(data,function(key, elem  ){
             var meal = $.parseJSON(elem.meal_name); var mealStr = [];
@@ -112,52 +110,64 @@ function generateMealList(){
                 mealStr.push(meal[i].value);
             }
             mealStr = makeHRString(mealStr);
-            meals += '<option value="'+mealStr+'">'+mealStr+'</option>';
+            mealsAvailable += '<option name="'+ elem.meal_id +'" value="'+mealStr+'">'+mealStr+'</option>';
         });
 
-        $('#addMealRow1').find('.meals').html(meals);
+        $('#addMealRow1').find('.meals').html(mealsAvailable);
     },"json");
 
 }
 function add_toMealList(){
-    $.get('canteen_json.php',{add_mealList: 2,cid:userData.cid,meal_name:mapDS.toArray(true)},function(data){
-
+    $.get('canteen_json.php',{add_mealList: 2,cid:userData.cid,meal_name:mapDS.toArray(true)},
+        function(data){
+            showMsg({msg:"added"});
+        //TODO: popup on true or 1
     });
 }
 
 function addCurMeal(elem){
-    var newMealDOM = ' <div class="row" id="addMealRow'+mealRows+'">'+
+
+    function createRow(){
+        newMealDOM = ' <div class="row" id="addMealRow'+(++mealRows)+'">'+
         '<div class="large-9 columns" style="padding-left: 0">'+
-        '<select id="meals">'+ mealsAvailable + '</select>'+
+        '<select class="meals">'+ mealsAvailable + '</select>'+
         '</div>'+
         '<div class="large-3 columns addBtn" style="padding-left: 0">'+
         '<button onclick="addCurMeal(this)">Add to menu</button>'+
         '</div>'+
         '</div>';
+        return newMealDOM;
+    }
     var parent = elem.parentNode.parentNode;
+
+    console.log($('#'+parent.id));
     console.log($('#'+parent.id).find('.meals').val());
-    $.get('canteen_json.php',{add_currentMeal:1,cid:userData.cid,
-        current_meal_name: $('#'+parent.id).find('.meals').val()},function(data,status){
-    console.log(data);
-        //do the below on successful add to db
-        elem.className += " alert";
-        elem.innerHTML = 'Remove';
-        $('#dataRows').append(newMealDOM);
-        elem.setAttribute('onclick', 'remCurMeal(this)');
-    }).done(function(){
-        mealRows++;
-    });
+    console.log($('#'+parent.id).find('.meals option:selected').attr('name'));
+    $.get('canteen_json.php',{add_currentMeal:  1,
+            cid:userData.cid,
+            current_meal_name: $('#'+parent.id).find('.meals').val(),
+            current_meal_id: $('#'+parent.id).find('.meals option:selected').attr('name')},
+        function(data,status){
+            console.log(data);
+            //todo: the below on successful add to db
+            //TODO: popup on true or 1
+            elem.className += " alert";
+            elem.innerHTML = 'Remove';
+            elem.setAttribute('onclick', 'remCurMeal(this)');
+            $('#dataRows').append(createRow());
+        });
 }
 function remCurMeal(elem){
     var parent = elem.parentNode.parentNode;
     console.log(parent.id);
     $('#'+parent.id).remove();
+    //TODO: popup on true or 1
 }
 
 
 function addFood(){
     $.get('canteen_json.php',{add_foodList: 2,item_name:$('#foodItem').val(),cid:userData.cid}).done(function(){
-
+        //TODO: popup on true or 1
         $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
             if(data.length > 0){
                 $('#foodList ul').html("");
@@ -180,8 +190,41 @@ function makeHRString(kvMap){
         return str.slice(0,ind) +" and"+ str.slice(ind+1,str.length);
     }
 }
-function showMsg(type,msg,options){
-    var options = $.extend({type : "info", speed : 40, mousestop : true }, options);
+function showMsg(options){
+
+    function close(elem){
+
+    }
+    var options = $.extend({type : "info", msg: "Hello world!" }, options);
+
+    var popup = '<section id="popup" class="popup centerPage"><div>stuff</div><span>&times;</span></section>';
+    $('body').append(popup);
+    var popup = $('.popup');
+    popup.hide();
+    popup.find('span').css({ position: "absolute",
+    "right": "3px",
+    "top": "50%",
+    "transform": "translateY(-50%)",
+    "font-size": "25px"}).click(function(){
+        //TODO: hide via clickeds id
+        popup.hide('slideTop');
+    });
+
+    popup.css({ position: "absolute",
+    "top": "55px",
+    "left": 0,
+    "right": 0,
+    "background": "beige",
+    "border": "1px solid rgb(218, 218, 184)",
+    "border-radius": "4px",
+    "line-height": "17px",
+    "padding": "10px",
+    "z-index": 400});
+    popup.find('div').html(options.msg);
+
+    popup.show('slideTop');
+    setTimeout(function(){popup.hide('slideTop')}, 2000);
+
 }
 
 

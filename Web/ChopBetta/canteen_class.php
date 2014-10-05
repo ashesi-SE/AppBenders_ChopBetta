@@ -1,4 +1,6 @@
 <?php
+
+//TODO: make the trues echo 1 and the false echo mysql_error
 /* 
 contains the functions needed to create, retrieve, update and delete information in the database.
  */
