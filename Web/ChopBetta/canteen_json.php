@@ -319,8 +319,10 @@
 		include_once("canteen_class.php");
 		
 		$current_meal_name="";
-		if (isset($_REQUEST["current_meal_name"])) {
+        $cid=0;
+		if (isset($_REQUEST["current_meal_name"]) && isset($_REQUEST["cid"])){
 			$current_meal_name=$_REQUEST["current_meal_name"];
+            $cid=$_REQUEST["cid"];
 		}
 		$cid=0;
 		if (isset($_REQUEST["cid"])) {
@@ -391,4 +393,5 @@
 		} 
 		echo json_encode($array);		
 	}
+echo mysql_error();
 ?>

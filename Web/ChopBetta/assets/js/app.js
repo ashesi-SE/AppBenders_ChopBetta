@@ -136,7 +136,9 @@ function addCurMeal(elem){
         '</div>';
     var parent = elem.parentNode.parentNode;
     console.log($('#'+parent.id).find('.meals').val());
-    $.get('canteen_json.php',{add_currentMeal:1,current_meal_name: $('#'+parent.id).find('.meals').val()},function(data,status){
+    $.get('canteen_json.php',{add_currentMeal:1,cid:userData.cid,
+        current_meal_name: $('#'+parent.id).find('.meals').val()},function(data,status){
+    console.log(data);
         //do the below on successful add to db
         elem.className += " alert";
         elem.innerHTML = 'Remove';
