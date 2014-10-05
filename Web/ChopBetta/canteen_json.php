@@ -78,6 +78,10 @@
 		if (isset($_REQUEST["vendor_password"])) {
 			$vendor_password=$_REQUEST["vendor_password"];
 		}
+		$cid=0;
+		if (isset($_REQUEST["cid"])) {
+			$cid=$_REQUEST["cid"];
+		}
 		$v=new canteen_class();
 		$v->add_vendor($vendor_name,$vendor_password,$cid);
 	}
@@ -159,6 +163,10 @@
 			$item_name=$_REQUEST["item_name"];
             $cid=$_REQUEST["cid"];
 		}
+		$cid=0;
+		if (isset($_REQUEST["cid"])) {
+			$cid=$_REQUEST["cid"];
+		}
 		$fl=new canteen_class();
 		$fl->add_foodList($item_name,$cid);
 	}
@@ -234,6 +242,10 @@
             $meal_name=$_REQUEST["meal_name"];
             $cid=$_REQUEST["cid"];
         }
+        $cid=0;
+		if (isset($_REQUEST["cid"])) {
+			$cid=$_REQUEST["cid"];
+		}
         $ml=new canteen_class();
         $ml->add_mealList($meal_name,$cid);
     }
@@ -310,8 +322,12 @@
 		if (isset($_REQUEST["current_meal_name"])) {
 			$current_meal_name=$_REQUEST["current_meal_name"];
 		}
+		$cid=0;
+		if (isset($_REQUEST["cid"])) {
+			$cid=$_REQUEST["cid"];
+		}
 		$cm=new canteen_class();
-		$cm->add_currentMeal($current_meal_name,$cid);
+		$cm->add_currentMeal($current_meal_id,$current_meal_name,$cid);
 	}
 
 	else if (isset($_REQUEST['display_currentMeal'])){
