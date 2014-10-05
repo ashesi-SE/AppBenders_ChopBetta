@@ -14,9 +14,8 @@ $(document).ready(function(){
         if(data){
             userData = data.dat;
             mealsAvailable = generateMealList();
-            $('#addMealRow1').find('.meals').html(mealsAvailable);
             console.log(userData);
-           console.log(mealsAvailable);
+            console.log(mealsAvailable);
         }
 
     },"json");
@@ -71,7 +70,6 @@ $(document).ready(function(){
                 });
             },"json").done(function(){
                 //Click function
-
                 $('#selectableFoodList').find('input[type=checkbox]').click(function(){
                     var elemId = $(this)['context'].id;
                     var clickedFoodItem = $('#'+ elemId + ':checked');
@@ -90,7 +88,6 @@ $(document).ready(function(){
                    // console.log(mapDS.length);
                 });
 
-
             });
         }
 
@@ -105,25 +102,21 @@ $(document).ready(function(){
  */
 function generateMealList(){
     console.log("CID: "+userData.cid);
-    var meals = "";
-    $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
+    return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
+        var meals = "";
         console.log(data);
         $.each(data,function(key, elem  ){
-            var meal = $.parseJSON(elem.meal_name); var mealStr = "";
-            for (var i=0;i<meal.length;i++){
-                if(i < meal.length-1){
-                    mealStr += meal[i].value+", ";
-                }else{
-                    mealStr += " and "+ meal[i].value;
-                }
-            }
+            var meal = $.parseJSON(elem.meal_name); var mealStr = [];
 
-            meals+='<option value="'+mealStr+'">'+mealStr+'</option>';
+            for (var i=0;i<meal.length;i++){
+                mealStr.push(meal[i].value);
+            }
+            mealStr = makeHRString(mealStr);
+            meals += '<option value="'+mealStr+'">'+mealStr+'</option>';
         });
-    },"json").done(function(){
-       // console.log(meals);
-        return meals;
-    });
+
+        $('#addMealRow1').find('.meals').html(meals);
+    },"json");
 
 }
 function add_toMealList(){
