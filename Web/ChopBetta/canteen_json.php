@@ -377,5 +377,5 @@
 		} 
 		echo json_encode($array);		
 	}
-echo mysql_error();
+
 ?>

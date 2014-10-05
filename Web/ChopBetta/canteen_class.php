@@ -169,7 +169,7 @@ class canteen_class extends db{
     function add_currentMeal($current_meal_name,$cid){ //allows food vendors add meals to the current list of 
     //food available at the canteens
 
-        $strQuery="INSERT INTO currentMeal(`current_meal_name`,`cid`) 
+        $strQuery="INSERT INTO currentMeal(`current_meal_name`,`cid`)
             VALUES ('$current_meal_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
