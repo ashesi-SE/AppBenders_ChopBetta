@@ -218,7 +218,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         try {
 
 //          hts.execute(url,getString(R.string.urlSet));
-          hts.execute(url,"http://10.0.2.2:63343/ChopBetta/Web/ChopBetta/canteen_json.php");
+          hts.execute(url,"http://192.168.42.10:63345/ChopBetta/Web/ChopBetta/canteen_json.php");
 
             res = hts.get();
         } catch (InterruptedException e) {
@@ -229,6 +229,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         return res;
     }
     public static class httpSender extends AsyncTask<String, Void, String> {
+
         private String urlStr;
         private String response;
         InputStream is = null;
@@ -237,6 +238,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         URL url;
         @Override
         protected String doInBackground(String... params) {
+
             urlStr = params[1];
             try {
                 Log.i("URL", urlStr + params[0]);
