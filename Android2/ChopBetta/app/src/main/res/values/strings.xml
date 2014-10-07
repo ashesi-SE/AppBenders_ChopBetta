@@ -7,5 +7,6 @@
     <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="urlSet">http://10.0.2.2:63343/ChopBetta/Web/ChopBetta/canteen_json.php</string>
 
 </resources>
