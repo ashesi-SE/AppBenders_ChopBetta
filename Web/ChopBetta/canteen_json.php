@@ -324,9 +324,9 @@
 			$current_meal_name=$_REQUEST["current_meal_name"];
             $cid=$_REQUEST["cid"];
 		}
-		$cid=0;
-		if (isset($_REQUEST["cid"])) {
-			$cid=$_REQUEST["cid"];
+        $current_meal_id=0;
+		if (isset($_REQUEST["current_meal_id"])) {
+            $current_meal_id=$_REQUEST["current_meal_id"];
 		}
 		$cm=new canteen_class();
 		$cm->add_currentMeal($current_meal_id,$current_meal_name,$cid);
@@ -393,5 +393,5 @@
 		} 
 		echo json_encode($array);		
 	}
-echo mysql_error();
+
 ?>

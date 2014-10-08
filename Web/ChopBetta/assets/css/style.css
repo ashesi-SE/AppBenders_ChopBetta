@@ -7,12 +7,13 @@
     box-sizing: inherit;
 }
 .column, .columns {
-    position: relative;
+    /*position: relative;*/
     /*padding-left : 0;*/
     /*padding-right: 0;*/
 }
 body {
     margin: 0;
+    position: relative;
 }
 label{
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
@@ -20,6 +21,7 @@ label{
 .addBtn button{
     padding: 9px;
 }
+
 .centerPage{
     margin: 0 auto;
     max-width: 500px;
@@ -56,4 +58,5 @@ label{
     height: 100%;
     margin: 0;
 }
+
 

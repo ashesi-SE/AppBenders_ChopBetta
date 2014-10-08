@@ -1,5 +1,18 @@
 <?php
 define("DB", "canteen");
+define("DB_user", "root");
+define("DB_pass", "");
+define("DB_host", "localhost");
+
+//define("DB", "csashesi_peter-vanderpuye");
+//define("DB_user", "csashesi_pv14");
+//define("DB_pass", "db!f5adb9");
+//define("DB_host", "cs.ashesi.edu.gh");
+
+//define("DB", "a9630604_cb");
+//define("DB_user", "a9630604_cbroot");
+//define("DB_pass", "dbadm1n");
+//define("DB_host", "mysql8.000webhost.com");
 class db{
     var $result;
     var $link;
@@ -17,7 +30,7 @@ class db{
             return true;
         }
 
-        $this->link=mysqli_connect("localhost","root","",DB);
+        $this->link=mysqli_connect(DB_host,DB_user,DB_pass,DB);
 
         if(!$this->link){
             $this->str_error="failed to connect to db";

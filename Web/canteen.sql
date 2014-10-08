@@ -1,4 +1,4 @@
-create schema `canteen`;
+
 use `canteen`;
 
 --
