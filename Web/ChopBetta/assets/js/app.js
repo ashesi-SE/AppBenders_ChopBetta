@@ -128,12 +128,12 @@ function add_toMealList(){
 function addCurMeal(elem){
 
     function createRow(){
-        newMealDOM = ' <div class="row" id="addMealRow'+(++mealRows)+'">'+
+        newMealDOM = ' <div class="row collapse prefix-round" id="addMealRow'+(++mealRows)+'">'+
         '<div class="large-9 columns" style="padding-left: 0">'+
         '<select class="meals">'+ mealsAvailable + '</select>'+
         '</div>'+
         '<div class="large-3 columns addBtn" style="padding-left: 0">'+
-        '<button onclick="addCurMeal(this)">Add to menu</button>'+
+        '<button class="menuControl button postfix" onclick="addCurMeal(this)">Add to menu</button>'+
         '</div>'+
         '</div>';
         return newMealDOM;

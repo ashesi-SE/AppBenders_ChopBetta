@@ -37,6 +37,8 @@
         android:numStars="5"
         android:mirrorForRtl="false"
         android:scaleX="0.5"
-        android:scaleY="0.5"/>
+        android:scaleY="0.5"
+        android:clickable="false"
+        android:isIndicator="true"/>
 
 </LinearLayout>
