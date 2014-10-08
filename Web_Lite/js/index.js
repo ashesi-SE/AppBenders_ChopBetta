@@ -6,7 +6,7 @@ var cafetria_names=[];
 $(document).ready(function(){
 startTime();
 //get number of cafetria to create tabs
-    $.get('../../Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
+    $.get('http://localhost/webTech/AppBenders_ChopBetta/Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
         // console.log(data);
         for(var i=0;i<data.length;i++){
             cafetria_ids[i]=data[i].cafeteria_id;
@@ -43,7 +43,7 @@ startTime();
 function getMealsBasedOnCafeteriaIds(){
     var c=0 ;
     for (var i=0;i<cafetria_ids.length;i++){
-         $.get('../../Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){           
+         $.get('http://localhost/webTech/AppBenders_ChopBetta/Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){           
     
          }    ,"json") 
          .done(function(data){

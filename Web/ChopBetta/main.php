@@ -7,11 +7,13 @@ if ($_SESSION['username'] == null){
     <!doctype html>
     <html>
     <head>
+	
         <title>ChopBetta</title>
         <link rel="stylesheet" href="assets/css/style.css"/>
         <link rel="stylesheet" href="assets/css/foundation.min.css"/>
     </head>
     <body>
+	
     <nav class="top-bar" data-topbar role="navigation">
         <section class="top-bar-section">
 
@@ -25,6 +27,7 @@ if ($_SESSION['username'] == null){
                     <a href="/"><?php echo $_SESSION['username']!= null? $_SESSION['username'] : "Who r u?"; ?></a>
                     <ul class="dropdown">
                         <li class="active" ><a id="logout" >Logout</a></li>
+						 <img src="bandt.jpg" alt="Mountain View">
                     </ul>
                 </li>
             </ul>
@@ -35,12 +38,12 @@ if ($_SESSION['username'] == null){
         <section id="dataRows">
             <div class="row" id="addMealRow1">
                 <label for="meals">Create menu</label>
-                <div class="large-9 columns" style="padding-left: 0">
+                <div class="large-9 columns" style="padding-left: 50">
                     <select class="meals">
                         <option value="load">Loading...</option>
                     </select>
                 </div>
-                <div class="large-3 columns addBtn" style="padding-left: 0">
+                <div class="large-3 columns addBtn" style="padding-left: 50">
                     <button class="menuControl" onclick="addCurMeal(this)">Add to menu</button>
                 </div>
             </div>
