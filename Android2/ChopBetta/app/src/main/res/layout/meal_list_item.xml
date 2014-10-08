@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/mealNameView"
+            android:layout_weight="7" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="eatToggle"
+            android:id="@+id/mealEatToggle"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mealRatingBar"
+        android:layout_weight="1"
+        android:rating="2.5"
+        android:layout_gravity="right"
+        android:focusableInTouchMode="false"
+        android:numStars="5"
+        android:mirrorForRtl="false"
+        android:scaleX="0.5"
+        android:scaleY="0.5"/>
+
+</LinearLayout>

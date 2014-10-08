@@ -1,4 +1,6 @@
 <?php
+
+//TODO: make the trues echo 1 and the false echo mysql_error
 /* 
 contains the functions needed to create, retrieve, update and delete information in the database.
  */
@@ -14,8 +16,10 @@ class canteen_class extends db{
             VALUES ('$cafeteria_name')"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -23,8 +27,10 @@ class canteen_class extends db{
         $strQuery="SELECT `cafeteria_id`,`cafeteria_name` FROM cafeteria"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
     
@@ -32,8 +38,10 @@ class canteen_class extends db{
         $strQuery="UPDATE cafeteria SET `cafeteria_name`='$cafeteria_name'"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -41,8 +49,10 @@ class canteen_class extends db{
         $strQuery="DELETE FROM cafeteria WHERE `cafeteria_id`=$cafeteria_id"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -52,17 +62,21 @@ class canteen_class extends db{
             VALUES ('$vendor_name',md5('$vendor_password'),$cid)"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
     function display_vendor($cid){ //this function pulls the vendors in each cafeteria, in the database
         $strQuery="SELECT `vendor_name`,`vendor_password` FROM vendors WHERE `cid`=$cid"; 
 
-        if(!$this->sql_query($strQuery)){
+       if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
     
@@ -71,8 +85,10 @@ class canteen_class extends db{
         WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -80,8 +96,10 @@ class canteen_class extends db{
         $strQuery="DELETE FROM vendors WHERE `vendor_id`=$vendor_id AND `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -91,8 +109,10 @@ class canteen_class extends db{
             VALUES ('$item_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -100,8 +120,10 @@ class canteen_class extends db{
         $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
     
@@ -109,8 +131,10 @@ class canteen_class extends db{
         $strQuery="UPDATE foodList SET `item_name`='$item_name' WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -118,8 +142,10 @@ class canteen_class extends db{
         $strQuery="DELETE FROM foodList WHERE `item_id`=$item_id AND `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -130,8 +156,10 @@ class canteen_class extends db{
             VALUES ('$meal_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -139,8 +167,10 @@ class canteen_class extends db{
         $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
     
@@ -148,8 +178,10 @@ class canteen_class extends db{
         $strQuery="UPDATE mealList SET `meal_name`='$meal_name' WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -157,8 +189,10 @@ class canteen_class extends db{
         $strQuery="DELETE FROM mealList WHERE `meal_id`=$meal_id AND `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -173,8 +207,10 @@ class canteen_class extends db{
             VALUES ('$current_meal_id','$current_meal_name',$cid)"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -184,8 +220,10 @@ class canteen_class extends db{
         $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`cid` FROM currentMeal WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
     
@@ -193,8 +231,10 @@ class canteen_class extends db{
         $strQuery="UPDATE currentMeal SET `current_meal_name`='$current_meal_name' WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 
@@ -204,8 +244,10 @@ class canteen_class extends db{
         $strQuery="DELETE FROM currentMeal WHERE `current_meal_id`=$current_meal_id WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
+            mysql_error();
             return false;
         }
+        echo "1";
         return true;
     }
 

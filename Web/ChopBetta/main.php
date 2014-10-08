@@ -21,6 +21,7 @@ if ($_SESSION['username'] == null){
                 <li><a href="#">Home</a></li>
                 <li><a href="#" data-reveal-id="create_meal_modal">Create meal item</a></li>
                 <li><a href="#" data-reveal-id="add_foodItem_modal">Add food item</a></li>
+                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>
             </ul>
             <ul class="right">
                 <li class="has-dropdown">
@@ -36,15 +37,21 @@ if ($_SESSION['username'] == null){
 
     <main class="centerPage">
         <section id="dataRows">
-            <div class="row" id="addMealRow1">
+            <div class="row collapse prefix-round" id="addMealRow1">
+
                 <label for="meals">Create menu</label>
                 <div class="large-9 columns" style="padding-left: 50">
                     <select class="meals">
                         <option value="load">Loading...</option>
                     </select>
                 </div>
+<<<<<<< HEAD
                 <div class="large-3 columns addBtn" style="padding-left: 50">
                     <button class="menuControl" onclick="addCurMeal(this)">Add to menu</button>
+=======
+                <div class="large-3 columns addBtn" style="padding-left: 0">
+                    <button class="menuControl button postfix" onclick="addCurMeal(this)">Add to menu</button>
+>>>>>>> e959afbe722bd5d6a3677473732bea8dbd4040d5
                 </div>
             </div>
             <div id="adder"></div>
@@ -99,7 +106,9 @@ if ($_SESSION['username'] == null){
                 <a class="close-reveal-modal">&times;</a>
             </div>
     </main>
-
+<!--<section id="popup" class="centerPage">-->
+<!--    <div>stuff</div><span>&times;</span>-->
+<!--</section>-->
 
     </body>
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
