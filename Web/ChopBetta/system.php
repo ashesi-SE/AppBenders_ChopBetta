@@ -1,13 +1,7 @@
-<?php
-session_start();
-if (@$_SESSION['username'] != null){
-    header('Location: main.php');
-}
-?>
 <!doctype html>
 <html>
 <head>
-    <title>ChopBetta</title>
+    <title>Super ADmin</title>
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/foundation.min.css"/>
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
@@ -20,16 +14,22 @@ if (@$_SESSION['username'] != null){
 
 <form id="login" class="centerPage" >
     <header>Login</header>
-    <br>
     <div>
-        <label for="username">Username</label>
+        <label for="cafeteria">Enter Name of new Cafeteria </label>
         <input id="username" name="username" type="text" required="true" placeholder="Username">
-    </div>
-    <div>
-        <label for="password">Password</label>
+	</div>
+
+	<div>			
+	<label for="vendor">Enter Vendor name </label>
+        <input id="username" name="username" type="text" required="true" placeholder="Username">
+	</div>
+	<div>
+	<label for="cafeteria">Enter vendor password </label>
         <input id="password" name="password" type="password"
                required="true" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+
     </div>
+   
     <button type="submit" value="Log in">Log in</button>
 </form>
 
@@ -39,6 +39,3 @@ if (@$_SESSION['username'] != null){
 </body>
 
 </html>
-
-
-

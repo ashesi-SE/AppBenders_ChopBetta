@@ -75,34 +75,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-home:before {
+.icon-edit:before {
+    content: "\e600";
+}
+.icon-delete:before {
     content: "\e601";
 }
-.icon-team:before {
-    content: "\e602";
-}
-.icon-menu:before {
-    content: "\e603";
-}
-.icon-contact-us:before {
-    content: "\e604";
-}
-.icon-visit-us:before {
-    content: "\e605";
-}
-.icon-twitter:before {
-    content: "\e606";
-}
-.icon-twitter2:before {
-    content: "\e607";
-}
-.icon-retweet:before {
-    content: "\e60a";
-}
-.icon-reply:before {
-    content: "\e60b";
-}
-.icon-fave:before {
-    content: "\e60c";
-}
+
 

@@ -21,10 +21,22 @@ label{
 .addBtn button{
     padding: 9px;
 }
+
 .centerPage{
     margin: 0 auto;
     max-width: 500px;
 }
+
+
+#bender { border-left-width: 2px; }
+
+#fry { border-width: 1px 4px 1px 100px; }
+
+body {
+   
+    background-color: #FFFFFF;
+}
+
 .reveal-modal .close-reveal-modal {
     font-weight: normal !important;
 }
