@@ -30,8 +30,7 @@ class canteen_class extends db{
             mysql_error();
             return false;
         }
-        echo "1";
-        return true;
+        return 1;
     }
     
     function update_cafeteria($cafeteria_name){ //allows the super admin to make changes to the cafeterias
@@ -76,8 +75,7 @@ class canteen_class extends db{
             mysql_error();
             return false;
         }
-        echo "1";
-        return true;
+        return 1;
     }
     
     function update_vendor($vendor_name,$vendor_password,$cid){ //can change the details of food vendors 
@@ -123,8 +121,7 @@ class canteen_class extends db{
             mysql_error();
             return false;
         }
-        echo "1";
-        return true;
+        return 1;
     }
     
     function update_foodList($item_name,$cid){ //this function allows the food vendors to make changes to the food items
@@ -170,8 +167,7 @@ class canteen_class extends db{
             mysql_error();
             return false;
         }
-        echo "1";
-        return true;
+        return 1;
     }
     
     function update_mealList($meal_name,$cid){ //changes can be made to meal
@@ -223,8 +219,7 @@ class canteen_class extends db{
             mysql_error();
             return false;
         }
-        echo "1";
-        return true;
+        return 1;
     }
     
     function update_currentMeal($current_meal_name,$cid){ //allows food vendors to make changes to the available meals

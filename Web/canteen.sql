@@ -5,6 +5,17 @@ use `canteen`;
 -- Database: `canteen`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cafeteria`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin_id` int PRIMARY KEY AUTO_INCREMENT,
+  `admin_name` varchar(50) UNIQUE,
+  `admin_password`	varchar(255)
+) COMMENT='This table stores the credentials of the super admin';
 
 -- --------------------------------------------------------
 

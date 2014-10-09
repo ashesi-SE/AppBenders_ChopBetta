@@ -20,6 +20,7 @@ if (@$_SESSION['username'] != null){
 
 <form id="login" class="centerPage" >
     <header>Login</header>
+    <br>
     <div>
         <label for="username">Username</label>
         <input id="username" name="username" type="text" required="true" placeholder="Username">
