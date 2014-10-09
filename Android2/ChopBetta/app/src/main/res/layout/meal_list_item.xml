@@ -23,7 +23,9 @@
             android:layout_height="wrap_content"
             android:text="eatToggle"
             android:id="@+id/mealEatToggle"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textOff="Select"
+            android:textOn="Selected" />
     </LinearLayout>
 
     <RatingBar

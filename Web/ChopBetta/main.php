@@ -45,13 +45,11 @@ if ($_SESSION['username'] == null){
                         <option value="load">Loading...</option>
                     </select>
                 </div>
-<<<<<<< HEAD
-                <div class="large-3 columns addBtn" style="padding-left: 50">
-                    <button class="menuControl" onclick="addCurMeal(this)">Add to menu</button>
-=======
+
+
+
                 <div class="large-3 columns addBtn" style="padding-left: 0">
                     <button class="menuControl button postfix" onclick="addCurMeal(this)">Add to menu</button>
->>>>>>> e959afbe722bd5d6a3677473732bea8dbd4040d5
                 </div>
             </div>
             <div id="adder"></div>

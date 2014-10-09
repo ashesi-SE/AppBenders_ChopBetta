@@ -191,7 +191,7 @@ public class meallist extends Fragment {
                     // You have successfully connected.
                     int length = (int)con.getContentLength();
                     is = con.getInputStream();
-                    final int MAX_LENGTH = 512;
+                    final int MAX_LENGTH = 5120;
                     byte[] buf = new byte[MAX_LENGTH];
                     int total = 0;
 
