@@ -345,7 +345,7 @@
 		$array = array();	
 
 		while($row = $cm->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
+            $array[] = array_map('utf8_encode',	$row);
 		} 
 		echo json_encode($array);	
 	}
@@ -386,12 +386,6 @@
 		$cm=new canteen_class();
 		$cm->delete_currentMeal($current_meal_id,$cid);
 
-		$array = array();	
-
-		while($row = $cm->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);		
 	}
 
 ?>

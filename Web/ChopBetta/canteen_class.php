@@ -236,10 +236,10 @@ class canteen_class extends db{
     function delete_currentMeal($current_meal_id,$cid){ //allows food vendors to remove meals that are no longer 
     //available at the canteens
 
-        $strQuery="DELETE FROM currentMeal WHERE `current_meal_id`=$current_meal_id WHERE `cid`=$cid"; 
+        $strQuery="DELETE FROM currentMeal WHERE `current_meal_id`=$current_meal_id AND `cid`=$cid";
 
         if(!$this->sql_query($strQuery)){
-            mysql_error();
+            echo $this->str_error;
             return false;
         }
         echo "1";

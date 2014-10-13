@@ -22,7 +22,10 @@ var mapDS = new function() {
         });
         this.length--;
     };
-
+    this.clear = function(){
+        key = [];
+        value = [];
+    };
     this.toArray = function (serialize) {
         serialize = serialize || false;
         var final = [];
@@ -38,8 +41,6 @@ var mapDS = new function() {
     };
     this.valArray = function (serialize) {
         serialize = serialize || false;
-
-
         return (serialize)? JSON.stringify(value): value;
 
     };

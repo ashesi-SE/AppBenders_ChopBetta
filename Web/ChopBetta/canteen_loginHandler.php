@@ -11,15 +11,15 @@ $controllerObj = new canteen_class();
 $res=false;
 
 if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
-    $_SESSION['username']= null;
-    $_SESSION['cid']= null;
-    $_SESSION['vid']= null;
+    $_SESSION['chopbetta']['username']= null;
+    $_SESSION['chopbetta']['cid']= null;
+    $_SESSION['chopbetta']['vid']= null;
     $res = $controllerObj->authenticate($_REQUEST['username'],$_REQUEST['password']);//this is echoing to ajax
 
     if($res){
-        $_SESSION['username'] = $_REQUEST['username'];
-        $_SESSION['cid'] = $res['cid'];
-        $_SESSION['vid'] = $res['vendor_id'];
+        $_SESSION['chopbetta']['username'] = $_REQUEST['username'];
+        $_SESSION['chopbetta']['cid'] = $res['cid'];
+        $_SESSION['chopbetta']['vid'] = $res['vendor_id'];
     }
   //  print_r($_SERVER['username']);
 }
@@ -28,10 +28,10 @@ if(isset($_REQUEST['logout'])){
 }
 if(isset($_REQUEST['isAuthenticated'])){
 
-    if($_SESSION['username']==null){
+    if($_SESSION['chopbetta']['username']==null){
        echo false;
     }else{
-       echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['vid'], 'vendor_name' => $_SESSION['username'],'cid' => $_SESSION['cid'] )));
+       echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['chopbetta']['vid'], 'vendor_name' => $_SESSION['chopbetta']['username'],'cid' => $_SESSION['chopbetta']['cid'] )));
     }
 }
 

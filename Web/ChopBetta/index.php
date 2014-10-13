@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (@$_SESSION['username'] != null){
+if (@$_SESSION['chopbetta']['username'] != null){
     header('Location: main.php');
 }
 ?>
