@@ -1,12 +1,17 @@
 package se.com.chopbetta;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,36 +36,16 @@ public class splashScreen extends Activity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.splash_screen, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     public void getData(String url){
         httpSender hts = new httpSender();
         String res = null;
 
-
-          hts.execute(url,getString(R.string.urlSet));
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_general, false);
+        String serverIp = sharedPref.getString("serverIP", null );
+        hts.execute(url,"http://"+ serverIp + getString(R.string.pref_urlSet));
           //  hts.execute(url, "http://192.168.42.173:63345/ChopBetta/Web/ChopBetta/canteen_json.php");
 
 
@@ -74,6 +59,13 @@ public class splashScreen extends Activity {
         HttpURLConnection con = null;
         OutputStream os = null;
         URL url;
+        AlertDialog.Builder alert;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+           alert = new AlertDialog.Builder(splashScreen.this);
+        }
+
         @Override
         protected String doInBackground(String... params) {
 
@@ -133,12 +125,31 @@ public class splashScreen extends Activity {
         @Override
         protected void onPostExecute(String s) {
 
-            super.onPostExecute(s);
-            Intent tIntent = new Intent(splashScreen.this,MainActivity.class);
-            tIntent.putExtra("cafeInfo", s);
-            startActivity(tIntent);
+            super.onPostExecute("PE Splash" + s);
+            if(s==null){
+                alert.setTitle("Could not connect to service.")
+                        .setMessage("The internet may be down\n" +
+                        "You may also want to check IP/hostname configuration settings?")
+                        .setPositiveButton("App Settings", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getApplication(), SettingsActivity.class);
+                                startActivity(i);
+                            }
+                        }).setNegativeButton("Try later", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        finish();
+                    }
+                }).show();
+            }else {
+                Intent tIntent = new Intent(splashScreen.this, MainActivity.class);
+                tIntent.putExtra("cafeInfo", s);
+                startActivity(tIntent);
 
-            finish();
+                finish();
+            }
         }
     }
 }

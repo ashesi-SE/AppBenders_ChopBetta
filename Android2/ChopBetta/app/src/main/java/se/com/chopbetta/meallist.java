@@ -5,10 +5,15 @@ package se.com.chopbetta;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +80,7 @@ public class meallist extends Fragment {
             mParam1 = getArguments().getInt(ARG_PARAM1);
             canteenID = getArguments().getString(CANTEEN_ID);
         }
-       
+        setRetainInstance(true);
 
     }
     private ListView lvMeal;
@@ -154,17 +159,21 @@ public class meallist extends Fragment {
     public String getData(String url){
         httpSender hts = new httpSender();
         String res = null;
-        try {
+//        try {
 
-          hts.execute(url,getString(R.string.urlSet));
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            PreferenceManager.setDefaultValues(getActivity(), R.xml.pref_general, false);
+            String serverIp = sharedPref.getString("serverIP", null );
+          hts.execute(url,"http://"+ serverIp + getString(R.string.pref_urlSet));
           //  hts.execute(url,"http://192.168.42.10:63345/ChopBetta/Web/ChopBetta/canteen_json.php");
 
-          res = hts.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+//          res = hts.get();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
         return res;
     }
 
@@ -176,6 +185,14 @@ public class meallist extends Fragment {
         HttpURLConnection con = null;
         OutputStream os = null;
         URL url;
+        AlertDialog.Builder alert;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            alert = new AlertDialog.Builder(getActivity());
+        }
+
         @Override
         protected String doInBackground(String... params) {
 
@@ -235,10 +252,29 @@ public class meallist extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            MealListAdapter adap = new MealListAdapter(getActivity(), R.layout.meal_list_item, parseResponse(s));
-            lvMeal.setAdapter(adap);
-            showProgress(false);
+            if(s==null){
+                alert.setTitle("Could not connect to service.")
+                        .setMessage("The internet may be down\n" +
+                                "You may also want to check IP/hostname configuration settings?")
+                        .setPositiveButton("App Settings", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent(getActivity(), SettingsActivity.class);
+                                startActivity(i);
+                            }
+                        }).setNegativeButton("Try later", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        getActivity().finish();
+                    }
+                }).show();
+            }else {
+                //TODO: Check crash that occurs on multiple screen rotates
+                MealListAdapter adap = new MealListAdapter(getActivity(), R.layout.meal_list_item, parseResponse(s));
+                lvMeal.setAdapter(adap);
+                showProgress(false);
+            }
         }
     }
 

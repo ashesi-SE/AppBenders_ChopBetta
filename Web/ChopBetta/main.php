@@ -27,8 +27,7 @@ if ($_SESSION['chopbetta']['username'] == null){
                 <li class="has-dropdown">
                     <a href="/"><?php echo $_SESSION['chopbetta']['username']!= null? $_SESSION['chopbetta']['username'] : "Who r u?"; ?></a>
                     <ul class="dropdown">
-                        <li class="active" ><a id="logout" >Logout</a></li>
-						 <img src="bandt.jpg" alt="Mountain View">
+                        <li class="active" ><a id="logout" >Logout</a></li> 
                     </ul>
                 </li>
             </ul>

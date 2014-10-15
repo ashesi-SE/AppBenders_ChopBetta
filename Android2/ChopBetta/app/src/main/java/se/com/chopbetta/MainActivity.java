@@ -14,6 +14,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
@@ -109,6 +110,10 @@ String cafeInfoJSON = "";
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+                Intent i = new Intent(this,SettingsActivity.class);
+                startActivity(i);
+
             return true;
         }
 
