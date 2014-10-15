@@ -35,8 +35,8 @@ if ($_SESSION['chopbetta']['username'] == null) {
 
 <main class="centerPage">
 
-    <table class="responsive">
-        <thead>
+    <table class="centerPage">
+    <thead>
         <tr>
             <th>Cafeteria name</th>
             <th>Edit</th>

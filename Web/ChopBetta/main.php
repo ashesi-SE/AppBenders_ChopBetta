@@ -21,14 +21,14 @@ if ($_SESSION['chopbetta']['username'] == null){
                 <li><a href="#">Home</a></li>
                 <li><a href="#" data-reveal-id="create_meal_modal">Create meal item</a></li>
                 <li><a href="#" data-reveal-id="add_foodItem_modal">Add food item</a></li>
-                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>
+                <!--                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>-->
             </ul>
             <ul class="right">
                 <li class="has-dropdown">
                     <a href="/"><?php echo $_SESSION['chopbetta']['username']!= null? $_SESSION['chopbetta']['username'] : "Who r u?"; ?></a>
                     <ul class="dropdown">
                         <li class="active" ><a id="logout" >Logout</a></li>
-						 <img src="bandt.jpg" alt="Mountain View">
+                        <!--						 <img src="bandt.jpg" alt="Mountain View">-->
                     </ul>
                 </li>
             </ul>
