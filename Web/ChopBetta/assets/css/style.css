@@ -41,28 +41,63 @@ body {
     font-weight: normal !important;
 }
 
+#mealList ul,
+#currentMealList ul,
 #selectableFoodList ul,
 #foodList ul{
     margin: 0;
 }
+#mealList ul li:hover,
+#currentMealList ul li:hover,
 #selectableFoodList ul li:hover,
 #foodList ul li:hover{
     background-color: rgba(224, 252, 244, 0.56);
 }
+
+#mealList ul li,
+#currentMealList ul li,
 #selectableFoodList ul li,
 #foodList ul li{
     position: relative;
     vertical-align: middle;
     list-style: none;
-    padding: 1px 2px;
+    padding: 4px 2px;
     border-top: dotted 1px #000;
 }
+#mealList ul li>span,
+#currentMealList ul li>span,
+#selectableFoodList ul li label>span,
+#foodList ul li>span{
+    position: relative;
+    float: right;
+}
+#selectableFoodList ul li label>span{
+    color: #e0e0e0;
+}
+#selectableFoodList ul li:hover label>span{
+    color: #bababa;
+}
+#mealList ul li>span .icon-delete,
+#currentMealList ul li>span .icon-delete,
+#foodList ul li>span .delete{
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 0 0 5px;
+    border-radius: 2px;
+}
+#mealList ul li:hover>span .icon-delete,
+#currentMealList ul li:hover>span .icon-delete,
+#foodList ul li:hover>span .icon-delete{
+    background-color: #ff8339;
+    color: #ffffff;
+}
+
 #selectableFoodList input[type=checkbox]{
     display: none;
 }
-#selectableFoodList input[type=checkbox]:checked + label{
-    color: red;
-    background-color: #007095;
+#selectableFoodList input[type=checkbox]:checked + label span{
+    font-size: 20px;
+    color: #1EE71E;
 }
 #selectableFoodList label{
     width: 100%;

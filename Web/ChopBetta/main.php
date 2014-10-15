@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['username'] == null){
+if ($_SESSION['chopbetta']['username'] == null){
     header('Location: index.php');
 }
 ?>
@@ -25,7 +25,7 @@ if ($_SESSION['username'] == null){
             </ul>
             <ul class="right">
                 <li class="has-dropdown">
-                    <a href="/"><?php echo $_SESSION['username']!= null? $_SESSION['username'] : "Who r u?"; ?></a>
+                    <a href="/"><?php echo $_SESSION['chopbetta']['username']!= null? $_SESSION['chopbetta']['username'] : "Who r u?"; ?></a>
                     <ul class="dropdown">
                         <li class="active" ><a id="logout" >Logout</a></li>
 						 <img src="bandt.jpg" alt="Mountain View">
@@ -36,25 +36,25 @@ if ($_SESSION['username'] == null){
     </nav>
 
     <main class="centerPage">
-        <section id="dataRows">
-            <div class="row collapse prefix-round" id="addMealRow1">
+        <section id="currentMealsArea">
+            <div class="row collapse prefix-round" id="addMealRow">
 
-                <label for="meals">Create menu</label>
+                <label for="meals">Select a meal to add to the current menu</label>
                 <div class="large-9 columns" style="padding-left: 50">
                     <select class="meals">
                         <option value="load">Loading...</option>
                     </select>
                 </div>
-<<<<<<< HEAD
-                <div class="large-3 columns addBtn" style="padding-left: 50">
-                    <button class="menuControl" onclick="addCurMeal(this)">Add to menu</button>
-=======
+
                 <div class="large-3 columns addBtn" style="padding-left: 0">
                     <button class="menuControl button postfix" onclick="addCurMeal(this)">Add to menu</button>
->>>>>>> e959afbe722bd5d6a3677473732bea8dbd4040d5
                 </div>
             </div>
-            <div id="adder"></div>
+            <section id="currentMealList" class="large-12 columns"  >
+                <ul>
+                    <li>Loading...</li>
+                </ul>
+            </section>
 
         </section>
 

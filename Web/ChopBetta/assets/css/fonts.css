@@ -75,11 +75,26 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-edit:before {
+.icon-add:before{
     content: "\e600";
 }
+.icon-edit:before {
+    content: "\e603";
+}
 .icon-delete:before {
-    content: "\e601";
+    content: "\e602";
+}
+.icon-star-full:before{
+    content: "\f005";
+}
+.icon-star-empty:before{
+    content: "\f006";
+}
+.icon-star-half:before{
+    content: "\f123";
+}
+.icon-check:before{
+    content: "\f046";
 }
 
 

@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
@@ -20,19 +19,13 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +41,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-
+String cafeInfoJSON = "";
+    SimpleKVPair cafeInfoKV = null;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -59,6 +53,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cafeInfoJSON = getIntent().getCharSequenceExtra("cafeInfo").toString();
+        Log.i("JSONCAFE",cafeInfoJSON);
+        cafeInfoKV = parseResponse(cafeInfoJSON);
+        Log.d("HMDATA", cafeInfoKV.getKeyAt(1));
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -132,6 +130,22 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    public SimpleKVPair parseResponse(String result){
+
+//        String resultArray
+        SimpleKVPair menuArray = new SimpleKVPair();
+        try {
+            JSONArray aJsonArray = new JSONArray(result);
+            for (int i=0; i<aJsonArray.length();i++){
+                JSONObject jAr = aJsonArray.getJSONObject(i);
+                menuArray.put(jAr.getString("cafeteria_id"),jAr.getString("cafeteria_name"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return menuArray;
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -144,160 +158,22 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
         @Override
         public Fragment getItem(int position) {
+            String selCafKey = cafeInfoKV.getKeyAt(position);
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return meallist.newInstance(0,selCafKey);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 4;
+
+            return cafeInfoKV.getLength();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
-                case 3:
-                    return "I am number 4";
-            }
-            return null;
+            return cafeInfoKV.getValueAt(position).toUpperCase(l);
         }
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            ArrayList ar = new ArrayList<String>(); ar.add("Item one");ar.add("item 2");
-            MealListAdapter adap = new MealListAdapter(getActivity(),
-                    R.layout.meal_list_item, ar);
-            getData("?display_cafeteria");
-            ListView tv1 = (ListView)rootView.findViewById(R.id.mealListView);
-            tv1.setAdapter(adap);
-            return rootView;
-        }
-    }
-
-    public static String getData(String url){
-        httpSender hts = new httpSender();
-        String res = null;
-        try {
-
-//          hts.execute(url,getString(R.string.urlSet));
-          hts.execute(url,"http://192.168.42.10:63345/ChopBetta/Web/ChopBetta/canteen_json.php");
-
-            res = hts.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return res;
-    }
-    public static class httpSender extends AsyncTask<String, Void, String> {
-
-        private String urlStr;
-        private String response;
-        InputStream is = null;
-        HttpURLConnection con = null;
-        OutputStream os = null;
-        URL url;
-        @Override
-        protected String doInBackground(String... params) {
-
-            urlStr = params[1];
-            try {
-                Log.i("URL", urlStr + params[0]);
-                url = new URL(urlStr+params[0]);
-                con = (HttpURLConnection)url.openConnection();
-
-                // Always get the Response code first .
-                int responseCode = con.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    // You have successfully connected.
-                    int length = (int)con.getContentLength();
-                    is = con.getInputStream();
-                    final int MAX_LENGTH = 512;
-                    byte[] buf = new byte[MAX_LENGTH];
-                    int total = 0;
-
-                    while (total < MAX_LENGTH) {
-
-                        int count = is.read(buf, total, MAX_LENGTH - total);
-                        if (count < 0) {
-                            break;
-                        }
-                        total += count;
-                    }
-                    is.close();
-                    response = new String(buf, 0, total);
-                    System.out.println("HTTPClass| "+ response);
-                } else {
-                    System.out.println("HTTPClass| Conn error");
-                    // Problem with your connection
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                // Do your exception handling here
-            } finally {
-                try {
-                    if (is != null) {
-                        is.close();
-                    }
-                    if (os != null) {
-                        os.close();
-                    }
-                    if (con != null) {
-                        con.disconnect();
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            return response;
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
-
-
-
 }

@@ -3,9 +3,9 @@
  */
 
 var mealRows = 1;
-var mealsAvailable = "";
+
 var userData = "";//Values are set by login handlers
-var newMealDOM = "";
+
 $(document).ready(function(){
     /**
      * Login n logout handlers
@@ -15,6 +15,7 @@ $(document).ready(function(){
         if(data){
             userData = data.dat;
             generateMealList();
+            generateCurMealList();
             console.log(userData);
         }
 
@@ -58,6 +59,8 @@ $(document).ready(function(){
 
         }else if(modalId == 'create_meal_modal'){
             $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
+                $('#create_meal_modal').find('.displayArea').html("No food items selected");
+                mapDS.clear();
                 if(data.length > 0){
                     $('#selectableFoodList ul').html("");
                 }
@@ -65,11 +68,13 @@ $(document).ready(function(){
                     $('#selectableFoodList ul').append(
                         '<li class="'+elem.item_id +'">' +
                         '<input type="checkbox" name="'+elem.item_name +'" value="'+elem.item_id +'" id="'+elem.item_id +'">' +
-                        '<label for="'+elem.item_id +'">'+elem.item_name +'</label>' +
+                        '<label for="'+elem.item_id +'">'+elem.item_name +'<span><i class="icon-check"></i></span>'+'</label>' +
                         '</li>');
                 });
-            },"json").done(function(){
-                //Click function
+
+                //mealList here
+
+                //click function for food list
                 $('#selectableFoodList').find('input[type=checkbox]').click(function(){
                     var elemId = $(this)['context'].id;
                     var clickedFoodItem = $('#'+ elemId + ':checked');
@@ -82,10 +87,15 @@ $(document).ready(function(){
                         mapDS.remove(uncheckedFoodItem.val());
                     }
                     //  $('#create_meal_modal').find('.displayArea').html(mealArray.join(", "));
-                    $('#create_meal_modal').find('.displayArea').html(makeHRString(mapDS.valArray()));
+                    $('#create_meal_modal').find('.displayArea').html(makeHRString({data:mapDS.valArray(),dataType:"array"}));
                     console.log(mapDS.toArray());
                 });
 
+            },"json");
+
+            var mealListAjax = generateMealList2();
+            mealListAjax.done(function(){
+               //onclick fubctions here to
             });
         }
 
@@ -95,73 +105,88 @@ $(document).ready(function(){
 
 
 /**
- * Creates meal list for a specified canteen
+ * generateMealList() creates meal list for a specified canteen
  * <option>{meal here}</option> part
  */
 function generateMealList(){
     console.log("CID: "+userData.cid);
-    return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
-
+    var mealsAvailable = "";
+    $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
         console.log(data);
         $.each(data,function(key, elem  ){
-            var meal = $.parseJSON(elem.meal_name); var mealStr = [];
-
-            for (var i=0;i<meal.length;i++){
-                mealStr.push(meal[i].value);
-            }
-            mealStr = makeHRString(mealStr);
+           var mealStr = makeHRString({data:elem.meal_name});
             mealsAvailable += '<option name="'+ elem.meal_id +'" value="'+mealStr+'">'+mealStr+'</option>';
         });
-
-        $('#addMealRow1').find('.meals').html(mealsAvailable);
+        $('#addMealRow').find('.meals').html(mealsAvailable);
     },"json");
+}
 
+function generateMealList2(){
+  return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
+        if(data.length > 0){
+            $('#mealList ul').html("");
+
+        $.each(data,function(key, elem  ){
+
+            $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'</li>');
+        });
+        }
+    },"json");
 }
 function add_toMealList(){
     $.get('canteen_json.php',{add_mealList: 2,cid:userData.cid,meal_name:mapDS.toArray(true)},
         function(data){
             showMsg({msg:"added"});
-        //TODO: popup on true or 1
-    });
+            generateMealList2();
+            //TODO: popup on true or 1
+        });
 }
 
+function generateCurMealList(){
+    var curListElem = $('#currentMealList').find('ul');
+    $.get('canteen_json.php',{display_currentMeal: 2,cid:userData.cid},function(data){
+        console.log(data);
+
+        if(data.length > 0){
+            curListElem.html("");
+        }
+        $.each(data,function(key, elem){
+            curListElem.append('<li class="meal' + elem.current_meal_id +'">'+
+            '<span style="float: none; width: 75%;display: inline-block">'+elem.current_meal_name+'</span>'+
+            '<span>' +
+            setRatingStars(elem.customer_rating) +
+            '<span onclick=remCurMeal("' + elem.current_meal_id + '") title="Delete item" class="icon-delete"></span>' +
+            '</span></li>');
+        });
+    },"json");
+}
 function addCurMeal(elem){
-
-    function createRow(){
-        newMealDOM = ' <div class="row" id="addMealRow'+(++mealRows)+'">'+
-        '<div class="large-9 columns" style="padding-left: 0">'+
-        '<select class="meals">'+ mealsAvailable + '</select>'+
-        '</div>'+
-        '<div class="large-3 columns addBtn" style="padding-left: 0">'+
-        '<button onclick="addCurMeal(this)">Add to menu</button>'+
-        '</div>'+
-        '</div>';
-        return newMealDOM;
-    }
     var parent = elem.parentNode.parentNode;
-
-    console.log($('#'+parent.id));
-    console.log($('#'+parent.id).find('.meals').val());
-    console.log($('#'+parent.id).find('.meals option:selected').attr('name'));
     $.get('canteen_json.php',{add_currentMeal:  1,
             cid:userData.cid,
             current_meal_name: $('#'+parent.id).find('.meals').val(),
             current_meal_id: $('#'+parent.id).find('.meals option:selected').attr('name')},
         function(data,status){
-            console.log(data);
-            //todo: the below on successful add to db
-            //TODO: popup on true or 1
-            elem.className += " alert";
-            elem.innerHTML = 'Remove';
-            elem.setAttribute('onclick', 'remCurMeal(this)');
-            $('#dataRows').append(createRow());
+            if(data == 1){
+                showMsg({msg:"The meal has been added to list"});
+                generateCurMealList();
+            }else{
+                showMsg({msg:"Could not add, meal may already be in the list",type: "Warning"})
+            }
         });
 }
 function remCurMeal(elem){
-    var parent = elem.parentNode.parentNode;
-    console.log(parent.id);
-    $('#'+parent.id).remove();
-    //TODO: popup on true or 1
+
+    $.get('canteen_json.php',{delete_currentMeal:1,cid:userData.cid,
+            current_meal_id:elem},
+        function(data){
+            if(data == 1){
+                showMsg({msg:"The meal was deleted from list"});
+                generateCurMealList();
+            }else{
+                showMsg({msg:"Failed to delete the item",type: "Warning"})
+            }
+        });
 }
 
 
@@ -172,7 +197,7 @@ function addFood(){
             if(data.length > 0){
                 $('#foodList ul').html("");
             }
-            $.each(data,function(key, elem  ){
+            $.each(data,function(key, elem){
                 $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
             });
             $('#foodItem').val("");
@@ -180,15 +205,44 @@ function addFood(){
     });
 }
 
-function makeHRString(kvMap){
+
+/**
+ * Helper methods
+ */
+function makeHRString(options){
+    var options = $.extend({data : "[hello]", dataType: "mealJson" }, options);
+    if(options.dataType == "mealJson"){
+        var meal = $.parseJSON(options.data); var mealStr = [];
+        for (var i=0;i<meal.length;i++){
+            mealStr.push(meal[i].value);
+        }
+    }else if(options.dataType == "array"){
+        mealStr = options.data;
+    }
+
     //TODO: nothing selected
-    if(kvMap.length == 1){
-        return kvMap[0];
+    if(mealStr.length ==0){
+        return "No food items selected";
+    }else if(mealStr.length == 1){
+        return mealStr[0];
     }else{
-        var str =  kvMap.join(", ");
+        var str =  mealStr.join(", ");
         var ind = str.lastIndexOf(",");
         return str.slice(0,ind) +" and"+ str.slice(ind+1,str.length);
     }
+}
+function setRatingStars(customer_rating) {
+    var stars = "";
+    for(var i=0;i<5;i++){
+        if(i+0.5 == customer_rating){
+            stars += '<i class="icon-star-half"></i>';
+        }else if(i<customer_rating) {
+            stars += '<i class="icon-star-full"></i>';
+        }else{
+            stars += '<i class="icon-star-empty"></i>';
+        }
+    }
+    return stars;
 }
 function showMsg(options){
 
@@ -199,27 +253,30 @@ function showMsg(options){
 
     var popup = '<section id="popup" class="popup centerPage"><div>stuff</div><span>&times;</span></section>';
     $('body').append(popup);
-    var popup = $('.popup');
+    popup = $('.popup');
     popup.hide();
     popup.find('span').css({ position: "absolute",
-    "right": "3px",
-    "top": "50%",
-    "transform": "translateY(-50%)",
-    "font-size": "25px"}).click(function(){
+        "right": "3px",
+        "top": "50%",
+        "transform": "translateY(-50%)",
+        "font-size": "25px"}).click(function(){
         //TODO: hide via clickeds id
         popup.hide('slideTop');
     });
 
     popup.css({ position: "absolute",
-    "top": "55px",
-    "left": 0,
-    "right": 0,
-    "background": "beige",
-    "border": "1px solid rgb(218, 218, 184)",
-    "border-radius": "4px",
-    "line-height": "17px",
-    "padding": "10px",
-    "z-index": 400});
+        "top": "55px",
+        "left": 0,
+        "right": 0,
+        "background": "beige",
+        "border": "1px solid rgb(218, 218, 184)",
+        "border-radius": "4px",
+        "line-height": "17px",
+        "padding": "10px",
+        "z-index": 400});
+    if(options.type == "Warning"){
+        popup.css({"background": "rgb(255, 193, 163)", "border": "1px solid rgb(235, 134, 41)"});
+    }
     popup.find('div').html(options.msg);
 
     popup.show('slideTop');

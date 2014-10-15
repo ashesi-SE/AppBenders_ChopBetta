@@ -300,7 +300,7 @@ include_once("canteen_class.php");
 		$array = array();	
 
 		while($row = $cm->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
+            $array[] = array_map('utf8_encode',	$row);
 		} 
 		echo json_encode($array);	
 	}
@@ -340,6 +340,7 @@ include_once("canteen_class.php");
 		$cm->delete_currentMeal($current_meal_id,$cid);
 	}
 
+<<<<<<< HEAD
 //submitting the customer ratings 
 	else if (isset($_REQUEST['submit_ratings'])){
 
@@ -357,6 +358,8 @@ include_once("canteen_class.php");
 		}
 		$r=new canteen_class();
 		$r->ratings($customer_rating,$current_meal_id,$cid);
+=======
+>>>>>>> 0ed27ac5eca2a9ea1c7b0dd22fd23176782fbe7b
 	}
 
 ?>

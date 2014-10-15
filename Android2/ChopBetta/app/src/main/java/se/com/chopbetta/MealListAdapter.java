@@ -2,6 +2,7 @@ package se.com.chopbetta;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,12 @@ import java.util.List;
 /**
  * Created by HP on 10/6/2014.
  */
-public class MealListAdapter extends ArrayAdapter<String> {
+public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
     Context context;
     int layoutResourceId;
-    List<String> data = null;
+    List<NotSoSimpleKVPair> data = null;
 
-    public MealListAdapter(Context context, int layoutResourceId, List<String> data) {
+    public MealListAdapter(Context context, int layoutResourceId, List<NotSoSimpleKVPair> data) {
         super(context, layoutResourceId,  data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -55,10 +56,14 @@ public class MealListAdapter extends ArrayAdapter<String> {
         }
 
         // fill data
+        Log.i("ANNOY","position is now "+position);
         ViewHolder holder = (ViewHolder) view.getTag();
-        String s = data.get(position);
-        holder.text.setText(s);
+        NotSoSimpleKVPair nsskvp = data.get(position);
+        Log.i("ANNOY",nsskvp.getNameAt(0));
+        String s = nsskvp.getNameAt(0);
 
+        holder.text.setText(s);
+        holder.ratingBar.setRating(data.get(position).getRateAt(0));
         return view;
     }
 }
