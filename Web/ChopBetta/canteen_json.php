@@ -11,7 +11,17 @@
 		}
 		$c=new canteen_class();
 		$c->add_cafeteria($cafeteria_name);
-	}
+	} else if (isset($_REQUEST['get_cafeteria_id'])) {
+        include_once("canteen_class.php");
+        $cafeteria_name = $_REQUEST["cafeteria_name"];
+        $c = new canteen_class();
+        $c->get_cafeteria_id($cafeteria_name);
+        $array = array();
+        while ($row = $c->fetch()) {
+            $array[] = array_map('utf8_encode', $row);
+        }
+        echo json_encode($array);
+    }
 	
 	else if(isset($_REQUEST['display_cafeteria'])){
 		include_once("canteen_class.php");
@@ -31,18 +41,17 @@
 		include_once("canteen_class.php");
 		
 		$cafeteria_name="";
+        $cafeteria_id = "";
 		if (isset($_REQUEST["cafeteria_name"])) {
 			$cafeteria_name=$_REQUEST["cafeteria_name"];
 		}
+        if (isset($_REQUEST["cafeteria_id"])) {
+            $cafeteria_id = $_REQUEST["cafeteria_id"];
+        }
 		$c=new canteen_class();
-		$c->update_cafeteria($cafeteria_name);
-
-		$array = array();	
-
-		while($row = $c->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);		
+        echo $cafeteria_id;
+        echo $cafeteria_name;
+        $c->update_cafeteria($cafeteria_id, $cafeteria_name);
 	}
 
 	else if (isset($_REQUEST['delete_cafeteria'])){
@@ -54,13 +63,6 @@
 		}
 		$c=new canteen_class();
 		$c->delete_cafeteria($cafeteria_id);
-
-		$array = array();	
-
-		while($row = $c->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);				
 	}
 
 /**
@@ -122,14 +124,21 @@
 		}
 		$v=new canteen_class();
 		$v->update_vendor($vendor_name,$vendor_password,$cid);
+    } else if (isset($_REQUEST['update_vendor_non_password'])) {
+        include_once("canteen_class.php");
 
-		$array = array();	
+        $vendor_name = "";
+        if (isset($_REQUEST["vendor_name"])) {
+            $vendor_name = $_REQUEST["vendor_name"];
+        }
+        $cid = 0;
+        if (isset($_REQUEST["cid"])) {
+            $cid = $_REQUEST["cid"];
+        }
 
-		while($row = $v->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);	
-	}
+        $v = new canteen_class();
+        $v->update_vendor_non_password($vendor_name, $cid);
+    }
 
 	else if (isset($_REQUEST['delete_vendor'])){
 		include_once("canteen_class.php");

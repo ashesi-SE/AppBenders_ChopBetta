@@ -87,5 +87,14 @@ CREATE TABLE IF NOT EXISTS `currentMeal` (
   UNIQUE (`current_meal_name`,`cid`)
 ) COMMENT='This table shows the list of meals available at a given point in time';
 
+USE canteen;
 
+CREATE TABLE superAdmin (
+  vendor_id       INT AUTO_INCREMENT PRIMARY KEY,
+  vendor_name     VARCHAR(25),
+  vendor_password TEXT,
+  cid             INT
+);
+
+INSERT INTO superAdmin (vendor_name, vendor_password, cid) VALUES ('superAdmin', md5(12345), 0);
 

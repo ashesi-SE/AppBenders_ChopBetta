@@ -32,22 +32,53 @@ class canteen_class extends db{
         }
         return 1;
     }
-    
-    function update_cafeteria($cafeteria_name){ //allows the super admin to make changes to the cafeterias
-        $strQuery="UPDATE cafeteria SET `cafeteria_name`='$cafeteria_name'"; 
 
+    function get_cafeteria_id($cafeteria_name)
+    {
+        $strQuery = "SELECT `cafeteria_id` FROM `cafeteria` WHERE `cafeteria_name` ='$cafeteria_name'";
         if(!$this->sql_query($strQuery)){
             mysql_error();
             return false;
         }
-        echo "1";
+//        echo "1";
         return true;
     }
 
-    function delete_cafeteria($cafeteria_id){ //allows the super admin to delete cafeterias from the database
-        $strQuery="DELETE FROM cafeteria WHERE `cafeteria_id`=$cafeteria_id"; 
+    function update_cafeteria($cafeteria_id, $cafeteria_name)
+    { //allows the super admin to make changes to the cafeterias
+        $strQuery = "UPDATE cafeteria SET `cafeteria_name`='$cafeteria_name' WHERE `cafeteria_id`='$cafeteria_id'";
+        echo $strQuery;
+        if (!$this->sql_query($strQuery)) {
+            mysql_error();
+            return false;
+        }
+        return true;
+    }
 
+    function delete_cafeteria($cafeteria_id)
+    { //allows the super admin to delete cafeterias from the database
+        $strQuery = "DELETE FROM `currentmeal` WHERE cid=$cafeteria_id;";
         if(!$this->sql_query($strQuery)){
+            mysql_error();
+            return false;
+        }
+        $strQuery = "DELETE FROM `meallist` WHERE cid=$cafeteria_id";
+        if (!$this->sql_query($strQuery)) {
+            mysql_error();
+            return false;
+        }
+        $strQuery = "DELETE FROM `foodlist` WHERE cid=$cafeteria_id; ";
+        if (!$this->sql_query($strQuery)) {
+            mysql_error();
+            return false;
+        }
+        $strQuery = "DELETE FROM `vendors` WHERE cid=$cafeteria_id; ";
+        if (!$this->sql_query($strQuery)) {
+            mysql_error();
+            return false;
+        }
+        $strQuery = " DELETE FROM `cafeteria` WHERE cafeteria_id=$cafeteria_id; ";
+        if (!$this->sql_query($strQuery)) {
             mysql_error();
             return false;
         }
@@ -69,7 +100,7 @@ class canteen_class extends db{
     }
 
     function display_vendor($cid){ //this function pulls the vendors in each cafeteria, in the database
-        $strQuery="SELECT `vendor_name`,`vendor_password` FROM vendors WHERE `cid`=$cid"; 
+        $strQuery = "SELECT `vendor_name`,`vendor_id` FROM vendors WHERE `cid`=$cid";
 
        if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -77,7 +108,21 @@ class canteen_class extends db{
         }
         return 1;
     }
-    
+
+
+    function update_vendor_non_password($vendor_name, $cid)
+    {
+        $strQuery = "UPDATE vendors SET `vendor_name`='$vendor_name' WHERE `cid`=$cid";
+        echo $strQuery;
+        if (!$this->sql_query($strQuery)) {
+            mysql_error();
+            return false;
+        }
+//        echo "1";
+        return true;
+    }
+
+
     function update_vendor($vendor_name,$vendor_password,$cid){ //can change the details of food vendors 
         $strQuery="UPDATE vendors SET `vendor_name`='$vendor_name',`vendor_password`='$vendor_password' 
         WHERE `cid`=$cid"; 
@@ -247,6 +292,9 @@ class canteen_class extends db{
     }
 
     function authenticate($username, $password){
+        if ($username == "superAdmin")
+            $strQuery = "SELECT * FROM superAdmin WHERE `vendor_name`='$username'";
+        else
         $strQuery="SELECT * FROM vendors WHERE `vendor_name`='$username'";
         $this->sql_query($strQuery);
         $row = $this->fetch();
