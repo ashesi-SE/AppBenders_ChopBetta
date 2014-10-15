@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS `mealList` (
 CREATE TABLE IF NOT EXISTS `currentMeal` (
   `current_meal_id` int PRIMARY KEY,
   `current_meal_name` varchar(255),
-  `customer_rating` int,
+  `customer_rating` decimal(2,1),
+  `number_of_ratings` int(11) NOT NULL DEFAULT '0',
   `cid` int NOT NULL,
   FOREIGN KEY (`cid`) references `cafeteria` (`cafeteria_id`),
   FOREIGN KEY (`current_meal_id`) references `mealList` (`meal_id`),

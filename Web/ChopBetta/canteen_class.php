@@ -213,7 +213,7 @@ class canteen_class extends db{
     function display_currentMeal($cid){ //displays the available meals and their 
     //ratings to customers
 
-        $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`cid` FROM currentMeal WHERE `cid`=$cid"; 
+        $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`number_of_ratings`,`cid` FROM currentMeal WHERE `cid`=$cid"; 
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -236,7 +236,11 @@ class canteen_class extends db{
     function delete_currentMeal($current_meal_id,$cid){ //allows food vendors to remove meals that are no longer 
     //available at the canteens
 
+<<<<<<< HEAD
+        $strQuery="DELETE FROM currentMeal WHERE `current_meal_id`=$current_meal_id AND `cid`=$cid"; 
+=======
         $strQuery="DELETE FROM currentMeal WHERE `current_meal_id`=$current_meal_id AND `cid`=$cid";
+>>>>>>> 0ed27ac5eca2a9ea1c7b0dd22fd23176782fbe7b
 
         if(!$this->sql_query($strQuery)){
             echo $this->str_error;
@@ -263,12 +267,29 @@ class canteen_class extends db{
                 return false;
             }
         }
-
     }
 
+    function ratings($customer_rating,$current_meal_id,$cid){ //shows the ratings assigned to each meal
+        $strQuery="SELECT `customer_rating`,`number_of_ratings` FROM currentMeal WHERE 
+        `current_meal_id`=$current_meal_id AND `cid`=$cid"; 
+   
+        if(!$this->sql_query($strQuery)){
+            mysql_error();         
+        }
+        else{ 
+            $row=$this->fetch();
+        
+            $new_rating=($row['customer_rating']*$row['number_of_ratings']+$customer_rating)/(++$row['number_of_ratings']);
 
-
-
+            $strQuery="UPDATE currentMeal SET `customer_rating`=$new_rating AND `number_of_ratings`=".$row['number_of_ratings']+1;
+            if(!$this->sql_query($strQuery)){
+                mysql_error();
+                return false;
+            }
+            echo "1";
+            return true; 
+        }
+    } 
 }
 
 ?>

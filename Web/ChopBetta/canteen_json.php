@@ -2,10 +2,10 @@
 /**
  * Cafeteria CRUD
  */
-	if (isset($_REQUEST['add_cafeteria'])){
-		include_once("canteen_class.php");
+include_once("canteen_class.php");
 		
-		$cafeteria_name="";
+	if (isset($_REQUEST['add_cafeteria'])){
+				$cafeteria_name="";
 		if (isset($_REQUEST["cafeteria_name"])) {
 			$cafeteria_name=$_REQUEST["cafeteria_name"];
 		}
@@ -14,9 +14,7 @@
 	}
 	
 	else if(isset($_REQUEST['display_cafeteria'])){
-		include_once("canteen_class.php");
-		
-		$c=new canteen_class();
+				$c=new canteen_class();
 		$c->display_cafeteria();
 
 		$array = array();	
@@ -28,7 +26,6 @@
 	}
 
 	else if (isset($_REQUEST['update_cafeteria'])){
-		include_once("canteen_class.php");
 		
 		$cafeteria_name="";
 		if (isset($_REQUEST["cafeteria_name"])) {
@@ -46,21 +43,13 @@
 	}
 
 	else if (isset($_REQUEST['delete_cafeteria'])){
-		include_once("canteen_class.php");
 		
 		$cafeteria_id=0;
 		if (isset($_REQUEST["cafeteria_id"])) {
 			$cafeteria_id=$_REQUEST["cafeteria_id"];
 		}
 		$c=new canteen_class();
-		$c->delete_cafeteria($cafeteria_id);
-
-		$array = array();	
-
-		while($row = $c->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);				
+		$c->delete_cafeteria($cafeteria_id);			
 	}
 
 /**
@@ -68,7 +57,6 @@
  */
 
 	else if (isset($_REQUEST['add_vendor'])){
-		include_once("canteen_class.php");
 		
 		$vendor_name="";
 		if (isset($_REQUEST["vendor_name"])) {
@@ -87,7 +75,6 @@
 	}
 
 	else if (isset($_REQUEST['display_vendor'])){
-		include_once("canteen_class.php");
 		
 		$cid=0;
 		if (isset($_REQUEST["cid"])) {
@@ -105,7 +92,6 @@
 	}
 
 	else if (isset($_REQUEST['update_vendor'])){
-		include_once("canteen_class.php");
 		
 		$vendor_name="";
 		if (isset($_REQUEST["vendor_name"])) {
@@ -132,7 +118,6 @@
 	}
 
 	else if (isset($_REQUEST['delete_vendor'])){
-		include_once("canteen_class.php");
 		
 		$vendor_id=0;
 		if (isset($_REQUEST["vendor_id"])) {
@@ -144,19 +129,11 @@
 		}
 		$v=new canteen_class();
 		$v->delete_vendor($vendor_id,$cid);
-
-		$array = array();	
-
-		while($row = $v->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);		
 	}
 /**
  * Food list CRUD
  */
 	if (isset($_REQUEST['add_foodList'])){
-		include_once("canteen_class.php");
 		
 		$item_name="";
 		if (isset($_REQUEST["item_name"]) && isset($_REQUEST["cid"])) {
@@ -172,7 +149,7 @@
 	}
 	
 	else if(isset($_REQUEST['display_foodList'])){
-		include_once("canteen_class.php");
+		
 		$cid=0;
 		if (isset($_REQUEST["cid"])) {
 			$cid=$_REQUEST["cid"];
@@ -189,7 +166,6 @@
 	}
 
 	else if (isset($_REQUEST['update_foodList'])){
-		include_once("canteen_class.php");
 		
 		$item_name="";
 		if (isset($_REQUEST["item_name"])) {
@@ -211,7 +187,6 @@
 	}
 
 	else if (isset($_REQUEST['delete_foodList'])){
-		include_once("canteen_class.php");
 		
 		$item_id=0;
 		if (isset($_REQUEST["item_id"])) {
@@ -223,20 +198,12 @@
 		}
 		$fl=new canteen_class();
 		$fl->delete_foodList($item_id,$cid);
-
-		$array = array();	
-
-		while($row = $fl->fetch()){
-    	$array[] = array_map('utf8_encode',	$row);
-		} 
-		echo json_encode($array);				
 	}
 /**
  * Meal list CRUD
  */
     else if (isset($_REQUEST['add_mealList'])){
-        include_once("canteen_class.php");
-
+        
         $meal_name="";
         if (isset($_REQUEST["meal_name"]) && isset($_REQUEST["cid"])) {
             $meal_name=$_REQUEST["meal_name"];
@@ -251,8 +218,7 @@
     }
 
     else if (isset($_REQUEST['display_mealList'])){
-        include_once("canteen_class.php");
-
+        
         $cid=0;
 		if (isset($_REQUEST["cid"])) {
 			$cid=$_REQUEST["cid"];
@@ -269,8 +235,7 @@
     }
 
     else if (isset($_REQUEST['update_mealList'])){
-        include_once("canteen_class.php");
-
+        
         $meal_name="";
         if (isset($_REQUEST["meal_name"])) {
             $meal_name=$_REQUEST["meal_name"];
@@ -291,7 +256,6 @@
     }
 
     else if (isset($_REQUEST['delete_mealList'])){
-        include_once("canteen_class.php");
 
         $meal_id=0;
         if (isset($_REQUEST["meal_id"])) {
@@ -303,20 +267,12 @@
 		}
         $ml=new canteen_class();
         $ml->delete_mealList($meal_id,$cid);
-
-        $array = array();
-
-        while($row = $ml->fetch()){
-            $array[] = array_map('utf8_encode',	$row);
-        }
-        echo json_encode($array);
     }
 /**
  * Current meal OR MENU CRUD
  */
 
 	else if (isset($_REQUEST['add_currentMeal'])){
-		include_once("canteen_class.php");
 		
 		$current_meal_name="";
         $cid=0;
@@ -333,7 +289,6 @@
 	}
 
 	else if (isset($_REQUEST['display_currentMeal'])){
-		include_once("canteen_class.php");
 		
 		$cid=0;
 		if (isset($_REQUEST["cid"])) {
@@ -351,7 +306,6 @@
 	}
 
 	else if (isset($_REQUEST['update_currentMeal'])){
-		include_once("canteen_class.php");
 		
 		$current_meal_name="";
 		if (isset($_REQUEST["current_meal_name"])) {
@@ -373,7 +327,6 @@
 	}
 
 	else if (isset($_REQUEST['delete_currentMeal'])){
-		include_once("canteen_class.php");
 		
 		$current_meal_id=0;
 		if (isset($_REQUEST["current_meal_id"])) {
@@ -385,7 +338,28 @@
 		}
 		$cm=new canteen_class();
 		$cm->delete_currentMeal($current_meal_id,$cid);
+	}
 
+<<<<<<< HEAD
+//submitting the customer ratings 
+	else if (isset($_REQUEST['submit_ratings'])){
+
+		$customer_rating=0.0;
+		if (isset($_REQUEST["customer_rating"])) {
+			$customer_rating=$_REQUEST["customer_rating"];
+		}
+		$current_meal_id=0;
+		if (isset($_REQUEST["current_meal_id"])) {
+			$current_meal_id=$_REQUEST["current_meal_id"];
+		}
+		$cid=0;
+		if (isset($_REQUEST["cid"])) {
+			$cid=$_REQUEST["cid"];
+		}
+		$r=new canteen_class();
+		$r->ratings($customer_rating,$current_meal_id,$cid);
+=======
+>>>>>>> 0ed27ac5eca2a9ea1c7b0dd22fd23176782fbe7b
 	}
 
 ?>
