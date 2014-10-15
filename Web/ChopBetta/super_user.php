@@ -97,7 +97,6 @@ if ($_SESSION['chopbetta']['username'] == null) {
                 <label>Reset password
                     <input type="password" id="edit_password" placeholder="Reset password"/>
                 </label>
-                <!--                TODO: check if you intend to change password-->
                 <a class="button right" onclick="saveEditCafeteria()">Save Changes</a>
             </fieldset>
         </form>

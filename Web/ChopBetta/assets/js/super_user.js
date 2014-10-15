@@ -104,10 +104,7 @@ function editCafeteria(cafeteria_id, cafeteria_name) {
     var cafeteria_name_field = $('#edit_cafeteria_name');
     $('#edit_cafeteria_id').val(cafeteria_id);
     var vendor_name_field = $('#edit_vendor_name');
-//    var password_name_field = $('#edit_password');
     var vendor_id_field = $('#edit_vendor_id');
-//    var vendor_id ;
-    //get checkbox state
     cafeteria_name_field.val(cafeteria_name);
 
     //get vendor info
@@ -116,7 +113,6 @@ function editCafeteria(cafeteria_id, cafeteria_name) {
         vendor_name_field.val(data[0].vendor_name);
         vendor_id_field.val(data[0].vendor_id);
     }, "json");
-//    console.log("hello");
 }
 
 function saveEditCafeteria() {
