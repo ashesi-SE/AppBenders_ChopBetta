@@ -2,7 +2,7 @@
 /**
  * Cafeteria CRUD
  */
-include_once("canteen_class.php");
+    include_once("canteen_class.php");
 		
 	if (isset($_REQUEST['add_cafeteria'])){
 				$cafeteria_name="";
@@ -218,7 +218,7 @@ include_once("canteen_class.php");
     }
 
     else if (isset($_REQUEST['display_mealList'])){
-        
+
         $cid=0;
 		if (isset($_REQUEST["cid"])) {
 			$cid=$_REQUEST["cid"];
@@ -289,7 +289,7 @@ include_once("canteen_class.php");
 	}
 
 	else if (isset($_REQUEST['display_currentMeal'])){
-		
+
 		$cid=0;
 		if (isset($_REQUEST["cid"])) {
 			$cid=$_REQUEST["cid"];
@@ -339,8 +339,6 @@ include_once("canteen_class.php");
 		$cm=new canteen_class();
 		$cm->delete_currentMeal($current_meal_id,$cid);
 	}
-
-<<<<<<< HEAD
 //submitting the customer ratings 
 	else if (isset($_REQUEST['submit_ratings'])){
 
@@ -358,8 +356,6 @@ include_once("canteen_class.php");
 		}
 		$r=new canteen_class();
 		$r->ratings($customer_rating,$current_meal_id,$cid);
-=======
->>>>>>> 0ed27ac5eca2a9ea1c7b0dd22fd23176782fbe7b
 	}
 
 ?>

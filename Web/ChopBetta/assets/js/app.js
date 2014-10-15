@@ -10,6 +10,7 @@ $(document).ready(function(){
     /**
      * Login n logout handlers
      */
+    console.log("loginStart");
     $.get('canteen_loginHandler.php',{isAuthenticated:2},function(data){
 
         if(data){
