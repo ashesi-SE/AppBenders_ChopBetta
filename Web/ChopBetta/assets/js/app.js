@@ -30,6 +30,9 @@ $(document).ready(function(){
             if (data.stat == "VALID") {
                 userData = data.dat;
                 console.log(userData);
+                if (userData.vendor_name == "superAdmin")
+                    window.location.href = "super_user.php";
+                else
                 window.location.href = "main.php";
             }
         },"json");

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if ($_SESSION['chopbetta']['username'] == null) {
+    header('Location: index.php');
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -20,7 +26,7 @@
             <li class="has-dropdown">
                 <a href="#">Super Admin</a>
                 <ul class="dropdown">
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="#" id="logout">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -29,37 +35,15 @@
 
 <main class="centerPage">
 
-    <table class="responsive">
-        <thead>
+    <table class="centerPage">
+    <thead>
         <tr>
             <th>Cafeteria name</th>
-            <th>Admin username</th>
             <th>Edit</th>
             <th width="150">Delete</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>Content Goes Here</td>
-            <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-            <td><a href="#" data-reveal-id="edit_cafeteria_modal" onclick="editCafeteria()"><span title="Edit item"
-                                                                                                  class="icon-edit"></span></a>
-            </td>
-            <td><a href="#" onclick="deleteCafeteria() "><span title="Delete item" class="icon-delete"></span></a></td>
-        </tr>
-        <tr>
-            <td>Content Goes Here</td>
-            <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-            <td><a href="#" onclick="editCafeteria()"><span title="Edit item" class="icon-edit"></span></a></td>
-            <td><a href="#" onclick="deleteCafeteria() "><span title="Delete item" class="icon-delete"></span></a></td>
-        </tr>
-        <tr>
-            <td>Content Goes Here</td>
-            <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-            <td><a href="#" onclick="editCafeteria()"><span title="Edit item" class="icon-edit"></span></a></td>
-            <td><a href="#" onclick="deleteCafeteria() "><span title="Delete item" class="icon-delete"></span></a></td>
-        </tr>
-        </tbody>
+        <tbody id="table_content"></tbody>
     </table>
 
     <div id="create_meal_modal" class="reveal-modal medium" data-reveal>
@@ -67,11 +51,11 @@
             <label>Name of new Cafeteria</label>
 
             <div class="large-9 columns" style="padding-left: 50">
-                <input type="text">
+                <input type="text" id="cafeteria_name">
             </div>
 
             <div class="large-3 columns" style="padding-left: 0">
-                <button class="menuControl button postfix" onclick="addCafeteria()">Add cafeteria</button>
+                <button class="menuControl button postfix" onclick="addCafeteria(1)">Add cafeteria</button>
             </div>
         </div>
         <div id="cafeteria_vendor_box">
@@ -80,12 +64,12 @@
                     <legend>Vendor information</legend>
 
                     <label>Vendor name
-                        <input type="text" placeholder="this would be the username for logging in">
+                        <input type="text" id="vendor_name" placeholder="this would be the username for logging in">
                     </label>
                     <label>Password
-                        <input type="password" placeholder="Password">
+                        <input type="password" id="vendor_password" placeholder="Password">
                     </label>
-                    <a class="button right">Create Vendor</a>
+                    <a class="button right" onclick="addCafeteria(2)">Create Vendor</a>
                 </fieldset>
             </form>
         </div>
@@ -96,7 +80,7 @@
             <fieldset>
                 <legend>Cafeteria information</legend>
                 <label>Cafeteria name
-                    <input type="text" placeholder="Cafeteria name here">
+                    <input type="text" id="edit_cafeteria_name" placeholder="Cafeteria name here">
                 </label>
             </fieldset>
         </form>
@@ -104,15 +88,16 @@
             <fieldset>
                 <legend>Vendor information</legend>
                 <label>Vendor name
-                    <input type="text" placeholder="vendor name here">
+                    <input type="text" id="edit_vendor_name" placeholder="vendor name here">
                 </label>
-
+                <input id="edit_vendor_id" type="hidden">
+                <input id="edit_cafeteria_id" type="hidden">
                 <input id="checkbox2" type="checkbox">
                 <label for="checkbox2">Change password</label>
                 <label>Reset password
-                    <input type="password" placeholder="Reset password"/>
+                    <input type="password" id="edit_password" placeholder="Reset password"/>
                 </label>
-                <a class="button right">Save Changes</a>
+                <a class="button right" onclick="saveEditCafeteria()">Save Changes</a>
             </fieldset>
         </form>
     </div>
@@ -123,6 +108,7 @@
 <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
 <script src="assets/js/mapDS.js" type="text/javascript"></script>
 <script src="assets/js/super_user.js" type="text/javascript"></script>
+<script src="assets/js/app.js" type="text/javascript"></script>
 <script src="assets/js/foundation.min.js" type="text/javascript"></script>
 <script>
     $(document).foundation();

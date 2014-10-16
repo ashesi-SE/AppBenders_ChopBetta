@@ -1,5 +1,4 @@
-
-use `canteen`;
+USE `canteen`;
 
 --
 -- Database: `canteen`
@@ -12,10 +11,11 @@ use `canteen`;
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_id` int PRIMARY KEY AUTO_INCREMENT,
-  `admin_name` varchar(50) UNIQUE,
-  `admin_password`	varchar(255)
-) COMMENT='This table stores the credentials of the super admin';
+  `admin_id`       INT PRIMARY KEY AUTO_INCREMENT,
+  `admin_name`     VARCHAR(50) UNIQUE,
+  `admin_password` VARCHAR(255)
+)
+  COMMENT ='This table stores the credentials of the super admin';
 
 -- --------------------------------------------------------
 
@@ -24,9 +24,10 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 CREATE TABLE IF NOT EXISTS `cafeteria` (
-  `cafeteria_id` int PRIMARY KEY AUTO_INCREMENT,
-  `cafeteria_name` varchar(50) UNIQUE
-) COMMENT='This table contains a list of all the different cafeterias available on campus';
+  `cafeteria_id`   INT PRIMARY KEY AUTO_INCREMENT,
+  `cafeteria_name` VARCHAR(50) UNIQUE
+)
+  COMMENT ='This table contains a list of all the different cafeterias available on campus';
 
 -- --------------------------------------------------------
 
@@ -35,13 +36,14 @@ CREATE TABLE IF NOT EXISTS `cafeteria` (
 --
 
 CREATE TABLE IF NOT EXISTS `vendors` (
-  `vendor_id` int PRIMARY KEY AUTO_INCREMENT,
-  `vendor_name` varchar(100),
-  `vendor_password`	varchar(255),
-  `cid` int NOT NULL,	
-  FOREIGN KEY (`cid`) references `cafeteria` (`cafeteria_id`),
-  UNIQUE (`vendor_name`,`cid`)
-) COMMENT='This table lists all the different vendors under a particular cafeteria';
+  `vendor_id`       INT PRIMARY KEY AUTO_INCREMENT,
+  `vendor_name`     VARCHAR(100),
+  `vendor_password` VARCHAR(255),
+  `cid`             INT NOT NULL,
+  FOREIGN KEY (`cid`) REFERENCES `cafeteria` (`cafeteria_id`),
+  UNIQUE (`vendor_name`, `cid`)
+)
+  COMMENT ='This table lists all the different vendors under a particular cafeteria';
 
 -- --------------------------------------------------------
 
@@ -50,12 +52,13 @@ CREATE TABLE IF NOT EXISTS `vendors` (
 --
 
 CREATE TABLE IF NOT EXISTS `foodList` (
-  `item_id` int PRIMARY KEY AUTO_INCREMENT,
-  `item_name` varchar(30),
-  `cid` int NOT NULL,
-  FOREIGN KEY (`cid`) references `cafeteria` (`cafeteria_id`),
-  UNIQUE (`item_name`,`cid`)
-) COMMENT='This table provides a list of food items available at the local eateries';
+  `item_id`   INT PRIMARY KEY AUTO_INCREMENT,
+  `item_name` VARCHAR(30),
+  `cid`       INT NOT NULL,
+  FOREIGN KEY (`cid`) REFERENCES `cafeteria` (`cafeteria_id`),
+  UNIQUE (`item_name`, `cid`)
+)
+  COMMENT ='This table provides a list of food items available at the local eateries';
 
 -- --------------------------------------------------------
 
@@ -64,12 +67,13 @@ CREATE TABLE IF NOT EXISTS `foodList` (
 --
 
 CREATE TABLE IF NOT EXISTS `mealList` (
-  `meal_id` int PRIMARY KEY AUTO_INCREMENT,
-  `meal_name` varchar(255),
-  `cid` int NOT NULL,
-  FOREIGN KEY (`cid`) references `cafeteria` (`cafeteria_id`),
-  UNIQUE (`meal_name`,`cid`)	
-) COMMENT='This table provides a collection of meals usually served at the eateries';
+  `meal_id`   INT PRIMARY KEY AUTO_INCREMENT,
+  `meal_name` VARCHAR(255),
+  `cid`       INT NOT NULL,
+  FOREIGN KEY (`cid`) REFERENCES `cafeteria` (`cafeteria_id`),
+  UNIQUE (`meal_name`, `cid`)
+)
+  COMMENT ='This table provides a collection of meals usually served at the eateries';
 
 -- --------------------------------------------------------
 
@@ -78,15 +82,22 @@ CREATE TABLE IF NOT EXISTS `mealList` (
 --
 
 CREATE TABLE IF NOT EXISTS `currentMeal` (
-  `current_meal_id` int PRIMARY KEY,
-  `current_meal_name` varchar(255),
-  `customer_rating` decimal(2,1),
-  `number_of_ratings` int(11) NOT NULL DEFAULT '0',
-  `cid` int NOT NULL,
-  FOREIGN KEY (`cid`) references `cafeteria` (`cafeteria_id`),
-  FOREIGN KEY (`current_meal_id`) references `mealList` (`meal_id`),
-  UNIQUE (`current_meal_name`,`cid`)
-) COMMENT='This table shows the list of meals available at a given point in time';
+  `current_meal_id`   INT PRIMARY KEY,
+  `current_meal_name` VARCHAR(255),
+  `customer_rating`   INT,
+  `cid`               INT NOT NULL,
+  FOREIGN KEY (`cid`) REFERENCES `cafeteria` (`cafeteria_id`),
+  FOREIGN KEY (`current_meal_id`) REFERENCES `mealList` (`meal_id`),
+  UNIQUE (`current_meal_name`, `cid`)
+)
+  COMMENT ='This table shows the list of meals available at a given point in time';
 
+CREATE TABLE superAdmin (
+  vendor_id       INT AUTO_INCREMENT PRIMARY KEY,
+  vendor_name     VARCHAR(25),
+  vendor_password TEXT,
+  cid             INT
+);
 
+INSERT INTO superAdmin (vendor_name, vendor_password, cid) VALUES ('superAdmin', md5(12345), 0);
 
