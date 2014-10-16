@@ -19,7 +19,6 @@ $(document).ready(function(){
             generateCurMealList();
             console.log(userData);
         }
-
     },"json");
 
     $('#login').submit(function(e){
@@ -33,7 +32,7 @@ $(document).ready(function(){
                 if (userData.vendor_name == "superAdmin")
                     window.location.href = "super_user.php";
                 else
-                window.location.href = "main.php";
+                    window.location.href = "main.php";
             }
         },"json");
     });
@@ -99,7 +98,7 @@ $(document).ready(function(){
 
             var mealListAjax = generateMealList2();
             mealListAjax.done(function(){
-               //onclick fubctions here to
+                //onclick fubctions here to
             });
         }
 
@@ -118,7 +117,7 @@ function generateMealList(){
     $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
         console.log(data);
         $.each(data,function(key, elem  ){
-           var mealStr = makeHRString({data:elem.meal_name});
+            var mealStr = makeHRString({data:elem.meal_name});
             mealsAvailable += '<option name="'+ elem.meal_id +'" value="'+mealStr+'">'+mealStr+'</option>';
         });
         $('#addMealRow').find('.meals').html(mealsAvailable);
@@ -126,14 +125,14 @@ function generateMealList(){
 }
 
 function generateMealList2(){
-  return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
+    return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
         if(data.length > 0){
             $('#mealList ul').html("");
 
-        $.each(data,function(key, elem  ){
+            $.each(data,function(key, elem  ){
 
-            $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'</li>');
-        });
+                $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'</li>');
+            });
         }
     },"json");
 }
