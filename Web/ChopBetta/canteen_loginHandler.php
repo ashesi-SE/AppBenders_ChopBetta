@@ -10,14 +10,15 @@ require_once("canteen_class.php");
 $controllerObj = new canteen_class();
 $res=false;
 
-if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
-    $_SESSION['chopbetta']['username']= null;
+if(isset($_REQUEST['username']) && isset($_REQUEST['password']) && isset($_REQUEST['isAdmin'])){
+    ($_REQUEST['isAdmin'])?$_SESSION['chopbetta']['superuser']= null:$_SESSION['chopbetta']['username']= null;
     $_SESSION['chopbetta']['cid']= null;
     $_SESSION['chopbetta']['vid']= null;
     $res = $controllerObj->authenticate($_REQUEST['username'],$_REQUEST['password']);//this is echoing to ajax
 
     if($res){
-        $_SESSION['chopbetta']['username'] = $_REQUEST['username'];
+        ($_REQUEST['isAdmin'])?$_SESSION['chopbetta']['superuser']= $_REQUEST['username']:
+            $_SESSION['chopbetta']['username']= $_REQUEST['username'];
         $_SESSION['chopbetta']['cid'] = $res['cid'];
         $_SESSION['chopbetta']['vid'] = $res['vendor_id'];
     }

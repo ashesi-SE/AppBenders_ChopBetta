@@ -30,12 +30,15 @@ if (@$_SESSION['chopbetta']['username'] != null){
         <input id="password" name="password" type="password"
                required="true" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
     </div>
+
     <button type="submit" value="Log in">Log in</button>
+    <label>
+        <input id="isAdmin" type="checkbox" value="adminLogin"  />
+        Login as admin
+    </label>
 </form>
 
-<div id='result'>
 
-</div>
 </body>
 
 </html>

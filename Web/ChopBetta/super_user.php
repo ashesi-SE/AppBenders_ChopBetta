@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['chopbetta']['username'] == null) {
+if ($_SESSION['chopbetta']['superuser'] == null) {
     header('Location: index.php');
 }
 ?>

@@ -2,7 +2,6 @@
  * Created by HP on 9/24/2014.
  */
 
-var mealRows = 1;
 
 var userData = "";//Values are set by login handlers
 
@@ -24,7 +23,7 @@ $(document).ready(function(){
     $('#login').submit(function(e){
         e.preventDefault();
         $.get('canteen_loginHandler.php',{username: $('#username').val(),
-            password: $('#password').val()},function(data,status) {
+            password: $('#password').val(),isAdmin:$('#isAdmin:checked').length==1?1:0},function(data,status) {
             console.log(data);
             if (data.stat == "VALID") {
                 userData = data.dat;
@@ -43,6 +42,14 @@ $(document).ready(function(){
         });
     });
 
+    $('#isAdmin').click(function(){
+        if(this.checked){
+            $('#username').attr('readonly','true').val('superAdmin');
+
+        }else{
+            $('#username').attr('readonly','false').val('');
+        }
+    });
 
     /**
      * Event handler for modal open
@@ -101,7 +108,6 @@ $(document).ready(function(){
                 //onclick fubctions here to
             });
         }
-
         console.log(modal);
     });
 });
@@ -191,7 +197,6 @@ function remCurMeal(elem){
             }
         });
 }
-
 
 function addFood(){
     $.get('canteen_json.php',{add_foodList: 2,item_name:$('#foodItem').val(),cid:userData.cid}).done(function(){
