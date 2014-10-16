@@ -10,5 +10,9 @@
                 <item name="android:minHeight">16dip</item>
                 <item name="android:maxHeight">16dip</item>
     </style>
-
+    <style name="ratingBarStyleLarge">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar_large</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+    </style>
 </resources>

@@ -235,9 +235,9 @@ function makeHRString(options){
 function setRatingStars(customer_rating) {
     var stars = "";
     for(var i=0;i<5;i++){
-        if(i+0.5 == customer_rating){
+        if(i+0.2<customer_rating && i+0.9 >= customer_rating){
             stars += '<i class="icon-star-half"></i>';
-        }else if(i<customer_rating) {
+        }else if(i+0.2<customer_rating) {
             stars += '<i class="icon-star-full"></i>';
         }else{
             stars += '<i class="icon-star-empty"></i>';

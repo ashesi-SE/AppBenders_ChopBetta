@@ -13,12 +13,16 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +43,7 @@ import java.util.concurrent.ExecutionException;
  * create an instance of this fragment.
  *
  */
-public class meallist extends Fragment {
+public class meallist extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,7 +52,7 @@ public class meallist extends Fragment {
     // TODO: Rename and change types of parameters
     private int mParam1;
     private String canteenID;
-    private View meallistView;
+    private SwipeRefreshLayout meallistView;
     private View progressView;
 
 
@@ -88,14 +92,31 @@ public class meallist extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_meal, container, false);
+
         progressView = rootView.findViewById(R.id.progress1);
-        meallistView = rootView.findViewById(R.id.mealList);
+        meallistView = (SwipeRefreshLayout)rootView.findViewById(R.id.mealList);
+        meallistView.setOnRefreshListener(this);
+        meallistView.setColorScheme( android.R.color.holo_orange_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_red_light);
+
         showProgress(true);
-        getData("?display_currentMeal&cid="+canteenID);
+        getData("?display_currentMeal&cid="+canteenID,false);
         lvMeal = (ListView)rootView.findViewById(R.id.mealListView);
 
         return rootView;
     }
+
+    @Override
+    public void onRefresh() {
+        if(meallistView.isRefreshing()){
+            meallistView.setRefreshing(true);
+        }
+        getData("?display_currentMeal&cid="+canteenID,false);
+
+    }
+
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -147,7 +168,8 @@ public class meallist extends Fragment {
                 JSONObject jAr = aJsonArray.getJSONObject(i);
                 Log.i("ANNOY",(jAr.getString("current_meal_name")));
                 mealData.put(jAr.getString("current_meal_id"),jAr.getString("current_meal_name"),
-                        jAr.getString("customer_rating").equals("")?0.f:Float.parseFloat(jAr.getString("customer_rating")));
+                        jAr.getString("customer_rating").equals("")?0.f:Float.parseFloat(jAr.getString("customer_rating")),
+                        jAr.getInt("number_of_ratings"));
                 menuArray.add(mealData);
             }
         } catch (JSONException e) {
@@ -156,26 +178,30 @@ public class meallist extends Fragment {
         return menuArray;
     }
 
-    public String getData(String url){
+    public String getData(String url, boolean block){
         httpSender hts = new httpSender();
         String res = null;
-//        try {
 
 
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            PreferenceManager.setDefaultValues(getActivity(), R.xml.pref_general, false);
-            String serverIp = sharedPref.getString("serverIP", null );
-          hts.execute(url,"http://"+ serverIp + getString(R.string.pref_urlSet));
-          //  hts.execute(url,"http://192.168.42.10:63345/ChopBetta/Web/ChopBetta/canteen_json.php");
 
-//          res = hts.get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.pref_general, false);
+        String serverIp = sharedPref.getString("serverIP", null );
+        hts.execute(url,"http://"+ serverIp + getString(R.string.pref_urlSet));
+        if(block){
+            try {
+                res = hts.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
         return res;
     }
+
+
 
     public class httpSender extends AsyncTask<String, Void, String> {
 
@@ -197,6 +223,8 @@ public class meallist extends Fragment {
         protected String doInBackground(String... params) {
 
             urlStr = params[1];
+
+
             try {
                 Log.i("URL", urlStr + params[0]);
                 url = new URL(urlStr+params[0]);
@@ -252,6 +280,7 @@ public class meallist extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
             if(s==null){
                 alert.setTitle("Could not connect to service.")
                         .setMessage("The internet may be down\n" +
@@ -274,6 +303,8 @@ public class meallist extends Fragment {
                 MealListAdapter adap = new MealListAdapter(getActivity(), R.layout.meal_list_item, parseResponse(s));
                 lvMeal.setAdapter(adap);
                 showProgress(false);
+                meallistView.setRefreshing(false);
+
             }
         }
     }

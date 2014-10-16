@@ -3,7 +3,8 @@
     tools:context="se.com.chopbetta.meallist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="0dip">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -24,14 +25,14 @@
 
 
     </RelativeLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingTop="2dip"
+        android:paddingBottom="5dip"
         tools:context=".MainActivity$PlaceholderFragment"
         android:id="@+id/mealList"
         android:focusableInTouchMode="true">
@@ -42,8 +43,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/mealListView"
             android:layout_weight="1"
-            android:headerDividersEnabled="false" />
-    </LinearLayout>
+            android:clickable="true"
+            android:longClickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 

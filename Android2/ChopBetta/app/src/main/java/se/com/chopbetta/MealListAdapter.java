@@ -1,7 +1,9 @@
 package se.com.chopbetta;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.List;
@@ -30,29 +33,40 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
     }
     static class ViewHolder {
         public TextView text;
+        public TextView ratedBy;
         public RatingBar ratingBar;
         public ToggleButton mealEatToggle;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
 
 
         View view = convertView;
         // reuse views
         if (view == null) {
             //ALT:LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            final LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 
             //ALT:view = inflater.inflate(R.layout.rowlayout, null);
             view = inflater.inflate(layoutResourceId, null);
-
             // configure view holder
-            ViewHolder viewHolder = new ViewHolder();
+            final ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) view.findViewById(R.id.mealNameView);
             viewHolder.ratingBar = (RatingBar) view.findViewById(R.id.mealRatingBar);
             viewHolder.mealEatToggle = (ToggleButton) view.findViewById(R.id.mealEatToggle);
+            viewHolder.ratedBy = (TextView) view.findViewById(R.id.ratedByNo);
+            final String mealName = viewHolder.text.getText().toString();
             view.setTag(viewHolder);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    RatingAlertDialog rad = new RatingAlertDialog(context);
+                    NotSoSimpleKVPair nsskvp = data.get(position);
+                    rad.createAlert(nsskvp.getNameAt(0),nsskvp.getKeyAt(0)).show();
+                }
+            });
         }
 
         // fill data
@@ -64,6 +78,8 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
 
         holder.text.setText(s);
         holder.ratingBar.setRating(data.get(position).getRateAt(0));
+        int numRated = nsskvp.getNumRatedAt(0);
+        holder.ratedBy.setText("Rated by " + numRated + " user" + (numRated==1?"":"s"));
         return view;
     }
 }

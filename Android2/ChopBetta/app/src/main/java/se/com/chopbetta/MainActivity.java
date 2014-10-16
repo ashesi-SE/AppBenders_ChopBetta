@@ -136,8 +136,6 @@ String cafeInfoJSON = "";
     }
 
     public SimpleKVPair parseResponse(String result){
-
-//        String resultArray
         SimpleKVPair menuArray = new SimpleKVPair();
         try {
             JSONArray aJsonArray = new JSONArray(result);
