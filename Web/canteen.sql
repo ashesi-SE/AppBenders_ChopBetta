@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `currentMeal` (
   `current_meal_id`   INT PRIMARY KEY,
   `current_meal_name` VARCHAR(255),
   `customer_rating`   INT,
+  `number_of_ratings` INT,
   `cid`               INT NOT NULL,
   FOREIGN KEY (`cid`) REFERENCES `cafeteria` (`cafeteria_id`),
   FOREIGN KEY (`current_meal_id`) REFERENCES `mealList` (`meal_id`),
