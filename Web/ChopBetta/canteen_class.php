@@ -57,17 +57,17 @@ class canteen_class extends db{
 
     function delete_cafeteria($cafeteria_id)
     { //allows the super admin to delete cafeterias from the database
-        $strQuery = "DELETE FROM `currentmeal` WHERE cid=$cafeteria_id;";
+        $strQuery = "DELETE FROM `currentMeal` WHERE cid=$cafeteria_id;";
         if(!$this->sql_query($strQuery)){
             mysql_error();
             return false;
         }
-        $strQuery = "DELETE FROM `meallist` WHERE cid=$cafeteria_id";
+        $strQuery = "DELETE FROM `mealList` WHERE cid=$cafeteria_id";
         if (!$this->sql_query($strQuery)) {
             mysql_error();
             return false;
         }
-        $strQuery = "DELETE FROM `foodlist` WHERE cid=$cafeteria_id; ";
+        $strQuery = "DELETE FROM `foodList` WHERE cid=$cafeteria_id; ";
         if (!$this->sql_query($strQuery)) {
             mysql_error();
             return false;
