@@ -6,20 +6,21 @@
     android:padding="5dp"
     android:descendantFocusability="blocksDescendants">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="11">
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Meal name"
+        android:id="@+id/mealNameView"
+        android:layout_weight="3"
+        android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Meal name"
-            android:id="@+id/mealNameView"
-            android:layout_weight="9"
-            android:textSize="15sp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical|right">
 
         <RatingBar
             android:layout_width="wrap_content"
@@ -30,14 +31,15 @@
             android:numStars="5"
             android:clickable="false"
             android:isIndicator="true"
-            android:longClickable="true"
+            android:longClickable="false"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
             android:padding="0dp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             style="@style/ratingBarStyle"
-            android:mirrorForRtl="false" />
+            android:mirrorForRtl="false"
+            android:layout_gravity="right" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,25 +47,12 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Rated by 0 users"
             android:id="@+id/ratedByNo"
-            android:layout_gravity="left"
             android:layout_weight="9"
             android:textSize="11sp"
             android:textIsSelectable="false"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:layout_gravity="right" />
 
     </LinearLayout>
-
-    <ToggleButton
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="eatToggle"
-        android:id="@+id/mealEatToggle"
-        android:textOff="Select"
-        android:textOn="Selected"
-        android:minWidth="80dp"
-        android:maxWidth="80dp"
-        android:layout_weight="1"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp" />
 
 </LinearLayout>

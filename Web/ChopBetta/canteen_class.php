@@ -328,10 +328,11 @@ class canteen_class extends db{
 
             $strQuery="UPDATE currentMeal SET `customer_rating`=".$new_rating." , `number_of_ratings`=".($row['number_of_ratings']) .
                 " WHERE `current_meal_id`=$current_meal_id";
-            print_r($strQuery);
             if(!$this->sql_query($strQuery)){
                 mysql_error();
                 return false;
+            }else{
+                echo 1;
             }
         }
         return true;

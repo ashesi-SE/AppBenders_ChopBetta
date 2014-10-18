@@ -37,7 +37,7 @@ public class RatingAlertDialog {
         ratingBar = (RatingBar)vc.findViewById(R.id.ratingSet);
     }
 
-    public  AlertDialog.Builder createAlert(String ratingName,final String mealid) {
+    public  AlertDialog createAlert(String ratingName,final String mealid) {
         ratingText.setText(ratingName);
         alertDialog.setView(vc)
                 .setPositiveButton("Submit rating", new DialogInterface.OnClickListener() {
@@ -46,15 +46,15 @@ public class RatingAlertDialog {
                         getData("?submit_ratings&customer_rating="+ratingBar.getRating()+"&current_meal_id="+mealid,false);
                     }
                 });
-        return alertDialog;
+        AlertDialog ad  = alertDialog.create();
+        ad.setCanceledOnTouchOutside(true);
+        return ad;
     }
 
 
     public String getData(String url, boolean block){
         httpSender hts = new httpSender();
         String res = null;
-
-
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         PreferenceManager.setDefaultValues(context, R.xml.pref_general, false);
@@ -151,9 +151,9 @@ public class RatingAlertDialog {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if(s==null){
-                Toast.makeText(context,"Could not submit your rating",Toast.LENGTH_LONG);
+                Toast.makeText(context,"Could not submit your rating",Toast.LENGTH_LONG).show();
             }else {
-                Toast.makeText(context,"Your rating has been submitted",Toast.LENGTH_LONG);
+                Toast.makeText(context,"Your rating has been submitted",Toast.LENGTH_SHORT).show();
             }
         }
     }

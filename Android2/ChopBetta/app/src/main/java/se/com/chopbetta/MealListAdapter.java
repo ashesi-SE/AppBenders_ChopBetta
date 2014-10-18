@@ -35,7 +35,6 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
         public TextView text;
         public TextView ratedBy;
         public RatingBar ratingBar;
-        public ToggleButton mealEatToggle;
     }
 
     @Override
@@ -54,7 +53,6 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) view.findViewById(R.id.mealNameView);
             viewHolder.ratingBar = (RatingBar) view.findViewById(R.id.mealRatingBar);
-            viewHolder.mealEatToggle = (ToggleButton) view.findViewById(R.id.mealEatToggle);
             viewHolder.ratedBy = (TextView) view.findViewById(R.id.ratedByNo);
             final String mealName = viewHolder.text.getText().toString();
             view.setTag(viewHolder);
