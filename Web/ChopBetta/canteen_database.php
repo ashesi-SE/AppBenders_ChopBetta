@@ -1,7 +1,7 @@
 <?php
-define("DB", "canteen");
-define("DB_user", "root");
-define("DB_pass", "");
+define("DB", "csashesi_shamir-adjaku");
+define("DB_user", "csashesi_sa15");
+define("DB_pass", "db!829187");
 define("DB_host", "localhost");
 
 //define("DB", "csashesi_peter-vanderpuye");
