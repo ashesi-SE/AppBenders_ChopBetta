@@ -6,28 +6,24 @@ var cafetria_names=[];
 $(document).ready(function(){
 startTime();
 //get number of cafetria to create tabs
-    $.get('http://localhost/webTech/AppBenders_ChopBetta/Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
-        // console.log(data);
+    $.get('AppBenders_ChopBetta/../../Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
         for(var i=0;i<data.length;i++){
             cafetria_ids[i]=data[i].cafeteria_id;
             cafetria_names[i]=data[i].cafeteria_name;
         }
-        // console.log(cafetria_ids);
-        // console.log(cafetria_names);
 
         var tabs="";
         var tabContent = "";
         //build tabs
-        for (var i=0;i<cafetria_ids.length;i++){
+        for (var j=0;j<cafetria_ids.length;j++){
             if(tabs==""){
-                tabs+='<dd class="active"><a href="#panel'+cafetria_ids[i]+'">'+cafetria_names[i]+'</a></dd>'
+                tabs+='<dd class="active"><a href="#panel'+cafetria_ids[j]+'">'+cafetria_names[j]+'</a></dd>'
             }
             else{
-                tabs+='<dd ><a href="#panel'+cafetria_ids[i]+'">'+cafetria_names[i]+'</a></dd>'
+                tabs+='<dd ><a href="#panel'+cafetria_ids[j]+'">'+cafetria_names[j]+'</a></dd>'
             }
         }
         $(tabs).appendTo('#tabs');
-        // $(tabContent).appendTo('#tab_content');
         // end build tabs
     },"json")
  .done(function(){
@@ -43,7 +39,7 @@ startTime();
 function getMealsBasedOnCafeteriaIds(){
     var c=0 ;
     for (var i=0;i<cafetria_ids.length;i++){
-         $.get('http://localhost/webTech/AppBenders_ChopBetta/Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){           
+         $.get('AppBenders_ChopBetta/../../Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){
     
          }    ,"json") 
          .done(function(data){
@@ -52,11 +48,11 @@ function getMealsBasedOnCafeteriaIds(){
             for (var j=0;j<data.length;j++){
 
                 if (c==0){
-                content+='<div class="content active" id="panel'+data[j].cid+'"> <div class="card">'+data[j].current_meal_name+'</div></div>';
+                content+='<div style="margin: 0 auto; max-width: 500px;" class="content active" id="panel'+data[j].cid+'"> <div class="card">'+data[j].current_meal_name+'</div></div>';
                 c=1;
             }
             else{
-                content+='<div class="content" id="panel'+data[j].cid+'"> <div class="card">'+data[j].current_meal_name+'</div> </div>';
+                content+='<div style="margin: 0 auto; max-width: 500px;" class="content" id="panel'+data[j].cid+'"> <div class="card">'+data[j].current_meal_name+'</div> </div>';
 }
             }
             $(content).appendTo('#tab_content');
