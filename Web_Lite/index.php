@@ -35,6 +35,7 @@ $detect = new Mobile_Detect;
               font-size:25px;
               font-family: cursive;
               text-align: center;
+              margin-bottom: 9px;
           }
           #tab_content{
               align-items: center;
