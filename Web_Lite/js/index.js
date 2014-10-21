@@ -7,7 +7,7 @@ var c=0 ;
 $(document).ready(function(){
 startTime();
 //get number of cafetria to create tabs
-    $.get('AppBenders_ChopBetta/../../Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
+    $.get('ChopBetta/../../Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
         for(var i=0;i<data.length;i++){
             cafetria_ids[i]=data[i].cafeteria_id;
             cafetria_names[i]=data[i].cafeteria_name;
@@ -41,7 +41,7 @@ function getMealsBasedOnCafeteriaIds(){
 
     c=0;
     for (var i=0;i<cafetria_ids.length;i++){
-         $.get('AppBenders_ChopBetta/../../Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){
+         $.get('ChopBetta/../../Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){
          }    ,"json")
          .done(function(data){
             console.log(data);
