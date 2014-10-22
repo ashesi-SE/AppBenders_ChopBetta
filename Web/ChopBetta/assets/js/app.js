@@ -156,7 +156,7 @@ function generateCurMealList(){
     $.get('canteen_json.php',{display_currentMeal: 2,cid:userData.cid},function(data){
         console.log(data);
 
-        if(data.length > 0){
+        if(data.length >= 0){
             curListElem.html("");
         }
         $.each(data,function(key, elem){
