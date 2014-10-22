@@ -9,6 +9,7 @@
 
 body {
     margin: 0;
+    left:0;right:0;
     position: relative;
     background-color: #FFFFFF;
     z-index: 23;
@@ -32,6 +33,9 @@ nav.top-bar a:active{
 .top-bar-section li.active:not(.has-form) a:not(.button){
     background-color: rgba(62, 169, 178,0.7) !important;
 }
+.top-bar-section li.active:not(.has-form) a:not(.button):hover{
+    background-color: rgba(62, 169, 178,0.9) !important;
+}
 .addBtn button{
     padding: 9px;
 }
@@ -48,7 +52,7 @@ nav.top-bar a:active{
 }
 main{
     z-index: 100;
-    background-color: rgba( 255,255,255,0.5);
+    background-color: rgba( 255,255,255,0.81);
     border-radius: 4px;
     padding: 8px;
 }
@@ -66,7 +70,7 @@ main{
 #currentMealList ul li:hover,
 #selectableFoodList ul li:hover,
 #foodList ul li:hover{
-    background-color: rgba(224, 252, 244, 0.56);
+    background-color: rgba(255, 240, 213, 0.56);
 }
 
 #mealList ul li,
