@@ -6,17 +6,31 @@
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
-.column, .columns {
-    /*position: relative;*/
-    /*padding-left : 0;*/
-    /*padding-right: 0;*/
-}
+
 body {
     margin: 0;
     position: relative;
-}
-label{
+    background-color: #FFFFFF;
+    z-index: 23;
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+}
+nav.top-bar{
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+}
+nav.top-bar a,
+nav.top-bar ul{
+    background: transparent !important;
+}
+nav.top-bar a:hover{
+    background-color: rgba(0,0,0,0.4) !important;
+}
+nav.top-bar a:active{
+    background-color: rgba(0,0,0,0.5) !important;
+    box-shadow: inset 0 0 4px #000;
+}
+.top-bar-section li.active:not(.has-form) a:not(.button){
+    background-color: rgba(62, 169, 178,0.7) !important;
 }
 .addBtn button{
     padding: 9px;
@@ -26,27 +40,28 @@ label{
     margin: 0 auto;
     max-width: 500px;
 }
-
-
-#bender { border-left-width: 2px; }
-
-#fry { border-width: 1px 4px 1px 100px; }
-
-body {
-   
-    background-color: #FFFFFF;
+.reveal-modal{
+    z-index: 100!important;
 }
-
 .reveal-modal .close-reveal-modal {
     font-weight: normal !important;
 }
-
+main{
+    z-index: 100;
+    background-color: rgba( 255,255,255,0.5);
+    border-radius: 4px;
+    padding: 8px;
+}
+#currentMealList {
+    float: none !important;
+}
 #mealList ul,
 #currentMealList ul,
 #selectableFoodList ul,
 #foodList ul{
     margin: 0;
 }
+
 #mealList ul li:hover,
 #currentMealList ul li:hover,
 #selectableFoodList ul li:hover,
@@ -63,6 +78,7 @@ body {
     list-style: none;
     padding: 4px 2px;
     border-top: dotted 1px #000;
+    min-height: 34px;
 }
 #mealList ul li>span,
 #currentMealList ul li>span,
@@ -105,4 +121,65 @@ body {
     margin: 0;
 }
 
+#picSlider{
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+.orbit-container{
+    overflow: visible !important;
+    bottom: 0;
+    top: 0;
+    position: relative;
+    background: none;
+}
+.orbit-caption{
+    font-family: Roboto_Thin, sans-serif;
+    background-color: rgba(0,0,0,0.3) !important;
+    text-shadow: 0 0 4px #000;
+}
+.orbit-container,
+.orbit-slides-container li{
+    height: 100%;
+}
+.orbit-container img{
+    width: 100%;
+}
 
+.orbit-bullets-container{
+    position: absolute;
+    margin: 0 5px;
+    bottom: 45px;
+    right: 5px;
+}
+.orbit-bullets-container .orbit-bullets{
+    margin: 0 auto;
+    top: 0;
+}
+.orbit-bullets-container .orbit-bullets li{
+    border-radius: 0;
+    height: 1px;
+}
+.orbit-container .orbit-timer{
+    top: auto !important;
+    left: 40px;
+    bottom: 30px;
+}
+.orbit-container .orbit-timer>span {
+    height: 10px;width: 3px;
+    border: none;
+    border-left: solid 3px #fff;
+    border-right: solid 3px #fff;
+
+}
+.orbit-container .orbit-timer.paused>span {
+    height: 0;width: 0;
+}
+
+
+/*FOR ANDROID APK*/
+#bender { border-left-width: 2px; }
+
+#fry { border-width: 1px 4px 1px 100px; }

@@ -22,7 +22,7 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password']) && isset($_REQUE
         $_SESSION['chopbetta']['cid'] = $res['cid'];
         $_SESSION['chopbetta']['vid'] = $res['vendor_id'];
     }
-  //  print_r($_SERVER['username']);
+    //  print_r($_SERVER['username']);
 }
 if(isset($_REQUEST['logout'])){
     session_destroy();
@@ -30,9 +30,9 @@ if(isset($_REQUEST['logout'])){
 if(isset($_REQUEST['isAuthenticated'])){
 
     if($_SESSION['chopbetta']['username']==null){
-       echo false;
+        echo false;
     }else{
-       echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['chopbetta']['vid'], 'vendor_name' => $_SESSION['chopbetta']['username'],'cid' => $_SESSION['chopbetta']['cid'] )));
+        echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['chopbetta']['vid'], 'vendor_name' => $_SESSION['chopbetta']['username'],'cid' => $_SESSION['chopbetta']['cid'] )));
     }
 }
 
