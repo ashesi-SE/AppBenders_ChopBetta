@@ -24,7 +24,7 @@ class canteen_class extends db{
     }
 
     function display_cafeteria(){ //this function shows all cafeterias on campus
-        $strQuery="SELECT `cafeteria_id`,`cafeteria_name` FROM cafeteria";
+        $strQuery="SELECT `cafeteria_id`,`cafeteria_name` FROM cafeteria ORDER BY `cafeteria_id` DESC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -57,17 +57,17 @@ class canteen_class extends db{
 
     function delete_cafeteria($cafeteria_id)
     { //allows the super admin to delete cafeterias from the database
-        $strQuery = "DELETE FROM `currentmeal` WHERE cid=$cafeteria_id;";
+        $strQuery = "DELETE FROM `currentMeal` WHERE cid=$cafeteria_id;";
         if(!$this->sql_query($strQuery)){
             mysql_error();
             return false;
         }
-        $strQuery = "DELETE FROM `meallist` WHERE cid=$cafeteria_id";
+        $strQuery = "DELETE FROM `mealList` WHERE cid=$cafeteria_id";
         if (!$this->sql_query($strQuery)) {
             mysql_error();
             return false;
         }
-        $strQuery = "DELETE FROM `foodlist` WHERE cid=$cafeteria_id; ";
+        $strQuery = "DELETE FROM `foodList` WHERE cid=$cafeteria_id; ";
         if (!$this->sql_query($strQuery)) {
             mysql_error();
             return false;
@@ -100,7 +100,7 @@ class canteen_class extends db{
     }
 
     function display_vendor($cid){ //this function pulls the vendors in each cafeteria, in the database
-        $strQuery = "SELECT `vendor_name`,`vendor_id` FROM vendors WHERE `cid`=$cid";
+        $strQuery = "SELECT `vendor_id`,`vendor_name` FROM vendors WHERE `cid`=$cid ORDER BY `vendor_id` DESC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -160,7 +160,7 @@ class canteen_class extends db{
     }
 
     function display_foodList($cid){ //this function shows the food items in the database
-        $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid";
+        $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid ORDER BY `item_id` DESC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -206,7 +206,7 @@ class canteen_class extends db{
     }
 
     function display_mealList($cid){ //this functions displays the combinations of food items 
-        $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid";
+        $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_id` DESC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -258,7 +258,8 @@ class canteen_class extends db{
     function display_currentMeal($cid){ //displays the available meals and their 
         //ratings to customers
 
-        $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`number_of_ratings`,`cid` FROM currentMeal WHERE `cid`=$cid";
+        $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`number_of_ratings`,`cid` FROM currentMeal 
+        WHERE `cid`=$cid ORDER BY `current_meal_id` DESC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
