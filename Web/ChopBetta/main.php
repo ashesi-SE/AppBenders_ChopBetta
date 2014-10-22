@@ -139,10 +139,11 @@ if ($_SESSION['chopbetta']['username'] == null){
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
     <script src="assets/js/mapDS.js" type="text/javascript"></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
+    <script src="assets/js/blur.js" type="text/javascript"></script>
     <script src="assets/js/foundation.min.js" type="text/javascript"></script>
     <script>
         $(document).foundation();
-        $('.target').blurjs({
+        $('#picSlider').blurjs({
             source: 'body',			//Background to blur
             radius: 5,			//Blur Radius
             overlay: '',			//Overlay Color, follow CSS3's rgba() syntax
