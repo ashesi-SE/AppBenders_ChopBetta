@@ -160,7 +160,7 @@ class canteen_class extends db{
     }
 
     function display_foodList($cid){ //this function shows the food items in the database
-        $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid ORDER BY `item_id` DESC";
+        $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid ORDER BY `item_name` ASC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -206,7 +206,7 @@ class canteen_class extends db{
     }
 
     function display_mealList($cid){ //this functions displays the combinations of food items 
-        $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_id` DESC";
+        $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_name` ASC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -259,7 +259,7 @@ class canteen_class extends db{
         //ratings to customers
 
         $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`number_of_ratings`,`cid` FROM currentMeal 
-        WHERE `cid`=$cid ORDER BY `current_meal_id` DESC";
+        WHERE `cid`=$cid ORDER BY `current_meal_name` ASC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();

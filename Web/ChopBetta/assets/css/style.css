@@ -117,7 +117,7 @@ label[for='meals'],.listHead{
 }
 nav.top-bar{
     background-color: rgba(0,0,0,0.5);
-    position: fixed;
+    /*position: fixed;*/
 }
 nav.top-bar a,
 nav.top-bar ul{
