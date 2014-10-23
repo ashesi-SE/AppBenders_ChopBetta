@@ -5,6 +5,7 @@
     -moz-box-sizing: inherit;
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
+
 }
 
 body {
@@ -13,7 +14,106 @@ body {
     position: relative;
     background-color: #FFFFFF;
     z-index: 23;
-    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+}
+body.login{
+    background: url("../img/back%20(6).jpg") center top;
+    margin: 0 auto;
+    max-width: 800px;
+}
+body.login #login form,
+body.login #login{
+    max-width: 320px;
+    min-width: 300px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    bottom: 5px;
+    margin: 0;
+    border-radius: 3px;
+}
+
+body.login #login form{
+    font-family: Eurofurence, sans-serif;
+    font-size: 37px;
+    opacity: 0.8;
+    background: rgba(0,0,0,0.4);
+
+}
+body.login #login form>div{
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    color: #ffffff;
+}
+body.login #password {
+    font-family: sans-serif;
+}
+body.login label{
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+}
+body.login input[type='text'],
+body.login input[type='password']{
+    background: transparent;
+    color: white;
+}
+body.login button[type='submit']{
+    font-family: Eurofurence, sans-serif;
+    font-size: 20px;
+    width: 100%;
+    border: 1px solid #85E875;
+    background-color: rgba(23, 221, 23, 0.6);
+}
+body.login button[type='submit']:hover{
+    background-color: rgba(23, 221, 23, 0.9);
+}
+body.login button[type='submit']:active{
+    background-color: rgba(30, 249, 30, 0.90);
+}
+body.login #backblur{
+    background: url("../img/back%20(6).jpg") 72% top;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 5px;
+    -webkit-filter: blur(20px);
+}
+main,
+main select{
+    font-family: Roboto_Light, sans-serif;
+    font-size: 14px;
+}
+main select{
+    border: 1px solid #008cba;
+}
+label[for='meals'],.listHead{
+    font-family: Eurofurence ,sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #008cba;
+    background-color: rgba(0, 140, 186, 0.09);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 5px;
+    border-bottom: 1px white solid
+}
+.listHead{
+    background-color: #595959;
+    color: #f5f5f5;
+    padding: 6px;
+}
+.displayArea{
+    font-family: Roboto_Light;
+    line-height: 35px;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    color: #5572bd;
 }
 nav.top-bar{
     background-color: rgba(0,0,0,0.5);
@@ -77,12 +177,13 @@ main{
 #currentMealList ul li,
 #selectableFoodList ul li,
 #foodList ul li{
+    font-family: Roboto_Light, sans-serif;
+    font-size: 14px;
     position: relative;
     vertical-align: middle;
     list-style: none;
     padding: 4px 2px;
     border-top: dotted 1px #000;
-    min-height: 34px;
 }
 #mealList ul li>span,
 #currentMealList ul li>span,
@@ -99,7 +200,7 @@ main{
 }
 #mealList ul li>span .icon-delete,
 #currentMealList ul li>span .icon-delete,
-#foodList ul li>span .delete{
+#foodList ul li>span .icon-delete{
     cursor: pointer;
     padding: 5px;
     margin: 0 0 0 5px;

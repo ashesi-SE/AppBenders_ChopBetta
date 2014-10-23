@@ -44,10 +44,10 @@ $(document).ready(function(){
 
     $('#isAdmin').click(function(){
         if(this.checked){
-            $('#username').attr('readonly','true').val('superAdmin');
+            $('#username').attr('readonly','readonly').val('superAdmin');
 
         }else{
-            $('#username').attr('readonly','false').val('');
+            $('#username').removeAttr('readonly').val('');
         }
     });
 
@@ -63,7 +63,7 @@ $(document).ready(function(){
                     $('#foodList ul').html("");
                 }
                 $.each(data,function(key, elem  ){
-                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
+                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span><i class="icon-delete"></i></span></li>');
                 });
             },"json");
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
                 });
 
             },"json");
-
+            generateMealList();
             var mealListAjax = generateMealList2();
             mealListAjax.done(function(){
                 //onclick fubctions here to
@@ -137,18 +137,34 @@ function generateMealList2(){
 
             $.each(data,function(key, elem  ){
 
-                $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'</li>');
+                $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'<span><i class="icon-delete"></i></span></li>');
             });
         }
     },"json");
 }
 function add_toMealList(){
-    $.get('canteen_json.php',{add_mealList: 2,cid:userData.cid,meal_name:mapDS.toArray(true)},
-        function(data){
-            showMsg({msg:"added"});
-            generateMealList2();
-            //TODO: popup on true or 1
-        });
+    if($('#create_meal_modal').find('.displayArea').html()=="No food items selected"){
+        showMsg({msg: "You have selected no items. Please select food items from the list on the left first"});
+    }else {
+        $.get('canteen_json.php', {add_mealList: 2, cid: userData.cid, meal_name: mapDS.toArray(true)},
+            function (data) {
+                if (data == 1) {
+                    showMsg({msg: "added"});
+                    generateMealList2();
+                    generateMealList();
+                } else {
+                    showMsg({msg: "Could not update your list of available meals"});
+                    generateMealList2();
+                    generateMealList();
+                }
+                $('#create_meal_modal').find('.displayArea').html("No food items selected");
+                mapDS.clear();
+                $('#selectableFoodList ul').each(function (key,elem) {
+                    console.log(elem);
+                    elem.attr("checked","false");
+                })
+            });
+    }
 }
 
 function generateCurMealList(){

@@ -32,7 +32,7 @@ if ($_SESSION['chopbetta']['username'] == null){
                 <li><a href="#">Home</a></li>
                 <li><a href="#" data-reveal-id="create_meal_modal">Create meal item</a></li>
                 <li><a href="#" data-reveal-id="add_foodItem_modal">Add food item</a></li>
-                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>
+<!--                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>-->
             </ul>
             <ul class="right">
                 <li class="has-dropdown">
@@ -48,8 +48,7 @@ if ($_SESSION['chopbetta']['username'] == null){
     <main class="centerPage">
         <section id="currentMealsArea">
             <div class="row collapse prefix-round" id="addMealRow">
-
-                <label for="meals">Select a meal to add to the current menu</label>
+                <label for="meals">Select a meal to add to the current menu below</label>
                 <div class="large-9 columns" style="padding-left: 50">
                     <select class="meals">
                         <option value="load">Loading...</option>
@@ -65,19 +64,22 @@ if ($_SESSION['chopbetta']['username'] == null){
                     <li>Loading...</li>
                 </ul>
             </section>
-
         </section>
-
     </main>
 
 
-    <div id="create_meal_modal" class="reveal-modal medium" data-reveal>
+    <div id="create_meal_modal" class="reveal-modal large" data-reveal>
         <div class="row">
             <div class="small-4 columns">
                 <section id="selectableFoodList" class="large-12 columns"  >
+                    <div class="listHead">Single foods</div>
                     <ul>
                         <li>Empty list...</li>
                     </ul>
+                    <div class="listfooter">
+                        Cannot find the single food you are looking for? Create it with
+                        the <a data-reveal-id="add_foodItem_modal">single foods editor here</a>
+                    </div>
                 </section>
             </div>
             <div class="small-8 columns">
@@ -88,9 +90,11 @@ if ($_SESSION['chopbetta']['username'] == null){
                     <a href="#" onclick="add_toMealList()" class="button postfix">Add meal</a>
                 </div>
                 <section id="mealList" class="large-12 columns"  >
+                    <div class="listHead">Created meals</div>
                     <ul>
                         <li>Empty list...</li>
                     </ul>
+
                 </section>
             </div>
             <a class="close-reveal-modal">&times;</a>
@@ -139,24 +143,9 @@ if ($_SESSION['chopbetta']['username'] == null){
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
     <script src="assets/js/mapDS.js" type="text/javascript"></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
-    <script src="assets/js/blur.js" type="text/javascript"></script>
     <script src="assets/js/foundation.min.js" type="text/javascript"></script>
     <script>
         $(document).foundation();
-        $('#picSlider').blurjs({
-            source: 'body',			//Background to blur
-            radius: 5,			//Blur Radius
-            overlay: '',			//Overlay Color, follow CSS3's rgba() syntax
-            offset: {			//Pixel offset of background-position
-                x: 0,
-                y: 0
-            },
-            optClass: '',			//Class to add to all affected elements
-            cache: false,			//If set to true, blurred image will be cached and used in the future. If image is in cache already, it will be used.
-            cacheKeyPrefix: 'blurjs-',	//Prefix to the keyname in the localStorage object
-            draggable: false		//Only used if jQuery UI is present. Will change background-position to fixed
-        });
-
     </script>
     </html>
 

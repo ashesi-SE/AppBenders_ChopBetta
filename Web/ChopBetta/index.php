@@ -28,27 +28,28 @@ if (@$_SESSION['chopbetta']['username'] != null){
 
 <body class="login">
 
+<section id="login">
+    <div id="backblur"></div>
+    <form class="centerPage" >
+        <div>
+            <div>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required="true" placeholder="Username">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password"
+                       required="true" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+            </div>
 
-<form id="login" class="centerPage" >
-    <header>Login</header>
-    <br>
-    <div>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" required="true" placeholder="Username">
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password"
-               required="true" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-    </div>
-
-    <button type="submit" value="Log in">Log in</button>
-    <label>
-        <input id="isAdmin" type="checkbox" value="adminLogin"  />
-        Login as admin
-    </label>
-</form>
-
+            <button type="submit" value="Log in">Log in</button>
+            <label>
+                <input id="isAdmin" type="checkbox" value="adminLogin"  />
+                Login as admin
+            </label>
+        </div>
+    </form>
+</section>
 
 </body>
 
