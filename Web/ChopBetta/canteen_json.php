@@ -229,12 +229,6 @@ else if (isset($_REQUEST['delete_foodList'])){
     $fl=new canteen_class();
     $fl->delete_foodList($item_id,$cid);
 
-    $array = array();
-
-    while($row = $fl->fetch()){
-        $array[] = array_map('utf8_encode',	$row);
-    }
-    echo json_encode($array);
 }
 /**
  * Meal list CRUD

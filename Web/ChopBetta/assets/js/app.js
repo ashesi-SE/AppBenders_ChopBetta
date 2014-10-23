@@ -63,7 +63,7 @@ $(document).ready(function(){
                     $('#foodList ul').html("");
                 }
                 $.each(data,function(key, elem  ){
-                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span><i class="icon-delete"></i></span></li>');
+                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span onclick="remFood('+elem.item_id+')"><i class="icon-delete"></i></span></li>');
                 });
             },"json");
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
                     $('#selectableFoodList ul').append(
                         '<li class="'+elem.item_id +'">' +
                         '<input type="checkbox" name="'+elem.item_name +'" value="'+elem.item_id +'" id="'+elem.item_id +'">' +
-                        '<label for="'+elem.item_id +'">'+elem.item_name +'<span><i class="icon-check"></i></span>'+'</label>' +
+                        '<label for="'+elem.item_id +'">'+elem.item_name +'<span><i class="icon-check"></i></span></label>' +
                         '</li>');
                 });
 
@@ -222,7 +222,23 @@ function addFood(){
                 $('#foodList ul').html("");
             }
             $.each(data,function(key, elem){
-                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
+                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span onclick="remFood('+elem.item_id+')"><i class="icon-delete"></i></span></li>');
+            });
+            $('#foodItem').val("");
+        },"json");
+    });
+}
+function remFood(foodId){
+    $.get('canteen_json.php',{delete_foodList: 2,item_id:foodId,cid:userData.cid}).done(function(data){
+        if(data==1){
+            showMsg({msg:"Item deleted"})
+        }
+        $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
+            if(data.length > 0){
+                $('#foodList ul').html("");
+            }
+            $.each(data,function(key, elem){
+                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span onclick="remFood(elem.item_id)"><i class="icon-delete"></i></span></li>');
             });
             $('#foodItem').val("");
         },"json");
