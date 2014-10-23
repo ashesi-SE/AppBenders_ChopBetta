@@ -27,8 +27,13 @@ if (@$_SESSION['chopbetta']['username'] != null){
 </head>
 
 <body class="login">
+   <div class="logo">
+       <img src="assets/img/logo.png">
+       <div class="caption">ChopBetta</div>
+   </div>
 
 <section id="login">
+
     <div id="backblur"></div>
     <form class="centerPage" >
         <div>

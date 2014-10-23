@@ -83,6 +83,21 @@ body.login #backblur{
     bottom: 5px;
     -webkit-filter: blur(20px);
 }
+body.login .logo{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+}
+body.login .logo img{
+    height: 250px;
+}
+body.login .logo .caption{
+    font-family: Eurofurence, sans-serif;
+    font-size: 55px;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 5px #000;
+}
 main,
 main select{
     font-family: Roboto_Light, sans-serif;
