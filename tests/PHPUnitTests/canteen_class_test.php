@@ -5,7 +5,7 @@
 // $username="root";
 // $password="";
 // $server="localhost";
-include("../ChopBetta/canteen_class.php");
+include("../../Web/ChopBetta/canteen_class.php");
 // mysql_connect($server,$username,$password,$database);
 
 
