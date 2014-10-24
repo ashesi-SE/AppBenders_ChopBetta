@@ -46,6 +46,10 @@ body.login #login form>div{
     padding: 20px;
     top: 50%;
     -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
     color: #ffffff;
 }
 body.login #password {
@@ -82,14 +86,23 @@ body.login #backblur{
     top: 5px;
     bottom: 5px;
     -webkit-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -o-filter: blur(20px);
+    -ms-filter: blur(20px);
+    filter: blur(20px);
 }
 body.login .logo{
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 body.login .logo img{
     height: 250px;
+    opacity: 0.8;
 }
 body.login .logo .caption{
     font-family: Eurofurence, sans-serif;
@@ -123,16 +136,19 @@ label[for='meals'],.listHead{
     padding: 6px;
 }
 .displayArea{
-    font-family: Roboto_Light;
+    font-family: Roboto_Light, sans-serif;
     line-height: 35px;
     width: 100%;
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
     color: #5572bd;
 }
+.popup{
+    font-family: Roboto_Light, sans-serif;
+}
 nav.top-bar{
     background-color: rgba(0,0,0,0.5);
-    /*position: fixed;*/
+    position: fixed;
 }
 nav.top-bar a,
 nav.top-bar ul{

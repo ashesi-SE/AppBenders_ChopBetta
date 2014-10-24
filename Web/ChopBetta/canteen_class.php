@@ -219,7 +219,7 @@ class canteen_class extends db{
         $strQuery="UPDATE mealList SET `meal_name`='$meal_name' WHERE `cid`=$cid";
 
         if(!$this->sql_query($strQuery)){
-            mysql_error();
+            $this->str_error;
             return false;
         }
         echo "1";
@@ -230,7 +230,8 @@ class canteen_class extends db{
         $strQuery="DELETE FROM mealList WHERE `meal_id`=$meal_id AND `cid`=$cid";
 
         if(!$this->sql_query($strQuery)){
-            mysql_error();
+            $isFKC = explode(" ",$this->str_error)[8];
+            print_r($isFKC);
             return false;
         }
         echo "1";

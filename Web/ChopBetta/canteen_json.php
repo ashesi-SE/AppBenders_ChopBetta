@@ -303,12 +303,7 @@ else if (isset($_REQUEST['delete_mealList'])){
     $ml=new canteen_class();
     $ml->delete_mealList($meal_id,$cid);
 
-    $array = array();
 
-    while($row = $ml->fetch()){
-        $array[] = array_map('utf8_encode',	$row);
-    }
-    echo json_encode($array);
 }
 /**
  * Current meal OR MENU CRUD

@@ -5,20 +5,20 @@
     width: 10px;
     background-color: rgba(0,0,0,0);
     box-shadow: inset 0 0 3px #000;
-
+    position: absolute;
 }
 ::-webkit-scrollbar-thumb {
    /* border-radius: 12px;*/
     border: 4px solid rgba(255,255,255,0);
     background-clip: content-box;
-    background-color: rgba(223, 3, 2, 0.54);
+    background-color: rgba(35, 213, 223, 0.54);
 }
 ::-webkit-scrollbar-thumb:hover {
     border: 3px solid rgba(255,255,255,0);
-    background-color: rgba(209, 27, 1, 0.81);
+    background-color: rgba(70, 166, 209, 0.81);
 }
 ::-webkit-scrollbar-thumb:active {
-    background-color: rgba(237, 22, 51, 0.96);
+    background-color: rgba(30, 102, 237, 0.96);
 }
 ::-webkit-scrollbar-corner {
     background-color: #e6e6e6;
