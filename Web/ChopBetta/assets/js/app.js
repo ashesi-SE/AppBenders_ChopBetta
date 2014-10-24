@@ -133,7 +133,7 @@ function generateMealList(){
 /*Meal list in the modal*/
 function generateMealList2(){
     return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
-        if(data.length > 0){
+        if(data.length >= 0){
             $('#mealList ul').html("");
 
             $.each(data,function(key, elem  ){
