@@ -1,18 +1,14 @@
 <?php
-<<<<<<< HEAD
+
+define("DB_host", "127.0.0.1");
 define("DB", "canteen");
 define("DB_user", "root");
 define("DB_pass", "");
-define("DB_host", "127.0.0.1");
-=======
-//define("DB", "canteen");
-//define("DB_user", "root");
-//define("DB_pass", "");
-define("DB_host", "localhost");
-define("DB", "csashesi_shamir-adjaku");
-define("DB_user", "csashesi_sa15");
-define("DB_pass", "db!829187");
->>>>>>> 2c0751c008d904cd46644ad2ae814780bcf4201d
+
+//define("DB_host", "localhost");
+//define("DB", "csashesi_shamir-adjaku");
+//define("DB_user", "csashesi_sa15");
+//define("DB_pass", "db!829187");
 
 //define("DB", "csashesi_peter-vanderpuye");
 //define("DB_user", "csashesi_pv14");

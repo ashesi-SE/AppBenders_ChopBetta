@@ -32,7 +32,7 @@ if ($_SESSION['chopbetta']['username'] == null){
                 <li><a href="#">Home</a></li>
                 <li><a href="#" data-reveal-id="create_meal_modal">Create meal item</a></li>
 <!--                <li><a href="#" data-reveal-id="add_foodItem_modal">Add food item</a></li>-->
-                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>
+<!--                <li><a href="#" onclick="showMsg({msg:'to say or not to say'})">Popup tester</a></li>-->
             </ul>
             <ul class="right">
                 <li class="has-dropdown">

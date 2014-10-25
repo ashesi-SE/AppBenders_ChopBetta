@@ -224,12 +224,9 @@ class canteen_class extends db{
     }
 
     function display_mealList($cid){ //this functions displays the combinations of food items 
-<<<<<<< HEAD
-        $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_id` DESC";
-=======
+
         $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_name` ASC";
 
->>>>>>> 2c0751c008d904cd46644ad2ae814780bcf4201d
         if(!$this->sql_query($strQuery)){
             mysql_error();
             return false;
