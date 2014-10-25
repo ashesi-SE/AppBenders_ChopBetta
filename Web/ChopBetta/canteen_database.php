@@ -2,7 +2,7 @@
 define("DB", "canteen");
 define("DB_user", "root");
 define("DB_pass", "");
-define("DB_host", "localhost");
+define("DB_host", "127.0.0.1");
 
 //define("DB", "csashesi_peter-vanderpuye");
 //define("DB_user", "csashesi_pv14");
