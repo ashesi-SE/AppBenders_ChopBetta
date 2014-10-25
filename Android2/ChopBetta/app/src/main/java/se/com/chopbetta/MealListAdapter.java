@@ -35,13 +35,12 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
         public TextView text;
         public TextView ratedBy;
         public RatingBar ratingBar;
-        public ToggleButton mealEatToggle;
     }
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
-
+        Log.i("KEYVALPOS",""+position);
         View view = convertView;
         // reuse views
         if (view == null) {
@@ -54,21 +53,21 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) view.findViewById(R.id.mealNameView);
             viewHolder.ratingBar = (RatingBar) view.findViewById(R.id.mealRatingBar);
-            viewHolder.mealEatToggle = (ToggleButton) view.findViewById(R.id.mealEatToggle);
             viewHolder.ratedBy = (TextView) view.findViewById(R.id.ratedByNo);
             final String mealName = viewHolder.text.getText().toString();
             view.setTag(viewHolder);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    RatingAlertDialog rad = new RatingAlertDialog(context);
-                    NotSoSimpleKVPair nsskvp = data.get(position);
-                    rad.createAlert(nsskvp.getNameAt(0),nsskvp.getKeyAt(0)).show();
-                }
-            });
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                RatingAlertDialog rad = new RatingAlertDialog(context);
+                NotSoSimpleKVPair nsskvp = data.get(position);
+                Log.i("KEYVAL",nsskvp.getNameAt(0)+"|"+nsskvp.getKeyAt(0)+"|"+position);
+                rad.createAlert(nsskvp.getNameAt(0),nsskvp.getKeyAt(0)).show();
+            }
+        });
         // fill data
         Log.i("ANNOY","position is now "+position);
         ViewHolder holder = (ViewHolder) view.getTag();

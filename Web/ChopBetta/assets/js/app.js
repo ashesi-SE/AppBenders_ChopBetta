@@ -44,10 +44,10 @@ $(document).ready(function(){
 
     $('#isAdmin').click(function(){
         if(this.checked){
-            $('#username').attr('readonly','true').val('superAdmin');
+            $('#username').attr('readonly','readonly').val('superAdmin');
 
         }else{
-            $('#username').attr('readonly','false').val('');
+            $('#username').removeAttr('readonly').val('');
         }
     });
 
@@ -63,7 +63,7 @@ $(document).ready(function(){
                     $('#foodList ul').html("");
                 }
                 $.each(data,function(key, elem  ){
-                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
+                    $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span onclick="remFood('+elem.item_id+')"><i class="icon-delete"></i></span></li>');
                 });
             },"json");
 
@@ -78,7 +78,7 @@ $(document).ready(function(){
                     $('#selectableFoodList ul').append(
                         '<li class="'+elem.item_id +'">' +
                         '<input type="checkbox" name="'+elem.item_name +'" value="'+elem.item_id +'" id="'+elem.item_id +'">' +
-                        '<label for="'+elem.item_id +'">'+elem.item_name +'<span><i class="icon-check"></i></span>'+'</label>' +
+                        '<label for="'+elem.item_id +'">'+elem.item_name +'<span><i class="icon-check"></i></span></label>' +
                         '</li>');
                 });
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
                 });
 
             },"json");
-
+            generateMealList();
             var mealListAjax = generateMealList2();
             mealListAjax.done(function(){
                 //onclick fubctions here to
@@ -117,6 +117,7 @@ $(document).ready(function(){
  * generateMealList() creates meal list for a specified canteen
  * <option>{meal here}</option> part
  */
+//TODO: find a way to merge the 2 below methods
 function generateMealList(){
     console.log("CID: "+userData.cid);
     var mealsAvailable = "";
@@ -129,34 +130,66 @@ function generateMealList(){
         $('#addMealRow').find('.meals').html(mealsAvailable);
     },"json");
 }
-
+/*Meal list in the modal*/
 function generateMealList2(){
     return $.get('canteen_json.php',{display_mealList: 2,cid:userData.cid},function(data){
-        if(data.length > 0){
+        if(data.length >= 0){
             $('#mealList ul').html("");
 
             $.each(data,function(key, elem  ){
 
-                $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'</li>');
+                $('#mealList ul').append('<li class="'+elem.meal_id +'">'+makeHRString({data:elem.meal_name})+'<span onclick="rem_fromMealList('+elem.meal_id+')"><i class="icon-delete"></i></span></li>');
             });
         }
     },"json");
 }
 function add_toMealList(){
-    $.get('canteen_json.php',{add_mealList: 2,cid:userData.cid,meal_name:mapDS.toArray(true)},
-        function(data){
-            showMsg({msg:"added"});
-            generateMealList2();
-            //TODO: popup on true or 1
-        });
+    if($('#create_meal_modal').find('.displayArea').html()=="No food items selected"){
+        showMsg({msg: "You have selected no items. Please select food items from the list on the left first"});
+    }else {
+        $.get('canteen_json.php', {add_mealList: 2, cid: userData.cid, meal_name: mapDS.toArray(true)},
+            function (data) {
+                if (data == 1) {
+                    showMsg({msg: "added"});
+                    generateMealList2();
+                    generateMealList();
+                } else {
+                    showMsg({msg: "Could not update your list of available meals",type:"Warning"});
+                    generateMealList2();
+                    generateMealList();
+                }
+                $('#create_meal_modal').find('.displayArea').html("No food items selected");
+                mapDS.clear();
+                $('#selectableFoodList ul').each(function (key,elem) {
+                    console.log(elem);
+                    elem.attr("checked","false");
+                })
+            });
+    }
 }
+function rem_fromMealList(meal_id){
+    $.get('canteen_json.php', {delete_mealList: 2, cid: userData.cid, meal_id: meal_id},
+        function (data) {
+            console.log(data);
+            if (data == 1) {
+                showMsg({msg: "Deleted"});
+                generateMealList2();
+                generateMealList();
+            } else if (data=="foreign") {
+                showMsg({msg: "Please remove meal from the menu before deleting from here", type: "Warning"});
+            }else {
+                showMsg({msg: "Could not delete from your list of available meals", type: "Warning"});
+            }
 
+        });
+
+}
 function generateCurMealList(){
     var curListElem = $('#currentMealList').find('ul');
     $.get('canteen_json.php',{display_currentMeal: 2,cid:userData.cid},function(data){
         console.log(data);
 
-        if(data.length > 0){
+        if(data.length >= 0){
             curListElem.html("");
         }
         $.each(data,function(key, elem){
@@ -185,7 +218,6 @@ function addCurMeal(elem){
         });
 }
 function remCurMeal(elem){
-
     $.get('canteen_json.php',{delete_currentMeal:1,cid:userData.cid,
             current_meal_id:elem},
         function(data){
@@ -199,14 +231,32 @@ function remCurMeal(elem){
 }
 
 function addFood(){
-    $.get('canteen_json.php',{add_foodList: 2,item_name:$('#foodItem').val(),cid:userData.cid}).done(function(){
-        //TODO: popup on true or 1
+    $.get('canteen_json.php',{add_foodList: 2,item_name:$('#foodItem').val(),cid:userData.cid}).done(function(data){
+        if(data==1){
+            showMsg({msg:"Item added"})
+        }
         $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
             if(data.length > 0){
                 $('#foodList ul').html("");
             }
             $.each(data,function(key, elem){
-                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'</li>');
+                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span onclick="remFood('+elem.item_id+')"><i class="icon-delete"></i></span></li>');
+            });
+            $('#foodItem').val("");
+        },"json");
+    });
+}
+function remFood(foodId){
+    $.get('canteen_json.php',{delete_foodList: 2,item_id:foodId,cid:userData.cid}).done(function(data){
+        if(data==1){
+            showMsg({msg:"Item deleted"})
+        }
+        $.get('canteen_json.php',{display_foodList: 2,cid:userData.cid},function(data){
+            if(data.length > 0){
+                $('#foodList ul').html("");
+            }
+            $.each(data,function(key, elem){
+                $('#foodList ul').append('<li class="'+elem.item_id +'">'+elem.item_name+'<span onclick="remFood(elem.item_id)"><i class="icon-delete"></i></span></li>');
             });
             $('#foodItem').val("");
         },"json");
@@ -228,7 +278,6 @@ function makeHRString(options){
         mealStr = options.data;
     }
 
-    //TODO: nothing selected
     if(mealStr.length ==0){
         return "No food items selected";
     }else if(mealStr.length == 1){
@@ -254,41 +303,41 @@ function setRatingStars(customer_rating) {
 }
 function showMsg(options){
 
-    function close(elem){
-
-    }
     var options = $.extend({type : "info", msg: "Hello world!" }, options);
 
     var popup = '<section id="popup" class="popup centerPage"><div>stuff</div><span>&times;</span></section>';
-    $('body').append(popup);
-    popup = $('.popup');
+    //check if popup exists in DOM before appending
+    console.log($('#popup'));
+    if ($('#popup').length==0)$('body').append(popup);
+
+    popup = $('#popup');
     popup.hide();
-    popup.find('span').css({ position: "absolute",
+    popup.find('span').css({ position: "fixed",
         "right": "3px",
         "top": "50%",
         "transform": "translateY(-50%)",
         "font-size": "25px"}).click(function(){
-        //TODO: hide via clickeds id
-        popup.hide('slideTop');
+        //hides popup
+        popup.hide('slideUp');
     });
 
-    popup.css({ position: "absolute",
-        "top": "55px",
+    popup.css({ position: "fixed",
+        "top": "48px",
         "left": 0,
         "right": 0,
-        "background": "beige",
+        "background":" rgba(245, 245, 220,0.67)",
         "border": "1px solid rgb(218, 218, 184)",
         "border-radius": "4px",
         "line-height": "17px",
         "padding": "10px",
-        "z-index": 400});
+        "z-index": 4000});
     if(options.type == "Warning"){
-        popup.css({"background": "rgb(255, 193, 163)", "border": "1px solid rgb(235, 134, 41)"});
+        popup.css({"background": "rgba(255, 193, 163,0.67)", "border": "1px solid rgb(235, 134, 41)"});
     }
     popup.find('div').html(options.msg);
 
-    popup.show('slideTop');
-    setTimeout(function(){popup.hide('slideTop')}, 2000);
+    popup.slideDown();
+    setTimeout(function(){popup.fadeOut()}, 3000);
 
 }
 

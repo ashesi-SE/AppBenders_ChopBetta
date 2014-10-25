@@ -169,7 +169,7 @@ class canteen_class extends db{
     }
 
     function display_foodList($cid){ //this function shows the food items in the database
-        $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid ORDER BY `item_id` DESC";
+        $strQuery="SELECT `item_id`,`item_name` FROM foodList WHERE `cid`=$cid ORDER BY `item_name` ASC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -224,7 +224,12 @@ class canteen_class extends db{
     }
 
     function display_mealList($cid){ //this functions displays the combinations of food items 
+<<<<<<< HEAD
         $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_id` DESC";
+=======
+        $strQuery="SELECT `meal_id`,`meal_name` FROM mealList WHERE `cid`=$cid ORDER BY `meal_name` ASC";
+
+>>>>>>> 2c0751c008d904cd46644ad2ae814780bcf4201d
         if(!$this->sql_query($strQuery)){
             mysql_error();
             return false;
@@ -246,7 +251,7 @@ class canteen_class extends db{
     function update_mealList($meal_name,$meal_id){ //changes can be made to meal
         $strQuery="UPDATE mealList SET `meal_name`='$meal_name' WHERE `meal_id`=$meal_id";
         if(!$this->sql_query($strQuery)){
-            mysql_error();
+            $this->str_error;
             return false;
         }
         echo "1";
@@ -257,7 +262,8 @@ class canteen_class extends db{
         $strQuery="DELETE FROM mealList WHERE `meal_id`=$meal_id AND `cid`=$cid";
    
         if(!$this->sql_query($strQuery)){
-            mysql_error();
+            $isFKC = explode(" ",$this->str_error)[8];
+            print_r($isFKC);
             return false;
         }
         echo "1";
@@ -286,7 +292,7 @@ class canteen_class extends db{
         //ratings to customers
 
         $strQuery="SELECT `current_meal_id`,`current_meal_name`,`customer_rating`,`number_of_ratings`,`cid` FROM currentMeal 
-        WHERE `cid`=$cid ORDER BY `current_meal_id` DESC";
+        WHERE `cid`=$cid ORDER BY `current_meal_name` ASC";
 
         if(!$this->sql_query($strQuery)){
             mysql_error();
@@ -371,6 +377,8 @@ class canteen_class extends db{
             if(!$this->sql_query($strQuery)){
                 mysql_error();
                 return false;
+            }else{
+                echo 1;
             }
         }
         return true;

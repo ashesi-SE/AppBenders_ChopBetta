@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -46,9 +47,6 @@ public class splashScreen extends Activity {
         PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.pref_general, false);
         String serverIp = sharedPref.getString("serverIP", null );
         hts.execute(url,"http://"+ serverIp + getString(R.string.pref_urlSet));
-          //  hts.execute(url, "http://192.168.42.173:63345/ChopBetta/Web/ChopBetta/canteen_json.php");
-
-
     }
 
     public class httpSender extends AsyncTask<String, Void, String> {
@@ -127,22 +125,26 @@ public class splashScreen extends Activity {
 
             super.onPostExecute("PE Splash" + s);
             if(s==null){
-                alert.setTitle("Could not connect to service.")
-                        .setMessage("The internet may be down\n" +
-                        "You may also want to check IP/hostname configuration settings?")
-                        .setPositiveButton("App Settings", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(getApplication(), SettingsActivity.class);
-                                startActivity(i);
-                            }
-                        }).setNegativeButton("Try later", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        finish();
-                    }
-                }).show();
+                try {
+                    alert.setTitle("Could not connect to service.")
+                            .setMessage("The internet may be down\n" +
+                                    "You may also want to check IP/hostname configuration settings?")
+                            .setPositiveButton("App Settings", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent i = new Intent(getApplication(), SettingsActivity.class);
+                                    startActivity(i);
+                                }
+                            }).setNegativeButton("Try later", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            finish();
+                        }
+                    }).show();
+                }catch(WindowManager.BadTokenException bte){
+                    Toast.makeText(getApplicationContext(),"ChopBetta could not connect to server",Toast.LENGTH_LONG).show();
+                }
             }else {
                 Intent tIntent = new Intent(splashScreen.this, MainActivity.class);
                 tIntent.putExtra("cafeInfo", s);

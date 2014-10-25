@@ -60,6 +60,7 @@ function getMealsBasedOnCafeteriaIds(){
                      content += '</div>';
                      $(content).appendTo('#tab_content');
                  }
+
          });
     }
 }
