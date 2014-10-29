@@ -25,7 +25,7 @@ if ($_SESSION['chopbetta']['superuser'] == null) {
 <body>
 
 <nav class="top-bar" data-topbar role="navigation">
-    <section class="top-bar-section">
+    <section class="top-bar-section fixed">
 
         <ul class="left">
             <li><a href="#">Home</a></li>
