@@ -7,7 +7,7 @@ var c=0 ;
 $(document).ready(function(){
 startTime();
 //get number of cafetria to create tabs
-    $.get('ChopBetta/../../Web/ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
+    $.get('../ChopBetta/canteen_json.php?display_cafeteria',function(data,status){
         for(var i=0;i<data.length;i++){
             cafetria_ids[i]=data[i].cafeteria_id;
             cafetria_names[i]=data[i].cafeteria_name;
@@ -41,7 +41,7 @@ function getMealsBasedOnCafeteriaIds(){
 
     c=0;
     for (var i=0;i<cafetria_ids.length;i++){
-         $.get('ChopBetta/../../Web/ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){
+         $.get('../ChopBetta/canteen_json.php?display_currentMeal&cid='+cafetria_ids[i]+'',function(status){
          }    ,"json")
          .done(function(data){
             console.log(data);
@@ -55,7 +55,7 @@ function getMealsBasedOnCafeteriaIds(){
                          content = '<div style="margin: 0 auto; max-width: 500px;" class="content" id="panel' + data[0].cid + '">';
                      }
                      for (var j = 0; j < data.length; j++) {
-                         content += '<div class="card">' + data[j].current_meal_name + '</div>';
+                         content += '<div class="card"><p>' + data[j].current_meal_name + '</p></div>';
                      }
                      content += '</div>';
                      $(content).appendTo('#tab_content');
