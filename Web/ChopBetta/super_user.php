@@ -11,6 +11,7 @@ if ($_SESSION['chopbetta']['superuser'] == null) {
     <title>ChopBetta</title>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="assets/css/foundation.min.css"/>
+    <link href="../ChopBetta/favicon.png" rel="icon">
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -24,8 +25,8 @@ if ($_SESSION['chopbetta']['superuser'] == null) {
 </head>
 <body>
 
-<nav class="top-bar" data-topbar role="navigation">
-    <section class="top-bar-section fixed">
+<nav class="top-bar fixed" data-topbar role="navigation" style="background-color: #000000">
+    <section class="top-bar-section">
 
         <ul class="left">
             <li><a href="#">Home</a></li>
@@ -36,13 +37,13 @@ if ($_SESSION['chopbetta']['superuser'] == null) {
             <li class="has-dropdown">
                 <a href="#">Super Admin</a>
                 <ul class="dropdown">
-                    <li><a href="#" id="logout">Logout</a></li>
+                    <li class="active" ><a href="#" id="logout">Logout</a></li>
                 </ul>
             </li>
         </ul>
     </section>
 </nav>
-
+<br><br><br>
 <main class="centerPage">
 
     <table class="centerPage">
@@ -50,7 +51,7 @@ if ($_SESSION['chopbetta']['superuser'] == null) {
         <tr>
             <th>Cafeteria name</th>
             <th>Edit</th>
-            <th width="150">Delete</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody id="table_content"></tbody>

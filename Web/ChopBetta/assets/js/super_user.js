@@ -18,8 +18,8 @@ function updateTable() {
         for (var i = 0; i < data.length; i++) {
             table_content += '<tr>' +
                 '<td>' + data[i].cafeteria_name + '</td>' +
-                '<td><a href="#" data-reveal-id="edit_cafeteria_modal" onclick="editCafeteria(' + data[i].cafeteria_id + ',\'' + data[i].cafeteria_name + '\')"><span title="Edit item" class="icon-edit"></span></a></td>' +
-                '<td><a href="#"  onclick="deleteCafeteria(' + data[i].cafeteria_id + ')"><span title="Delete item" class="icon-delete"></span></a></td>' +
+                '<td style="text-align: center;"><a href="#" data-reveal-id="edit_cafeteria_modal" onclick="editCafeteria(' + data[i].cafeteria_id + ',\'' + data[i].cafeteria_name + '\')"><span title="Edit item" class="icon-edit"></span></a></td>' +
+                '<td style="text-align: center;"><a href="#"  onclick="deleteCafeteria(' + data[i].cafeteria_id + ')"><span title="Delete item" class="icon-delete"></span></a></td>' +
                 '</tr>';
         }
         $(table_content).appendTo('#table_content');
