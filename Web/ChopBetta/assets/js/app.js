@@ -32,6 +32,12 @@ $(document).ready(function(){
                     window.location.href = "super_user.php";
                 else
                     window.location.href = "main.php";
+            }else{
+                if (data.stat=="NOU"){
+                    showMsg({msg: "The username you entered was not found.",type:"Warning"});
+                }else{
+                    showMsg({msg: "Sorry, Invalid password. Try again.",type:"Warning"});
+                }
             }
         },"json");
     });
