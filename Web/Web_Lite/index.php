@@ -104,7 +104,7 @@ $detect = new Mobile_Detect;
 <div id="create_modal" class="reveal-modal medium" data-reveal>
     <h2>Awesome.</h2>
     <p>Yaay android phone detected. Download our android app for a better experience</p>
-    <a href="../Web/Android/index.php" class="button">Get the App</a>
+    <a href="../Android/ChopBetta.apk" class="button">Get the App</a>
     <a class="close-reveal-modal">&#215;</a>
 </div>
 
