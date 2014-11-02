@@ -7,22 +7,6 @@
     src:url('../fonts/Roboto-Thin.ttf');
 }
 @font-face{
-    font-family: 'Desyrel';
-    src:url('../fonts/DESYREL.ttf');
-}
-@font-face{
-    font-family: 'Sanford';
-    src:url('../fonts/Sanford.ttf');
-}
-@font-face{
-    font-family: 'BasicTitle';
-    src:url('../fonts/basictitlefont.ttf');
-}
-@font-face{
-    font-family: 'NevisonCasD';
-    src:url('../fonts/NevisonCasD.otf');
-}
-@font-face{
     font-family: 'Eurofurence';
     src:url('../fonts/eurof35.ttf');
 }
@@ -43,12 +27,8 @@
     src:url('../fonts/Capsuula.ttf');
 }
 @font-face{
-    font-family: 'Halo';
-    src:url('../fonts/HaloHandletter.otf');
-}
-@font-face{
-    font-family: 'Trajan';
-    src:url('../fonts/TrajanPro-Regular.ttf');
+    font-family: 'Eurofurence';
+    src:url('../fonts/eurof35.ttf');
 }
 @font-face {
     font-family: 'icomoon';

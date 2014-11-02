@@ -11,7 +11,7 @@
     <string name="hello_world">Hello world!</string>
     <!-- Strings related to Settings -->
     <string name="pref_title_serverAddress">Server address or hostname</string>
-    <string name="pref_serverAddress">192.168.42.10:63345</string>
-    <string name="pref_title_url">URL to JSON(to be removed)</string>
-    <string name="pref_urlSet">/ChopBetta/Web/ChopBetta/canteen_json.php</string>
+    <!--<string name="pref_serverAddress">50.63.128.135/~csashesi/class2015/shamir-adjaku</string>-->
+    <string name="pref_serverAddress">chopbetta.elasticbeanstalk.com/ChopBetta</string>
+    <string name="pref_urlSet">/canteen_json.php</string>
 </resources>

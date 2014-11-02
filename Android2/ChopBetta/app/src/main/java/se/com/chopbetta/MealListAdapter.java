@@ -23,6 +23,7 @@ import java.util.List;
 public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
     Context context;
     int layoutResourceId;
+    DBAdapter dba;
     List<NotSoSimpleKVPair> data = null;
 
     public MealListAdapter(Context context, int layoutResourceId, List<NotSoSimpleKVPair> data) {
@@ -30,18 +31,18 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        dba = new DBAdapter(context);
     }
     static class ViewHolder {
         public TextView text;
         public TextView ratedBy;
         public RatingBar ratingBar;
-        public ToggleButton mealEatToggle;
     }
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
-
+        Log.i("KEYVALPOS",""+position);
         View view = convertView;
         // reuse views
         if (view == null) {
@@ -54,21 +55,26 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) view.findViewById(R.id.mealNameView);
             viewHolder.ratingBar = (RatingBar) view.findViewById(R.id.mealRatingBar);
-            viewHolder.mealEatToggle = (ToggleButton) view.findViewById(R.id.mealEatToggle);
             viewHolder.ratedBy = (TextView) view.findViewById(R.id.ratedByNo);
             final String mealName = viewHolder.text.getText().toString();
             view.setTag(viewHolder);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    RatingAlertDialog rad = new RatingAlertDialog(context);
-                    NotSoSimpleKVPair nsskvp = data.get(position);
-                    rad.createAlert(nsskvp.getNameAt(0),nsskvp.getKeyAt(0)).show();
-                }
-            });
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                RatingAlertDialog rad = new RatingAlertDialog(context);
+                NotSoSimpleKVPair nsskvp = data.get(position);
+                Log.i("KEYVAL",nsskvp.getNameAt(0)+"|"+nsskvp.getKeyAt(0)+"|"+position);
+                dba.open();
+                if(dba.ratingExists(nsskvp.getKeyAt(0))) {
+                    Toast.makeText(context, "You've already rated this item", Toast.LENGTH_SHORT).show();
+                } else {
+                    rad.createAlert(nsskvp.getNameAt(0), nsskvp.getKeyAt(0)).show();
+                }
+            }
+        });
         // fill data
         Log.i("ANNOY","position is now "+position);
         ViewHolder holder = (ViewHolder) view.getTag();
@@ -80,6 +86,10 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
         holder.ratingBar.setRating(data.get(position).getRateAt(0));
         int numRated = nsskvp.getNumRatedAt(0);
         holder.ratedBy.setText("Rated by " + numRated + " user" + (numRated==1?"":"s"));
+        dba.open();
+        if( numRated == 0){
+            dba.deleteMealID(nsskvp.getKeyAt(0));
+        }
         return view;
     }
 }

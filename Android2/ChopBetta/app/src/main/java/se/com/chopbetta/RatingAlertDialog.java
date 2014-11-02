@@ -29,32 +29,40 @@ public class RatingAlertDialog {
     static View vc;
     static AlertDialog.Builder alertDialog;
     Context context;
+    DBAdapter dba;
     public RatingAlertDialog(Context context){
         this.context = context;
         alertDialog =  new AlertDialog.Builder(context);
         vc = View.inflate(context,R.layout.rating_alert_layout,null);
         ratingText = (TextView)vc.findViewById(R.id.ratingText);
         ratingBar = (RatingBar)vc.findViewById(R.id.ratingSet);
+        dba = new DBAdapter(context);
     }
 
-    public  AlertDialog.Builder createAlert(String ratingName,final String mealid) {
+    public  AlertDialog createAlert(String ratingName,final String mealid) {
         ratingText.setText(ratingName);
         alertDialog.setView(vc)
                 .setPositiveButton("Submit rating", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        getData("?submit_ratings&customer_rating="+ratingBar.getRating()+"&current_meal_id="+mealid,false);
+                        dba.open();
+                        if(dba.ratingExists(mealid)){
+                            Toast.makeText(context,"You've already rated this item",Toast.LENGTH_SHORT).show();
+                        }else {
+                            dba.insertRatingData(mealid);
+                            getData("?submit_ratings&customer_rating=" + ratingBar.getRating() + "&current_meal_id=" + mealid, false);
+                        }
                     }
                 });
-        return alertDialog;
+        AlertDialog ad  = alertDialog.create();
+        ad.setCanceledOnTouchOutside(true);
+        return ad;
     }
 
 
     public String getData(String url, boolean block){
         httpSender hts = new httpSender();
         String res = null;
-
-
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         PreferenceManager.setDefaultValues(context, R.xml.pref_general, false);
@@ -151,9 +159,10 @@ public class RatingAlertDialog {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if(s==null){
-                Toast.makeText(context,"Could not submit your rating",Toast.LENGTH_LONG);
+                Toast.makeText(context,"Could not submit your rating",Toast.LENGTH_LONG).show();
             }else {
-                Toast.makeText(context,"Your rating has been submitted",Toast.LENGTH_LONG);
+                Toast.makeText(context,"Your rating has been submitted.",Toast.LENGTH_SHORT).show();
+
             }
         }
     }
