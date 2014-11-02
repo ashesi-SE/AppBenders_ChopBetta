@@ -23,6 +23,7 @@ import java.util.List;
 public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
     Context context;
     int layoutResourceId;
+    DBAdapter dba;
     List<NotSoSimpleKVPair> data = null;
 
     public MealListAdapter(Context context, int layoutResourceId, List<NotSoSimpleKVPair> data) {
@@ -30,6 +31,7 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        dba = new DBAdapter(context);
     }
     static class ViewHolder {
         public TextView text;
@@ -65,7 +67,12 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
                 RatingAlertDialog rad = new RatingAlertDialog(context);
                 NotSoSimpleKVPair nsskvp = data.get(position);
                 Log.i("KEYVAL",nsskvp.getNameAt(0)+"|"+nsskvp.getKeyAt(0)+"|"+position);
-                rad.createAlert(nsskvp.getNameAt(0),nsskvp.getKeyAt(0)).show();
+                dba.open();
+                if(dba.ratingExists(nsskvp.getKeyAt(0))) {
+                    Toast.makeText(context, "You've already rated this item", Toast.LENGTH_SHORT).show();
+                } else {
+                    rad.createAlert(nsskvp.getNameAt(0), nsskvp.getKeyAt(0)).show();
+                }
             }
         });
         // fill data
@@ -79,6 +86,10 @@ public class MealListAdapter extends ArrayAdapter<NotSoSimpleKVPair> {
         holder.ratingBar.setRating(data.get(position).getRateAt(0));
         int numRated = nsskvp.getNumRatedAt(0);
         holder.ratedBy.setText("Rated by " + numRated + " user" + (numRated==1?"":"s"));
+        dba.open();
+        if( numRated == 0){
+            dba.deleteMealID(nsskvp.getKeyAt(0));
+        }
         return view;
     }
 }

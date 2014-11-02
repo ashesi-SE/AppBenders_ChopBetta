@@ -5,7 +5,10 @@ package se.com.chopbetta;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +37,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 
 
@@ -54,6 +58,8 @@ public class meallist extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     private String canteenID;
     private SwipeRefreshLayout meallistView;
     private View progressView;
+    private PendingIntent pendingIntent;
+    private AlarmManager manager;
 
 
     /**
@@ -80,6 +86,22 @@ public class meallist extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Scheduled task for deleting ratings
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+            calendar.add(Calendar.DATE,1);
+        }
+
+        Intent alarmIntent = new Intent(getActivity(), DBScheduler.class);
+        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        //End of scheduled task
         if (getArguments() != null) {
             mParam1 = getArguments().getInt(ARG_PARAM1);
             canteenID = getArguments().getString(CANTEEN_ID);
@@ -116,6 +138,7 @@ public class meallist extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         getData("?display_currentMeal&cid="+canteenID,false);
 
     }
+
 
     /**
      * Shows the progress UI and hides the login form.
@@ -288,6 +311,7 @@ public class meallist extends Fragment implements SwipeRefreshLayout.OnRefreshLi
                         .setPositiveButton("App Settings", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+
                                 Intent i = new Intent(getActivity(), SettingsActivity.class);
                                 startActivity(i);
                             }
@@ -300,11 +324,12 @@ public class meallist extends Fragment implements SwipeRefreshLayout.OnRefreshLi
                 }).show();
             }else {
                 //TODO: Check crash that occurs on multiple screen rotates
-                MealListAdapter adap = new MealListAdapter(getActivity(), R.layout.meal_list_item, parseResponse(s));
-                lvMeal.setAdapter(adap);
-                showProgress(false);
-                meallistView.setRefreshing(false);
-
+                if(getActivity()!=null) {
+                    MealListAdapter adap = new MealListAdapter(getActivity(), R.layout.meal_list_item, parseResponse(s));
+                    lvMeal.setAdapter(adap);
+                    showProgress(false);
+                    meallistView.setRefreshing(false);
+                }
             }
         }
     }

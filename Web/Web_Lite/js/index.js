@@ -18,10 +18,10 @@ startTime();
         //build tabs
         for (var j=0;j<cafetria_ids.length;j++){
             if(tabs==""){
-                tabs+='<dd class="active"><a href="#panel'+cafetria_ids[j]+'">'+cafetria_names[j]+'</a></dd>'
+                tabs+='<dd style="min-width:'+100/cafetria_ids.length+'%" class="active"><a href="#panel'+cafetria_ids[j]+'">'+cafetria_names[j]+'</a></dd>'
             }
             else{
-                tabs+='<dd><a href="#panel'+cafetria_ids[j]+'">'+cafetria_names[j]+'</a></dd>'
+                tabs+='<dd style="min-width:'+100/cafetria_ids.length+'%"><a href="#panel'+cafetria_ids[j]+'">'+cafetria_names[j]+'</a></dd>'
             }
         }
         $(tabs).appendTo('#tabs');

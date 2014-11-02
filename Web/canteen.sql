@@ -81,17 +81,18 @@ CREATE TABLE IF NOT EXISTS `mealList` (
 -- Table structure for table `currentMeal`
 --
 
-CREATE TABLE IF NOT EXISTS `currentMeal` (
-  `current_meal_id`   INT PRIMARY KEY,
-  `current_meal_name` VARCHAR(255),
-  `customer_rating`   INT,
-  `number_of_ratings` INT,
-  `cid`               INT NOT NULL,
+CREATE TABLE `currentmeal` (
+  `current_meal_id` int(11) NOT NULL,
+  `current_meal_name` varchar(255) DEFAULT NULL,
+  `customer_rating` decimal(2,1) NOT NULL DEFAULT '0.0',
+  `number_of_ratings` int(11) NOT NULL DEFAULT '0',
+  `cid` int(11) NOT NULL,
+  PRIMARY KEY (`current_meal_id`),
+  UNIQUE KEY `current_meal_name` (`current_meal_name`,`cid`),
+  KEY `cid` (`cid`),
   FOREIGN KEY (`cid`) REFERENCES `cafeteria` (`cafeteria_id`),
-  FOREIGN KEY (`current_meal_id`) REFERENCES `mealList` (`meal_id`),
-  UNIQUE (`current_meal_name`, `cid`)
-)
-  COMMENT ='This table shows the list of meals available at a given point in time';
+  FOREIGN KEY (`current_meal_id`) REFERENCES `meallist` (`meal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This table shows the list of meals available at a given point in time';
 
 CREATE TABLE superAdmin (
   vendor_id       INT AUTO_INCREMENT PRIMARY KEY,

@@ -57,7 +57,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         cafeInfoJSON = getIntent().getCharSequenceExtra("cafeInfo").toString();
         Log.i("JSONCAFE",cafeInfoJSON);
         cafeInfoKV = parseResponse(cafeInfoJSON);
-        Log.d("HMDATA", cafeInfoKV.getKeyAt(1));
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
