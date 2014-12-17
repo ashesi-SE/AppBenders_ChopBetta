@@ -22,7 +22,8 @@ $(document).ready(function(){
 
     $('#login').submit(function(e){
         e.preventDefault();
-        $.get('canteen_loginHandler.php',{username: $('#username').val(),
+        console.log('click');
+        $.get('./canteen_loginHandler.php',{username: $('#username').val(),
             password: $('#password').val(),isAdmin:$('#isAdmin:checked').length==1?1:0},function(data,status) {
             console.log(data);
             if (data.stat == "VALID") {
@@ -35,6 +36,13 @@ $(document).ready(function(){
             }else{
                 if (data.stat=="NOU"){
                     showMsg({msg: "The username you entered was not found.",type:"Warning"});
+                    $.get('http://localhost:63342/MealPlanEnhancement/php/mpe_loginHandler.php',{username: $('#username').val(),
+                        password: $('#password').val()},function(data){
+                        if(data){
+                            window.location.href = "http://localhost:63342/MealPlanEnhancement/admin_console.php";
+                        }
+                    });
+
                 }else{
                     showMsg({msg: "Sorry, Invalid password. Try again.",type:"Warning"});
                 }

@@ -14,16 +14,16 @@ if (@$_SESSION['chopbetta']['username'] != null){
     <script src="assets/js/jquery-1.11.0.js" type="text/javascript"></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
     <script src="assets/js/foundation.min.js" type="text/javascript"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-55868008-1', 'auto');
-        ga('send', 'pageview');
-
-    </script>
+<!--    <script>-->
+<!--        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){-->
+<!--            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),-->
+<!--            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)-->
+<!--        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');-->
+<!---->
+<!--        ga('create', 'UA-55868008-1', 'auto');-->
+<!--        ga('send', 'pageview');-->
+<!---->
+<!--    </script>-->
 </head>
 
 <body class="login">

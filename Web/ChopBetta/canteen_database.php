@@ -1,9 +1,9 @@
 <?php
 
-//define("DB_host", "127.0.0.1");
+define("DB_host", "127.0.0.1");
 define("DB", "canteen");
-//define("DB_user", "root");
-//define("DB_pass", "");
+define("DB_user", "root");
+define("DB_pass", "");
 
 //define("DB_host", "localhost");
 //define("DB", "csashesi_shamir-adjaku");
@@ -11,10 +11,10 @@ define("DB", "canteen");
 //define("DB_pass", "db!829187");
 
 //define("DB",  $_SERVER['RDS_DB_NAME']);
-define("DB_user", $_SERVER['RDS_USERNAME']);
-define("DB_pass",  $_SERVER['RDS_PASSWORD']);
-define("DB_host", $_SERVER['RDS_HOSTNAME']);
-define("DB_port", $_SERVER['RDS_PORT']);
+//define("DB_user", $_SERVER['RDS_USERNAME']);
+//define("DB_pass",  $_SERVER['RDS_PASSWORD']);
+//define("DB_host", $_SERVER['RDS_HOSTNAME']);
+//define("DB_port", $_SERVER['RDS_PORT']);
 
 class db{
     var $result;
