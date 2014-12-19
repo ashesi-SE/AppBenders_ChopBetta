@@ -123,6 +123,7 @@ function saveEditCafeteria() {
     var isChecked = $('#checkbox2').is(':checked');
     var cafeteria_id = $('#edit_cafeteria_id').val();
     console.log("done");
+    //TODO: Get data value before prompting completion
     if (isChecked && password_name_field != "") {
         $.get('canteen_json.php', {update_vendor: 2, vendor_id: vendor_id_field, vendor_password: password_name_field, cid: cafeteria_id, vendor_name: vendor_name_field}, function (data) {
             console.log("done with first");
