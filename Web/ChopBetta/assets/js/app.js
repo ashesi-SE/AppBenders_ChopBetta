@@ -35,11 +35,14 @@ $(document).ready(function(){
                     window.location.href = "main.php";
             }else{
                 if (data.stat=="NOU"){
-                    showMsg({msg: "The username you entered was not found.",type:"Warning"});
+
                     $.get('http://localhost:63342/MealPlanEnhancement/php/mpe_loginHandler.php',{username: $('#username').val(),
                         password: $('#password').val()},function(data){
                         if(data){
+                            showMsg({msg: "Redirecting.",type:"Information"});
                             window.location.href = "http://localhost:63342/MealPlanEnhancement/admin_console.php";
+                        }else{
+                            showMsg({msg: "The username you entered was not found.",type:"Warning"});
                         }
                     });
 
