@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
-String cafeInfoJSON = "";
+    String cafeInfoJSON = "";
     SimpleKVPair cafeInfoKV = null;
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -57,7 +57,6 @@ String cafeInfoJSON = "";
         cafeInfoJSON = getIntent().getCharSequenceExtra("cafeInfo").toString();
         Log.i("JSONCAFE",cafeInfoJSON);
         cafeInfoKV = parseResponse(cafeInfoJSON);
-        Log.d("HMDATA", cafeInfoKV.getKeyAt(1));
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

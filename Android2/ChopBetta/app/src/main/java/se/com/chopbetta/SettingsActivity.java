@@ -48,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
             Toast.makeText(this,"Hostname/IP changed. Reloading app",Toast.LENGTH_SHORT).show();
             finish();
+
             Intent i = new Intent(getApplication(), splashScreen.class);
             startActivity(i);
         }

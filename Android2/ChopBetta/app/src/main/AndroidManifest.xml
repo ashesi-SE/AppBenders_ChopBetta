@@ -3,7 +3,6 @@
     package="se.com.chopbetta" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -19,7 +18,8 @@
         <activity
             android:name="se.com.chopbetta.splashScreen"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
             android:name="se.com.chopbetta.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
-
+        <receiver android:name="se.com.chopbetta.DBScheduler"/>
     </application>
 
 </manifest>

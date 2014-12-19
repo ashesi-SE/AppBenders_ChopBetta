@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="0dip">
+    android:background="#fff5f5f5">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -29,13 +29,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="2dip"
-        android:paddingBottom="5dip"
         tools:context=".MainActivity$PlaceholderFragment"
         android:id="@+id/mealList"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:background="#F5F5F5">
 
 
         <ListView
@@ -46,7 +43,12 @@
             android:clickable="true"
             android:longClickable="true"
             android:focusable="true"
-            android:focusableInTouchMode="true" />
+            android:focusableInTouchMode="true"
+            android:dividerHeight="3sp"
+            android:divider="@android:color/transparent"
+            android:drawSelectorOnTop="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 

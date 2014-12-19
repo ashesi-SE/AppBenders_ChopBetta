@@ -10,18 +10,19 @@ require_once("canteen_class.php");
 $controllerObj = new canteen_class();
 $res=false;
 
-if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
-    $_SESSION['chopbetta']['username']= null;
+if(isset($_REQUEST['username']) && isset($_REQUEST['password']) && isset($_REQUEST['isAdmin'])){
+    ($_REQUEST['isAdmin'])?$_SESSION['chopbetta']['superuser']= null:$_SESSION['chopbetta']['username']= null;
     $_SESSION['chopbetta']['cid']= null;
     $_SESSION['chopbetta']['vid']= null;
     $res = $controllerObj->authenticate($_REQUEST['username'],$_REQUEST['password']);//this is echoing to ajax
 
     if($res){
-        $_SESSION['chopbetta']['username'] = $_REQUEST['username'];
+        ($_REQUEST['isAdmin'])?$_SESSION['chopbetta']['superuser']= $_REQUEST['username']:
+            $_SESSION['chopbetta']['username']= $_REQUEST['username'];
         $_SESSION['chopbetta']['cid'] = $res['cid'];
         $_SESSION['chopbetta']['vid'] = $res['vendor_id'];
     }
-  //  print_r($_SERVER['username']);
+    //  print_r($_SERVER['username']);
 }
 if(isset($_REQUEST['logout'])){
     session_destroy();
@@ -29,9 +30,9 @@ if(isset($_REQUEST['logout'])){
 if(isset($_REQUEST['isAuthenticated'])){
 
     if($_SESSION['chopbetta']['username']==null){
-       echo false;
+        echo false;
     }else{
-       echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['chopbetta']['vid'], 'vendor_name' => $_SESSION['chopbetta']['username'],'cid' => $_SESSION['chopbetta']['cid'] )));
+        echo json_encode(array('stat' => 'VALID','dat' =>  Array ('vendor_id' => $_SESSION['chopbetta']['vid'], 'vendor_name' => $_SESSION['chopbetta']['username'],'cid' => $_SESSION['chopbetta']['cid'] )));
     }
 }
 

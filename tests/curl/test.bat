@@ -1,0 +1,16 @@
+curl http://localhost/Web/ChopBetta/canteen_json.php?display_currentMeal
+curl http://localhost/Web/ChopBetta/canteen_json.php?delete_foodList
+curl http://localhost/Web/ChopBetta/canteen_json.php?display_foodList
+curl http://localhost/Web/ChopBetta/canteen_json.php?add_foodList
+curl http://localhost/Web/ChopBetta/canteen_json.php?delete_currentMeal
+curl http://localhost/Web/ChopBetta/canteen_json.php?add_currentMeal
+curl http://localhost/Web/ChopBetta/canteen_json.php?display_currentMeal
+curl http://localhost/Web/ChopBetta/canteen_json.php?add_mealList
+curl http://localhost/Web/ChopBetta/canteen_json.php?display_mealList
+curl http://localhost/Web/ChopBetta/canteen_json.php?display_foodList
+curl http://localhost/Web/ChopBetta/canteen_loginHandler.php
+curl http://localhost/Web/ChopBetta/canteen_json.php?display_cafeteria
+curl http://localhost/Web/ChopBetta/main.php
+curl http://localhost/Web/ChopBetta/index.php
+curl http://localhost/Web/ChopBetta/super_user.php
+curl http://localhost/Android/index.php
