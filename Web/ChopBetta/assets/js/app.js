@@ -36,13 +36,14 @@ $(document).ready(function(){
             }else{
                 if (data.stat=="NOU"){
 
-                    $.get('http://localhost:63342/MealPlanEnhancement/php/mpe_loginHandler.php',{username: $('#username').val(),
-                        password: $('#password').val()},function(data){
-                        if(data){
+                    $.get('../../MealPlanEnhancement/php/mpe_loginHandler.php',{username: $('#username').val(),
+                        password: $('#password').val()},function(inf){
+                        console.log(inf);
+                        if(inf){
                             showMsg({msg: "Redirecting.",type:"Information"});
-                            window.location.href = "http://localhost:63342/MealPlanEnhancement/admin_console.php";
+                            window.location.href = "../../MealPlanEnhancement/admin_console.php";
                         }else{
-                            showMsg({msg: "The username you entered was not found.",type:"Warning"});
+                            showMsg({msg: "The username or password you entered is invalid.",type:"Warning"});
                         }
                     });
 
